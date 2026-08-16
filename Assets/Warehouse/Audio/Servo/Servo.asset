@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-3937702201748377065
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ServoLoop_{-3937702201748377065}
+  m_AudioClip: {fileID: 8300000, guid: b0c9eeba2032442b6a77640683c27eb8, type: 3}
+  m_Volume: 0
+  m_Enabled: 0
+--- !u!1233149941 &-3164511681256286518
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BeepLoopSingle_{-3164511681256286518}
+  m_AudioClip: {fileID: 8300000, guid: 5033d9bbc381c4742a6442850be09e28, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3011467587667363164
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BeepLoop2_{-3011467587667363164}
+  m_AudioClip: {fileID: 8300000, guid: 1bed15b654b94442aa8596d152930977, type: 3}
+  m_Volume: 0
+  m_Enabled: 0
+--- !u!1233149941 &3232788792433523189
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BeepLoopSingleDry_{3232788792433523189}
+  m_AudioClip: {fileID: 8300000, guid: 4105c40a6065c41eb9252ec4eaeacafa, type: 3}
+  m_Volume: 0
+  m_Enabled: 0
+--- !u!1233149941 &4645133259550632187
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BeepLoopSingleDryHigh_{4645133259550632187}
+  m_AudioClip: {fileID: 8300000, guid: df0c4139c91c944e69f5505e9af12ae2, type: 3}
+  m_Volume: 0
+  m_Enabled: 0
+--- !u!1233149941 &5908538703512148011
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ServBike_{5908538703512148011}
+  m_AudioClip: {fileID: 8300000, guid: 68207ab53c88d410c90ff45c1870dd25, type: 3}
+  m_Volume: 0
+  m_Enabled: 0
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Servo
+  m_Volume: -28.9
+  m_Pitch: 430
+  m_AutomaticTriggerTime: 3
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 50}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 1}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -3937702201748377065}
+  - {fileID: 5908538703512148011}
+  - {fileID: 7944886173615500060}
+  - {fileID: -3011467587667363164}
+  - {fileID: -3164511681256286518}
+  - {fileID: 3232788792433523189}
+  - {fileID: 4645133259550632187}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 0
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 0
+  m_LoopMode: 0
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 1
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7944886173615500060
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BeepLoop_{7944886173615500060}
+  m_AudioClip: {fileID: 8300000, guid: 3c7aee8e9381e4b87ae98b3b06d578fc, type: 3}
+  m_Volume: 0
+  m_Enabled: 0

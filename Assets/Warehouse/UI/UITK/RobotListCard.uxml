@@ -1,0 +1,41 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Warehouse/UI/UITK/IndustrialDashboard.uss?fileID=7433441132597879392&amp;guid=77078c07febda4d1fa5407352b65a670&amp;type=3#IndustrialDashboard"/>
+    <ui:VisualElement name="Step1" class="pipeline-step" style="-unity-background-scale-mode: stretch-to-fill;">
+        <ui:VisualElement class="step-header">
+            <ui:Label text="1" name="CardID" class="step-number"/>
+            <ui:VisualElement class="step-info">
+                <ui:Label name="RobotNameLabel" class="step-name">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="robotName" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="STEP-1" name="RobotIDLabel" class="step-id"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="StatusDot" class="step-status-dot status-active"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="step-metrics">
+            <ui:VisualElement class="metric">
+                <ui:VisualElement name="LabelContainer" style="flex-direction: row;">
+                    <ui:VisualElement class="metric-icon" style="background-image: url(&quot;project://database/Assets/Warehouse/UI/Icons/Phosphor/pulse-fill.png?fileID=2800000&amp;guid=da450bdc0f58b4d49accb2c11bb39778&amp;type=3#pulse-fill&quot;);"/>
+                    <ui:Label text="HEALTH" class="metric-label"/>
+                </ui:VisualElement>
+                <ui:Label name="HealthDataLabel" class="metric-value metric-good">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="Health" binding-mode="ToTarget" source-to-ui-converters="RoundToInt"/>
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+            <ui:VisualElement class="metric">
+                <ui:VisualElement name="LabelContainer" style="flex-direction: row;">
+                    <ui:VisualElement class="metric-icon" style="background-image: url(&quot;project://database/Assets/Warehouse/UI/Icons/Phosphor/battery-charging-fill.png?fileID=2800000&amp;guid=a486b0a2904d74cd2862e94a1d79713e&amp;type=3#battery-charging-fill&quot;);"/>
+                    <ui:Label text="BATTERY" class="metric-label"/>
+                </ui:VisualElement>
+                <ui:Label name="BatteryDataLabel" class="metric-value metric-good">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="Battery" binding-mode="ToTarget" source-to-ui-converters="ToPercentageDirect"/>
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

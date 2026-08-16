@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4717db777f641194e8f8b90da0c29a4f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 388822
+  packageName: Bubba The Handyman
+  packageVersion: 1.0
+  assetPath: Assets/Bubba_The_Handyman/HDRP/Animations/handyman_walk_cntrlr.controller
+  uploadId: 942060

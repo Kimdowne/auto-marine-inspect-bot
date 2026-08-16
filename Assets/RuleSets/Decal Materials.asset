@@ -1,0 +1,619 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f829ad3a44588b4fb9c5fbcd1b89d6f, type: 3}
+  m_Name: Decal Materials
+  m_EditorClassIdentifier: Unity.Pixyz.Plugin4Unity.Editor::UnityEditor.PixyzPlugin4Unity.RuleEngine.RuleSet
+  m_Rules:
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_arrow_rear
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 2
+      - decal_arrow_rear
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 226df133e78d2f04ba18b42b5a3a04e7|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_rear_arrow.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_warning_rear
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_warning_rear
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 05499c40bc27389438772a1b0ab7e989|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_warning_rear.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_warning_rear
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_warning_rear_02
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - abf037fc5e1eaa648ab78ab1fcc176fd|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_warning_rear_02.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_arrow_front
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_arrow_front
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 2b160140b94aac74ca77e8ab9ccf39ee|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_arrow_front.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_sticker_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_sticker_01
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - includeTriangleNormals
+      m_SerializedValues:
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 10191513
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - f0ceb563003d0ef4f9a1c701a12080b2|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_sticker_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_gear_warning_glider
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_gear_warning_glider
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 9f3351abaf0a4d54a8847d8699dc87ab|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_gear_warning_glider.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_load_platform
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_load_platform
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 1e181db86cff42148add97e13b93ccfb|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_load_platform.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_load_platform_02
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_load_platform_02
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 8a3648b011f184f4986b0a878a5d2516|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_load_platform_02.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_sticker_02
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_sticker_02
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - c6e189f2f513a61449c00840fec0ab76|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_sticker_02.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_sticker_03
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_sticker_03
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - f273f81b4e42d7c4dbdb1019e3a6f25b|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_sticker_03.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_warning_support
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_warning_support
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - d10640c2fb110b64a99301420cbbe7b7|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_warning_support.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 0
+    m_IsEnabled: 1
+    m_Name: decal_side_logo_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_side_logo_01
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - e71d663c89a96274485a5e62fb19bee3|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_side_logo_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: decal_side_logo_02
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - DecalName
+      - False
+      - 3
+      - 0
+      - decal_side_logo_02
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 8a21d53faf17b414fb553e0f0988a4fd|Assets/Warehouse/Materials/moto/Temp Materials/decals/decal_side_logo_02.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537

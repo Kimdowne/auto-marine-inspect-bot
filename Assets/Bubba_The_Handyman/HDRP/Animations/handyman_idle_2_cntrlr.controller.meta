@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 753c3b11fc089e54c91f1540fc2c228e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 388822
+  packageName: Bubba The Handyman
+  packageVersion: 1.0
+  assetPath: Assets/Bubba_The_Handyman/HDRP/Animations/handyman_idle_2_cntrlr.controller
+  uploadId: 942060

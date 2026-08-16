@@ -1,0 +1,2223 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f829ad3a44588b4fb9c5fbcd1b89d6f, type: 3}
+  m_Name: Replace Materials on Metadata
+  m_EditorClassIdentifier: Unity.Pixyz.Plugin4Unity.Editor::UnityEditor.PixyzPlugin4Unity.RuleEngine.RuleSet
+  m_Rules:
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Yellow_Metallic_powder_coat_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Yellow_Metallic_powder_coat_01
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 5aa636c26d9556f42b3f894a463c1ad9|Assets/Warehouse/Materials/moto/Temp Materials/Yellow_Metallic_powder_coat_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Yellow_Metallic_powder_coat_02
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Yellow_Metallic_powder_coat_02
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - f4e5af27d81a7394cad8d6efaa7eddfe|Assets/Warehouse/Materials/moto/Temp Materials/Yellow_Metallic_powder_coat_02.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Teal_Metallic_powder_coat_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Tellow_Metallic_powder_coat_01
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 561e3833c7414dd4c8d8c215fa00c7b7|Assets/Warehouse/Materials/moto/Temp Materials/Teal_Metallic_powder_coat_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: White_Metallic_powder_coat_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - White_Metallic_powder_coat_01
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - f6c7e3da38343ed4c9449ff88a71e08d|Assets/Warehouse/Materials/moto/Temp Materials/White_Metallic_powder_coat_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: White_Metallic_powder_coat_02
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - White_Metallic_powder_coat_02
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 2fd5cce1e2a704a4ca7b7e171397ee09|Assets/Warehouse/Materials/moto/Temp Materials/White_Metallic_powder_coat_02.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: White_Metallic_powder_coat_03
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - White_Metallic_powder_coat_03
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - ef3d02c3d69953d4081b17a0424e03d6|Assets/Warehouse/Materials/moto/Temp Materials/White_Metallic_powder_coat_03.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: White_Metallic_powder_coat_04
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - White_Metallic_powder_coat_04
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 18cc72930ede5104cb949b25402207d5|Assets/Warehouse/Materials/moto/Temp Materials/White_Metallic_powder_coat_04.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: White_Metallic_powder_coat_05
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - White_Metallic_powder_coat_05
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - caced75d2281e13448ce141120bb13ff|Assets/Warehouse/Materials/moto/Temp Materials/White_Metallic_powder_coat_05.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: White_Metallic_powder_coat_06
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - White_Metallic_powder_coat_06
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 29ac45c3ff28522418cc81e786bfcb1a|Assets/Warehouse/Materials/moto/Temp Materials/White_Metallic_powder_coat_06.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Black_Metallic_powder_coat_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Black_Metallic_powder_coat_01
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 5884e84a601f0714fbcdcd615cd1cee2|Assets/Warehouse/Materials/moto/Temp Materials/Black_Metallic_powder_coat_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Stainless_Steel_Brushed_finish_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Stainless_Steel_Brushed_finish_01
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 82847cc3f067ed949a09be5e8727002a|Assets/Warehouse/Materials/moto/Temp Materials/Stainless_Steel_Brushed_finish_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Stainless_Steel_Brushed_finish_02
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Stainless_Steel_Brushed_finish_02
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 26db3d688c60aa54fbd403093d893723|Assets/Warehouse/Materials/moto/Temp Materials/Stainless_Steel_Brushed_finish_02.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Stainless_Steel_Brushed_finish_03
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Stainless_Steel_Brushed_finish_03
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 37d10aec324274d4297b33e46cb0b2d6|Assets/Warehouse/Materials/moto/Temp Materials/Stainless_Steel_Brushed_finish_03.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Stainless_Steel_Brushed_finish_04
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Stainless_Steel_Brushed_finish_04
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 03c5fc3836ac9df44865f6839c51ca97|Assets/Warehouse/Materials/moto/Temp Materials/Stainless_Steel_Brushed_finish_04.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Grey_Metallic_powder_coat
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Grey_Metallic_powder_coat
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 3b99e5aaea769d54aa22a1c05d92005f|Assets/Warehouse/Materials/moto/Temp Materials/Grey_Metallic_powder_coat.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Black_Brushed_finish
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Black_Brushed_finish
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - a36f7a5e33d783743b43dfcd540a9a31|Assets/Warehouse/Materials/moto/Temp Materials/Black_Brushed_finish.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Stainless_Steel_Fine_finish
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Black_Stainless_Steel_Fine_finish
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 82847cc3f067ed949a09be5e8727002a|Assets/Warehouse/Materials/moto/Temp Materials/Stainless_Steel_Brushed_finish_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: fastener_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - fastener_01
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - d558519131083e14b840c1c3eb19365f|Assets/Warehouse/Materials/moto/Temp Materials/fastener_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: fastener_02
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - fastener_02
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - e850631a0003b974da987c27c8eeaf89|Assets/Warehouse/Materials/moto/Temp Materials/fastener_02.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: fastener_03
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - fastener_03
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 640c184578794874e8cbbcbe6cb8089c|Assets/Warehouse/Materials/moto/Temp Materials/fastener_03.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: fastener_04
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - fastener_04
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - a6b734c14e08b744ab634e361e97a287|Assets/Warehouse/Materials/moto/Temp Materials/fastener_04.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Black_Stainless_Steel_Fine_finish
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Stainless_Steel_Fine_finish
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 82847cc3f067ed949a09be5e8727002a|Assets/Warehouse/Materials/moto/Temp Materials/Stainless_Steel_Brushed_finish_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Grey_Brushed_finish
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Grey_Brushed_finish
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - a36f7a5e33d783743b43dfcd540a9a31|Assets/Warehouse/Materials/moto/Temp Materials/Black_Brushed_finish.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: DarkGrey_Rubber
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - DarkGrey_Rubber
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - a28eac242f678214fb69955d15417b9b|Assets/Warehouse/Materials/moto/Temp Materials/DarkGrey_Rubber.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: tire_rubber
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - tire_rubber
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 04b3bef26bd0a9b4da7db238d5baab0d|Assets/Warehouse/Materials/moto/Temp Materials/tire_rubber.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Grey_Polycarbonate
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Grey_Polycarbonate
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 106b2a4cd0c3b434cb69241211cc6a40|Assets/Warehouse/Materials/moto/Temp Materials/Grey_Polycarbonate.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Dark_Grey_Polycarbonate
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Dark_Grey_Polycarbonate
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - efdddf16cc9eaec47829a803fb054854|Assets/Warehouse/Materials/moto/Temp Materials/Dark_Grey_Polycarbonate.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Blue_Polyurethane
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Blue_Polyurethane
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - ba96214a4a9b29e41b50436d8d0347c5|Assets/Warehouse/Materials/moto/Temp Materials/Blue_Polyurethane.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Orange_Polyurethane
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Orange_Polyurethane
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 5023a28ce2796ff4195bc82584afded4|Assets/Warehouse/Materials/moto/Temp Materials/Orange_Polyurethane.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Black_Polyurethane
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Black_Polyurethane
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 65d21c32cc4de5a4988ed4927c18e9a6|Assets/Warehouse/Materials/moto/Temp Materials/Black_Polyurethane.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Red_Translucent_acrylic
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Red_Translucent_acrylic
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 9cdb3c8632292ae49bc2124937268ef3|Assets/Warehouse/Materials/moto/Temp Materials/Red_Translucent_acrylic.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Blue_Translucent_acrylic
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Blue_Translucent_acrylic
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 25017158bc1eca34881b94e978330cbe|Assets/Warehouse/Materials/moto/Temp Materials/Blue_Translucent_acrylic.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: White_Translucent_acrylic
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - White_Translucent_acrylic
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 6860bff5798e2974989b8d994b9e6531|Assets/Warehouse/Materials/moto/Temp Materials/White_Translucent_acrylic.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Orange_Translucent_acrylic
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Orange_Translucent_acrylic
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - b5ec28d93fac03a42a945ffacb6a713d|Assets/Warehouse/Materials/moto/Temp Materials/Orange_Translucent_acrylic.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: back_plate_light_lid
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - back_plate_light_lid
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - be530131572671d4ab580aa3e51eff03|Assets/Warehouse/Materials/moto/Temp Materials/back_plate_light_lid.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Orange_PVC
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Orange_PVC
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 3eba4ba59c5d76a4e854c026f6703866|Assets/Warehouse/Materials/moto/Temp Materials/Orange_PVC.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Orange_PVC_02
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Orange_PVC_02
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 3eba4ba59c5d76a4e854c026f6703866|Assets/Warehouse/Materials/moto/Temp Materials/Orange_PVC.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Blue_PVC
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Blue_PVC
+      - False
+      - 3
+      - 2
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 97ff497527713d849b2c8a5b1158653b|Assets/Warehouse/Materials/moto/Temp Materials/Blue_PVC.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Shdw_Decal
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Shdw_Decal
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 1ed563c92436b424eb55d7d8ab5e9e87|Assets/Warehouse/Materials/moto/Temp Materials/Shdw_Decal.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: cable_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - cable_01
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - edfd326043d17dc47aaaaa9b0cc75234|Assets/Warehouse/Materials/moto/Temp Materials/cable_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: cable_02
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - cable_02
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - e16dca0f28dadfd4a9d646b58f833d82|Assets/Warehouse/Materials/moto/Temp Materials/cable_02.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: cable_03
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - cable_03
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - b803344d70e1235498d1cdc4b976e8d3|Assets/Warehouse/Materials/moto/Temp Materials/cable_03.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Cable_strap_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - Cable_strap_01
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - b5dea51e346f46746a87f4f5f3899fc0|Assets/Warehouse/Materials/moto/Temp Materials/Cable_strap_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: headLights_reflector_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - headLights_reflector_01
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 86c6155a6564d3e45ad5b58afcbb0a84|Assets/Warehouse/Materials/moto/Temp Materials/headLights_reflector_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: headLights_emmissive_01
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - headLights_emmissive_01
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - fe395c9dfee8ea944a3e60ed6f22ad0c|Assets/Warehouse/Materials/moto/Temp Materials/headLights_emmissive_01.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: ring_light
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - ring_light
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 7e948cca6cea42443987fab5903cb7a6|Assets/Warehouse/Materials/moto/Temp Materials/ring_light.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: light_general
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - light_general
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 013a4c4373276614294f88ac36463ca4|Assets/Warehouse/Materials/moto/Temp Materials/light_general.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: back_plate_light
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - MaterialName
+      - False
+      - 3
+      - 2
+      - back_plate_light
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - material
+      - topologyFilter
+      m_SerializedValues:
+      - 924a8ec05cf0e0943a5f865af9babea1|Assets/Warehouse/Materials/moto/Temp Materials/back_plate_light.mat
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 155767537

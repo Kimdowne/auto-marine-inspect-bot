@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f829ad3a44588b4fb9c5fbcd1b89d6f, type: 3}
+  m_Name: Import Rules
+  m_EditorClassIdentifier: Unity.Pixyz.Plugin4Unity.Editor::UnityEditor.PixyzPlugin4Unity.RuleEngine.RuleSet
+  m_Rules:
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Simplify Hierarchy
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - type
+      - hierarchyLevel
+      - keepParent
+      - mergeByRegionsStrategy
+      - numberOfRegions
+      - sizeOfRegions
+      - mergeStrategy
+      m_SerializedValues:
+      - 2
+      - 1
+      - False
+      - 0
+      - 10
+      - 10
+      - 1
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 511763496
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 0
+    m_Name: Fix Z Fighting
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames: []
+      m_SerializedValues: []
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 1455705145
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 0
+    m_Name: Remove Holes
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - metadataFilter.propertyFilter.matchingMethod
+      - metadataFilter.propertyFilter.inputString
+      - metadataFilter.propertyFilter.caseSensitive
+      - metadataFilter.propertyFilter
+      - metadataFilter.valueFilter.matchingMethod
+      - metadataFilter.valueFilter.value
+      - metadataFilter.valueFilter.caseSensitive
+      - metadataFilter.valueFilter
+      - metadataFilter
+      - filterMode
+      - includeSubhierachy
+      m_SerializedValues:
+      - 2
+      - SW-File Name(File Name)
+      - False
+      - 3
+      - 2
+      - glider_suport_assm
+      - False
+      - 3
+      - 2
+      - 0
+      - False
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 523752222
+    - m_SerializedNames:
+      - throughHoles
+      - blindHoles
+      - surfacicHoles
+      - maxDiameter
+      m_SerializedValues:
+      - True
+      - True
+      - False
+      - 5
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 483983548
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Create Smooth Normals
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - smoothingAngle
+      - areaWeighting
+      m_SerializedValues:
+      - 60
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 219151512
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Generate UVs
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - channel
+      - useLocalBoundingBox
+      - uvSize
+      m_SerializedValues:
+      - 0
+      - True
+      - 1
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 451666
+    - m_SerializedNames:
+      - channel
+      - useLocalBoundingBox
+      - uvSize
+      m_SerializedValues:
+      - 2
+      - True
+      - 0.01
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 451666
+  - <IsCollapsed>k__BackingField: 1
+    m_IsEnabled: 1
+    m_Name: Create Colliders
+    m_Blocks:
+    - m_SerializedNames:
+      - context
+      - recursive
+      m_SerializedValues:
+      - 0
+      - True
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 887416576
+    - m_SerializedNames:
+      - oneColliderPerObject
+      - strategy
+      - maxDecompositionPerMesh
+      - maxTrianglesPerMesh
+      - resolution.value
+      - resolution
+      - gridResolutionPreset
+      - gridResolution
+      - boundingBoxType
+      m_SerializedValues:
+      - True
+      - 0
+      - 3
+      - 200
+      - 50
+      - 1
+      - 25
+      - 25
+      - 0
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 14249905
+  - <IsCollapsed>k__BackingField: 0
+    m_IsEnabled: 1
+    m_Name: Nested Rules
+    m_Blocks:
+    - m_SerializedNames:
+      - ruleSets.0
+      - ruleSets.1
+      - ruleSets.2
+      - ruleSets.3
+      - ruleSets
+      m_SerializedValues:
+      - d671f121edd26094a9e25775e4091d76|Assets/Rule Sets/Bake Ambient Occlusion.asset
+      - d69c2eb8f95918442bee9cd573593bdd|Assets/Rule Sets/Replace Materials on Metadata.asset
+      - f16bd2d6b2d7c8f40a32cd2a271508d7|Assets/Rule Sets/decal_Materials.asset
+      - 5e2bda8117dbe4249bdc832da1508ca9|Assets/Rule Sets/AddLights.asset
+      - 4
+      <IsEnabled>k__BackingField: 1
+      <ActionId>k__BackingField: 235363992

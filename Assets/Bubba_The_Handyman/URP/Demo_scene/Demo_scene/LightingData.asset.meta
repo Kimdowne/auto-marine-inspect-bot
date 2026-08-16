@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 598e58edf679dd342a38c4839b29ab03
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 388822
+  packageName: Bubba The Handyman
+  packageVersion: 1.0
+  assetPath: Assets/Bubba_The_Handyman/URP/Demo_scene/Demo_scene/LightingData.asset
+  uploadId: 942060
