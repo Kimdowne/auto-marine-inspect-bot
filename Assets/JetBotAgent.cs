@@ -75,6 +75,9 @@ public class JetBotAgent : Agent
     [Range(0f, 1f)]
     public float minimumCornerSpeedScale = 0.4f;
 
+    [Range(0f, 1f)]
+    public float maxPathTurn = 0.45f;
+
 
     // ============================================================
     // PPO Avoidance
@@ -216,7 +219,7 @@ public class JetBotAgent : Agent
         if (waypoints != null && waypoints.Length > 0)
         {
             previousWaypointDistance =
-                Vector3.Distance(
+                GetPlanarDistance(
                     rb.position,
                     waypoints[currentWaypoint].position
                 );
@@ -229,14 +232,13 @@ public class JetBotAgent : Agent
     // ============================================================
     // Observation
     //
-    // 총 9개
+    // 총 8개
     //
     // 1 ToF Left
     // 2 ToF Front
     // 3 ToF Right
     // 4 Path Turn
     // 5 Obstacle Danger
-    // 6 Left - Right Free Space
     // 7 Yaw Rate
     // 8 Previous Speed Action
     // 9 Previous Steering Action
@@ -273,15 +275,6 @@ public class JetBotAgent : Agent
 
         sensor.AddObservation(danger);
 
-
-        // 6. 좌/우 여유 공간 차이
-        //
-        // + : 왼쪽 공간이 더 큼
-        // - : 오른쪽 공간이 더 큼
-        float sideDifference =
-            leftNormalized - rightNormalized;
-
-        sensor.AddObservation(sideDifference);
 
 
         // 7. Yaw rate
@@ -549,47 +542,59 @@ public class JetBotAgent : Agent
 
     private float GetPathTurn()
     {
-        if (
-            waypoints == null ||
+        if (waypoints == null ||
             waypoints.Length == 0 ||
-            currentWaypoint >= waypoints.Length
-        )
+            currentWaypoint >= waypoints.Length)
         {
             return 0f;
         }
 
+        // 현재 위치 → waypoint
+        Vector3 toTarget =
+            waypoints[currentWaypoint].position - rb.position;
 
-        Vector3 localTarget =
-            transform.InverseTransformPoint(
-                waypoints[currentWaypoint].position
-            );
+        // 바닥 평면에서만 계산
+        toTarget.y = 0f;
 
+        if (toTarget.sqrMagnitude < 0.0001f)
+            return 0f;
 
+        // 로봇의 실제 +Z 방향
+        Vector3 forward = transform.forward;
+        forward.y = 0f;
+
+        forward.Normalize();
+        toTarget.Normalize();
+
+        // + = 오른쪽
+        // - = 왼쪽
         float angle =
-            Mathf.Atan2(
-                localTarget.x,
-                localTarget.z
-            ) *
-            Mathf.Rad2Deg;
-
+            Vector3.SignedAngle(
+                forward,
+                toTarget,
+                Vector3.up
+            );
 
         float turn =
-            angle /
-            Mathf.Max(
-                maxPathAngle,
-                0.01f
-            );
+            angle / Mathf.Max(maxPathAngle, 0.01f);
 
+        turn *= pathTurnGain;
 
-        turn *=
-            pathTurnGain;
-
-
-        return Mathf.Clamp(
+        turn = Mathf.Clamp(
             turn,
-            -1f,
-            1f
+            -maxPathTurn,
+            maxPathTurn
         );
+
+        Debug.Log(
+            $"WP={currentWaypoint} | " +
+            $"Angle={angle:F2} | " +
+            $"PathTurn={turn:F2} | " +
+            $"Forward={forward} | " +
+            $"TargetDir={toTarget}"
+        );
+
+        return turn;
     }
 
 
@@ -599,48 +604,23 @@ public class JetBotAgent : Agent
 
     private void ApplyDrivePhysics()
     {
-        // 현재 정의:
-        //
-        // turn -1 = 좌회전
-        // turn +1 = 우회전
-
-
         float leftTrackInput =
-            moveCommand +
-            turnCommand;
+            moveCommand - turnCommand;
 
         float rightTrackInput =
-            moveCommand -
-            turnCommand;
+            moveCommand + turnCommand;
 
+        leftTrackInput =
+            Mathf.Clamp(leftTrackInput, 0f, 1f);
 
-        // --------------------------------------------------------
-        // Differential mixing normalization
-        // --------------------------------------------------------
-
-        float maxMagnitude =
-            Mathf.Max(
-                1f,
-                Mathf.Abs(leftTrackInput),
-                Mathf.Abs(rightTrackInput)
-            );
-
-
-        leftTrackInput /=
-            maxMagnitude;
-
-        rightTrackInput /=
-            maxMagnitude;
-
+        rightTrackInput =
+            Mathf.Clamp(rightTrackInput, 0f, 1f);
 
         float leftTorque =
-            leftTrackInput *
-            maxMotorTorque;
+            leftTrackInput * maxMotorTorque;
 
         float rightTorque =
-            rightTrackInput *
-            maxMotorTorque;
-
+            rightTrackInput * maxMotorTorque;
 
         ApplyTorque(
             frontLeftWheel,
@@ -648,26 +628,16 @@ public class JetBotAgent : Agent
             leftTorque
         );
 
-
         ApplyTorque(
             frontRightWheel,
             rearRightWheel,
             rightTorque
         );
 
-
-        // --------------------------------------------------------
-        // 정지 명령
-        // --------------------------------------------------------
-
-        if (
-            Mathf.Abs(moveCommand) < 0.03f &&
-            Mathf.Abs(turnCommand) < 0.03f
-        )
+        if (Mathf.Abs(moveCommand) < 0.03f &&
+            Mathf.Abs(turnCommand) < 0.03f)
         {
-            SetBrakeTorque(
-                idleBrakeTorque
-            );
+            SetBrakeTorque(idleBrakeTorque);
         }
         else
         {
@@ -693,7 +663,7 @@ public class JetBotAgent : Agent
 
 
         float currentDistance =
-            Vector3.Distance(
+            GetPlanarDistance(
                 rb.position,
                 waypoints[currentWaypoint].position
             );
@@ -897,7 +867,7 @@ public class JetBotAgent : Agent
 
 
         previousWaypointDistance =
-            Vector3.Distance(
+            GetPlanarDistance(
                 rb.position,
                 waypoints[currentWaypoint].position
             );
@@ -1261,5 +1231,13 @@ public class JetBotAgent : Agent
             waypoints[currentWaypoint].position,
             waypointReachDistance
         );
+    }
+
+    private float GetPlanarDistance(Vector3 a, Vector3 b)
+    {
+        a.y = 0f;
+        b.y = 0f;
+
+        return Vector3.Distance(a, b);
     }
 }
