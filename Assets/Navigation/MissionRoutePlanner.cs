@@ -39,9 +39,9 @@ namespace ShipRobot.Navigation
                     return ConnectCurrentNode(currentNode, new[]
                     {
                         PlantNodeId.UnderMid,
-                        PlantNodeId.UnderLeft,
-                        PlantNodeId.UpperLeft,
                         PlantNodeId.UpperMid,
+                        PlantNodeId.UpperLeft,
+                        PlantNodeId.UnderLeft,
                         PlantNodeId.UnderMid
                     });
 

@@ -14,6 +14,8 @@ public class VirtualToFSensor : MonoBehaviour
     [Header("Simulation")]
     public bool addNoise = true;
     public float noiseStdDev = 0.01f;
+    public LayerMask detectionMask = ~0;
+    public bool ignoreOwnHierarchy = true;
 
     [Header("Debug")]
     public bool drawDebugRay = true;
@@ -73,14 +75,18 @@ public class VirtualToFSensor : MonoBehaviour
 
     private float CastRay(Vector3 direction)
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(
+        RaycastHit[] hits = Physics.RaycastAll(
             transform.position,
             direction,
-            out hit,
-            maxDistance))
+            maxDistance,
+            detectionMask,
+            QueryTriggerInteraction.Ignore);
+        System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+        for (int i = 0; i < hits.Length; i++)
         {
+            RaycastHit hit = hits[i];
+            if (ignoreOwnHierarchy && hit.transform.root == transform.root)
+                continue;
             if (drawDebugRay)
             {
                 Debug.DrawRay(
@@ -89,7 +95,6 @@ public class VirtualToFSensor : MonoBehaviour
                     Color.red
                 );
             }
-
             return hit.distance;
         }
 

@@ -37,6 +37,8 @@ namespace ShipRobot.LaneFollowing
 
         public bool IsLaneLocked { get; private set; }
         public bool IsDriveEnabled => driveEnabled;
+        public bool IsSafetyStopped => safetyStop;
+        public float SafetySpeedScale => safetySpeedScale;
         public bool HasUsableLane => laneDetector != null &&
             laneDetector.LatestDetection.IsUsable(minimumConfidence, maximumDetectionAge);
         public float MoveCommand { get; private set; }
@@ -48,8 +50,19 @@ namespace ShipRobot.LaneFollowing
         private bool manualControl;
         private float manualMoveCommand;
         private float manualTurnCommand;
+        private bool safetyStop;
+        private float safetySpeedScale = 1f;
         private void FixedUpdate()
         {
+            if (safetyStop)
+            {
+                MoveCommand = 0f;
+                TurnCommand = 0f;
+                IsLaneLocked = false;
+                ApplyDrive(0f, 0f, true);
+                return;
+            }
+
             if (!driveEnabled)
             {
                 MoveCommand = 0f;
@@ -61,7 +74,7 @@ namespace ShipRobot.LaneFollowing
 
             if (manualControl)
             {
-                MoveCommand = manualMoveCommand;
+                MoveCommand = manualMoveCommand * safetySpeedScale;
                 TurnCommand = manualTurnCommand;
                 IsLaneLocked = false;
                 ApplyDrive(MoveCommand, TurnCommand, false);
@@ -92,6 +105,7 @@ namespace ShipRobot.LaneFollowing
             float cornerRatio = Mathf.Abs(desiredTurn) / Mathf.Max(maximumTurnCommand, 0.001f);
             float desiredMove = Mathf.Lerp(cruiseCommand, minimumCornerCommand, cornerRatio);
             desiredMove *= Mathf.InverseLerp(minimumConfidence, 1f, detection.confidence);
+            desiredMove *= safetySpeedScale;
 
             MoveCommand = Mathf.MoveTowards(MoveCommand, desiredMove, controlSlewRate * Time.fixedDeltaTime);
             TurnCommand = Mathf.MoveTowards(TurnCommand, desiredTurn, controlSlewRate * Time.fixedDeltaTime);
@@ -124,6 +138,22 @@ namespace ShipRobot.LaneFollowing
         {
             manualControl = false;
             driveEnabled = true;
+        }
+
+        public void SetSafetyStop(bool stopped)
+        {
+            safetyStop = stopped;
+            if (!stopped)
+                return;
+            MoveCommand = 0f;
+            TurnCommand = 0f;
+            IsLaneLocked = false;
+            ApplyDrive(0f, 0f, true);
+        }
+
+        public void SetSafetySpeedScale(float scale)
+        {
+            safetySpeedScale = Mathf.Clamp01(scale);
         }
 
         public bool TryGetLaneDetection(out HsvLaneDetector.Detection detection)

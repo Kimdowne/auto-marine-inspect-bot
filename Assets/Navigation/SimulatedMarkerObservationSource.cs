@@ -16,6 +16,8 @@ namespace ShipRobot.Navigation
         [SerializeField, Range(0f, 1f)] private float minimumFacingDot = 0.10f;
         [SerializeField, Min(0.02f)] private float refreshInterval = 0.05f;
         [SerializeField] private bool showOverlay = true;
+        [SerializeField] private bool drawBoxInsideCameraPreview = true;
+        [SerializeField] private Rect cameraPreviewGuiRect = new Rect(10f, 10f, 320f, 180f);
 
         private NavigationMarker[] markers;
         private MarkerObservation latestObservation;
@@ -107,6 +109,26 @@ namespace ShipRobot.Navigation
 
         private Rect CalculateGuiRect(Vector3 viewport, float physicalSize, float distance)
         {
+            if (drawBoxInsideCameraPreview)
+            {
+                float previewFocalPixels = cameraPreviewGuiRect.height /
+                                           (2f * Mathf.Tan(markerCamera.fieldOfView * 0.5f * Mathf.Deg2Rad));
+                float previewSize = Mathf.Clamp(
+                    physicalSize / Mathf.Max(distance, 0.01f) * previewFocalPixels,
+                    12f, cameraPreviewGuiRect.height * 0.75f);
+                float previewScreenX = cameraPreviewGuiRect.x + viewport.x * cameraPreviewGuiRect.width;
+                float previewScreenY = cameraPreviewGuiRect.y + (1f - viewport.y) * cameraPreviewGuiRect.height;
+                Rect previewBox = new Rect(
+                    previewScreenX - previewSize * 0.5f,
+                    previewScreenY - previewSize * 0.5f,
+                    previewSize, previewSize);
+                previewBox.x = Mathf.Clamp(
+                    previewBox.x, cameraPreviewGuiRect.x, cameraPreviewGuiRect.xMax - previewBox.width);
+                previewBox.y = Mathf.Clamp(
+                    previewBox.y, cameraPreviewGuiRect.y, cameraPreviewGuiRect.yMax - previewBox.height);
+                return previewBox;
+            }
+
             Rect pixelRect = markerCamera.pixelRect;
             float focalPixels = pixelRect.height / (2f * Mathf.Tan(markerCamera.fieldOfView * 0.5f * Mathf.Deg2Rad));
             float size = Mathf.Clamp(physicalSize / Mathf.Max(distance, 0.01f) * focalPixels, 24f, pixelRect.height * 0.75f);
@@ -119,10 +141,11 @@ namespace ShipRobot.Navigation
         {
             if (!showOverlay || markerCamera == null)
                 return;
+            GUI.depth = -100;
             EnsureStyles();
 
-            Rect cameraRect = markerCamera.pixelRect;
-            float guiTop = Screen.height - cameraRect.yMax;
+            Rect cameraRect = drawBoxInsideCameraPreview ? cameraPreviewGuiRect : markerCamera.pixelRect;
+            float guiTop = drawBoxInsideCameraPreview ? cameraRect.y : Screen.height - cameraRect.yMax;
             var statusRect = new Rect(cameraRect.x + 8f, guiTop + 8f, Mathf.Max(260f, cameraRect.width - 16f), 48f);
 
             if (!hasObservation || latestMarker == null)

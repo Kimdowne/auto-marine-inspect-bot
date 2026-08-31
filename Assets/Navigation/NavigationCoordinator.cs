@@ -14,7 +14,7 @@ namespace ShipRobot.Navigation
         {
             Idle, FollowingLane, ConfirmingNode, ApproachingTurnCenter,
             SearchingExitLane, VisualAlign, StraightThroughJunction,
-            StraightToNextMarker, Completed, Fault
+            StraightToNextMarker, InspectingEquipment, Completed, Fault
         }
 
         [Serializable]
@@ -29,13 +29,18 @@ namespace ShipRobot.Navigation
             [Range(0.05f, 1f)] public float visualAlignMoveCommand;
         }
 
-        private enum ActiveMission { None, SingleEdge, Perimeter }
+        private enum ActiveMission { None, SingleEdge, Perimeter, EquipmentA }
 
         [Header("Connections")]
         [SerializeField] private PlantRouteGraph routeGraph;
         [SerializeField] private MissionRoutePlanner missionPlanner;
         [SerializeField] private SimulatedMarkerObservationSource markerSource;
         [SerializeField] private LaneFollowerController laneFollower;
+
+        [Header("Equipment A inspection")]
+        [SerializeField] private Transform inspectionPointA1;
+        [SerializeField] private Transform inspectionPointA2;
+        [SerializeField, Min(0.1f)] private float inspectionReachDistance = 1.20f;
 
         [Header("Marker localization")]
         [SerializeField] private PlantNodeId initialNode = PlantNodeId.UnderMid;
@@ -115,6 +120,9 @@ namespace ShipRobot.Navigation
         private float activeApproachCommand;
         private float activeSearchTurnCommand;
         private float activeVisualMoveCommand;
+        private int activeInspectionIndex;
+        private float inspectionTimeRemaining;
+        private Transform activeInspectionPoint;
         private string statusDetail = "Ready";
         private GUIStyle titleStyle;
         private GUIStyle statusStyle;
@@ -145,6 +153,9 @@ namespace ShipRobot.Navigation
                 case MissionState.StraightToNextMarker:
                     UpdateStraightToNextMarker();
                     return;
+                case MissionState.InspectingEquipment:
+                    UpdateEquipmentInspection();
+                    return;
             }
 
             if (State != MissionState.FollowingLane && State != MissionState.ConfirmingNode)
@@ -154,6 +165,9 @@ namespace ShipRobot.Navigation
                 Fail("Navigation setup is incomplete");
                 return;
             }
+
+            if (TryBeginEquipmentInspection())
+                return;
 
             PlantNodeId target = activeRoute[targetRouteIndex];
             bool targetVisible = markerSource.TryGetLatestObservation(out MarkerObservation observation) &&
@@ -224,6 +238,20 @@ namespace ShipRobot.Navigation
             StartRoute(missionPlanner.BuildPerimeterRoute(CurrentNode), ActiveMission.Perimeter);
         }
 
+        [ContextMenu("Start Equipment A Mission")]
+        public void StartEquipmentAMission()
+        {
+            if (missionPlanner == null || inspectionPointA1 == null || inspectionPointA2 == null)
+            {
+                Fail("Equipment A inspection setup is incomplete");
+                return;
+            }
+
+            StartRoute(
+                missionPlanner.BuildMissionRoute(PlantMission.InspectEquipmentA, CurrentNode),
+                ActiveMission.EquipmentA);
+        }
+
         private void StartRoute(IReadOnlyList<PlantNodeId> route, ActiveMission mission)
         {
             if (!ConnectionsReady() || route == null || route.Count < 2)
@@ -238,8 +266,44 @@ namespace ShipRobot.Navigation
             targetRouteIndex = 1;
             markerFrames = 0;
             normalLaneLostFrames = 0;
+            activeInspectionIndex = 0;
+            activeInspectionPoint = null;
             State = MissionState.FollowingLane;
             statusDetail = $"Following to ID {(int)activeRoute[1]} ({activeRoute[1]})";
+            laneFollower.ResumeLaneFollowing();
+        }
+
+        private bool TryBeginEquipmentInspection()
+        {
+            if (activeMission != ActiveMission.EquipmentA || activeInspectionIndex >= 2)
+                return false;
+
+            Transform target = activeInspectionIndex == 0 ? inspectionPointA1 : inspectionPointA2;
+            if (target == null || PlanarDistance(laneFollower.transform.position, target.position) > inspectionReachDistance)
+                return false;
+
+            activeInspectionPoint = target;
+            InspectionPoint point = target.GetComponent<InspectionPoint>();
+            inspectionTimeRemaining = point != null ? Mathf.Max(0f, point.inspectionTime) : 3f;
+            State = MissionState.InspectingEquipment;
+            statusDetail = $"Inspecting {target.name}: {inspectionTimeRemaining:F1} s";
+            laneFollower.SetDriveEnabled(false);
+            return true;
+        }
+
+        private void UpdateEquipmentInspection()
+        {
+            inspectionTimeRemaining = Mathf.Max(0f, inspectionTimeRemaining - Time.deltaTime);
+            string pointName = activeInspectionPoint != null ? activeInspectionPoint.name : "inspection point";
+            statusDetail = $"Inspecting {pointName}: {inspectionTimeRemaining:F1} s";
+            if (inspectionTimeRemaining > 0f)
+                return;
+
+            activeInspectionIndex++;
+            activeInspectionPoint = null;
+            State = MissionState.FollowingLane;
+            PlantNodeId target = activeRoute[targetRouteIndex];
+            statusDetail = $"Inspection complete; following ID {(int)target} ({target})";
             laneFollower.ResumeLaneFollowing();
         }
 
@@ -605,12 +669,20 @@ namespace ShipRobot.Navigation
             activeMission = ActiveMission.None;
             State = MissionState.Idle;
             normalLaneLostFrames = 0;
+            activeInspectionIndex = 0;
+            activeInspectionPoint = null;
             statusDetail = $"Ready at {CurrentNode}";
             laneFollower?.SetDriveEnabled(false);
         }
 
         private void CompleteMission()
         {
+            if (activeMission == ActiveMission.EquipmentA && activeInspectionIndex < 2)
+            {
+                Fail($"Equipment A mission reached the route end with only {activeInspectionIndex}/2 inspections completed");
+                return;
+            }
+
             State = MissionState.Completed;
             statusDetail = $"Completed at ID {(int)CurrentNode} ({CurrentNode})";
             laneFollower.SetDriveEnabled(false);
@@ -649,7 +721,7 @@ namespace ShipRobot.Navigation
         {
             if (!showMissionPanel) return;
             EnsureStyles();
-            Rect panel = new Rect(10f, Screen.height - 165f, 500f, 155f);
+            Rect panel = new Rect(10f, Screen.height - 198f, 500f, 188f);
             GUI.Box(panel, GUIContent.none);
             GUI.Label(new Rect(panel.x + 10f, panel.y + 7f, panel.width - 20f, 22f),
                 $"MISSION: {activeMission}   State: {State}", titleStyle);
@@ -660,7 +732,9 @@ namespace ShipRobot.Navigation
                 StartSingleEdgeMission();
             if (canStart && GUI.Button(new Rect(panel.x + 255f, panel.y + 92f, 230f, 27f), "START PERIMETER"))
                 StartPerimeterMission();
-            if (State != MissionState.Idle && GUI.Button(new Rect(panel.x + 10f, panel.y + 123f, 475f, 25f), "RESET / STOP"))
+            if (canStart && GUI.Button(new Rect(panel.x + 10f, panel.y + 123f, 475f, 27f), "START EQUIPMENT A INSPECTION"))
+                StartEquipmentAMission();
+            if (State != MissionState.Idle && GUI.Button(new Rect(panel.x + 10f, panel.y + 155f, 475f, 25f), "RESET / STOP"))
                 ResetMission();
         }
 
