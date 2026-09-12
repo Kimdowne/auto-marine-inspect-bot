@@ -1,0 +1,12 @@
+<Application x:Class="MarineMonitor.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <Application.Resources>
+  <SolidColorBrush x:Key="Muted" Color="#8CA0B9"/>
+  <Style TargetType="TextBlock"><Setter Property="Foreground" Value="#E9EFF8"/><Setter Property="FontFamily" Value="Malgun Gothic"/><Setter Property="FontSize" Value="13"/></Style>
+  <Style TargetType="Button">
+   <Setter Property="Foreground" Value="#DAE5F4"/><Setter Property="Background" Value="#22334B"/><Setter Property="BorderThickness" Value="0"/>
+   <Setter Property="Padding" Value="13,9"/><Setter Property="Margin" Value="0,0,6,0"/><Setter Property="Cursor" Value="Hand"/><Setter Property="FontFamily" Value="Malgun Gothic"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border x:Name="Surface" Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Surface" Property="Opacity" Value="0.8"/></Trigger><Trigger Property="IsEnabled" Value="False"><Setter TargetName="Surface" Property="Opacity" Value="0.35"/></Trigger><Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Surface" Property="BorderBrush" Value="#4DD8C3"/><Setter TargetName="Surface" Property="BorderThickness" Value="1"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style TargetType="TextBox"><Setter Property="Background" Value="#18273B"/><Setter Property="Foreground" Value="#E9EFF8"/><Setter Property="BorderBrush" Value="#32465D"/><Setter Property="Padding" Value="8"/><Setter Property="VerticalContentAlignment" Value="Center"/></Style>
+ </Application.Resources>
+</Application>
