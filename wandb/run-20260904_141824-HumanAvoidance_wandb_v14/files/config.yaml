@@ -1,0 +1,455 @@
+wandb_version: 1
+
+mlagents_run_id:
+  desc: null
+  value: HumanAvoidance_wandb_v14
+trainer_config:
+  desc: null
+  value: config/human_avoidance_ppo.yaml
+_wandb:
+  desc: null
+  value:
+    python_version: 3.10.9
+    cli_version: 0.16.6
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1788499104.0
+    t:
+      1:
+      - 55
+      2:
+      - 1
+      - 55
+      3:
+      - 2
+      - 5
+      - 7
+      - 13
+      - 14
+      - 16
+      - 23
+      - 62
+      4: 3.10.9
+      5: 0.16.6
+      8:
+      - 3
+      - 5
+      13: windows-amd64
+    framework: torch
+    m:
+    - 1: trainer/step
+      6:
+      - 3
+    - 1: episode/index
+      6:
+      - 3
+    - 1: mlagents/HumanAvoidance/Policy/Entropy
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Sensors/MinimumDistance
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Sensors/MinimumTTC
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Sensors/PersonDetected
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Sensors/PersonConfidence
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Lane/Usable
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Lane/RawConfidence
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Lane/ObservationAge
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Lane/AbsoluteError
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Policy/Active
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Policy/Latched
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Policy/RuleSpeedScale
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Policy/TargetLaneOffset
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Robot/ForwardSpeed
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Robot/LinearSpeed
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Safety/AppliedSpeedScale
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Step
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Policy/Extrinsic_Value_Estimate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Is_Training
+      5: 1
+      6:
+      - 1
+    - 1: episode/trainer_step
+      5: 2
+      6:
+      - 1
+    - 1: episode/failure_reason
+      5: 2
+      6:
+      - 1
+    - 1: episode/failure_code
+      5: 2
+      6:
+      - 1
+    - 1: episode/scenario
+      5: 2
+      6:
+      - 1
+    - 1: episode/decision
+      5: 2
+      6:
+      - 1
+    - 1: episode/forced_stop
+      5: 2
+      6:
+      - 1
+    - 1: episode/decision_stop
+      5: 2
+      6:
+      - 1
+    - 1: episode/decision_left
+      5: 2
+      6:
+      - 1
+    - 1: episode/decision_right
+      5: 2
+      6:
+      - 1
+    - 1: episode/scenario_approach_left
+      5: 2
+      6:
+      - 1
+    - 1: episode/scenario_approach_centre
+      5: 2
+      6:
+      - 1
+    - 1: episode/scenario_approach_right
+      5: 2
+      6:
+      - 1
+    - 1: episode/success
+      5: 2
+      6:
+      - 1
+    - 1: episode/avoidance_success
+      5: 2
+      6:
+      - 1
+    - 1: episode/safe_pass
+      5: 2
+      6:
+      - 1
+    - 1: episode/collision
+      5: 2
+      6:
+      - 1
+    - 1: episode/emergency_stop
+      5: 2
+      6:
+      - 1
+    - 1: episode/lane_exit
+      5: 2
+      6:
+      - 1
+    - 1: episode/timeout
+      5: 2
+      6:
+      - 1
+    - 1: episode/final_reward
+      5: 2
+      6:
+      - 1
+    - 1: episode/minimum_distance
+      5: 2
+      6:
+      - 1
+    - 1: episode/maximum_forward_speed
+      5: 2
+      6:
+      - 1
+    - 1: episode/experienced_avoidance
+      5: 2
+      6:
+      - 1
+    - 1: episode/approach_angle_degrees
+      5: 2
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Environment/Episode_Length
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/SuccessRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/AvoidanceSuccessRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/SafePassRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/CollisionRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/EmergencyStopRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/LaneExitRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/TimeoutRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/MinimumDistance
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/MaximumForwardSpeed
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Episode/ExperiencedAvoidance
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Decision/StopRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Decision/LeftRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Decision/RightRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Decision/ForcedStopRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Scenario/ApproachLeftRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Scenario/ApproachCentreRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Scenario/ApproachRightRate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/HumanAvoidance/Scenario/ApproachAngleDegrees
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Environment/Cumulative_Reward
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Policy/Extrinsic_Reward
+      5: 1
+      6:
+      - 1
+    - 1: train/reward_mean
+      5: 1
+      6:
+      - 1
+    - 1: train/reward_std
+      5: 1
+      6:
+      - 1
+    - 1: train/episodes_completed
+      5: 1
+      6:
+      - 1
+    - 1: train/success_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/avoidance_success_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/safe_pass_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/collision_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/emergency_stop_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/lane_exit_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/timeout_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/minimum_distance_mean
+      5: 1
+      6:
+      - 1
+    - 1: train/maximum_forward_speed_mean
+      5: 1
+      6:
+      - 1
+    - 1: train/experienced_avoidance_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/decision_stop_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/decision_left_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/decision_right_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/forced_stop_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/scenario_approach_left_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/scenario_approach_centre_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/scenario_approach_right_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/approach_angle_degrees_mean
+      5: 1
+      6:
+      - 1
+    - 1: train/episodes_total
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Losses/Policy_Loss
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Losses/Value_Loss
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Policy/Learning_Rate
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Policy/Epsilon
+      5: 1
+      6:
+      - 1
+    - 1: mlagents/HumanAvoidance/Policy/Beta
+      5: 1
+      6:
+      - 1
+mlagents/HumanAvoidance:
+  desc: null
+  value:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 128
+      buffer_size: 1024
+      learning_rate: 0.0003
+      beta: 0.005
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      shared_critic: false
+      learning_rate_schedule: linear
+      beta_schedule: linear
+      epsilon_schedule: linear
+    checkpoint_interval: 250000
+    network_settings:
+      normalize: true
+      hidden_units: 256
+      num_layers: 2
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+      deterministic: false
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+          deterministic: false
+    init_path: null
+    keep_checkpoints: 5
+    even_checkpoints: false
+    max_steps: 3000000
+    time_horizon: 16
+    summary_freq: 100
+    threaded: false
+    self_play: null
+    behavioral_cloning: null

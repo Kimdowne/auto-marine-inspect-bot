@@ -33,7 +33,18 @@ namespace ShipRobot.ObstacleAvoidance
         private GUIStyle titleStyle;
         private GUIStyle valueStyle;
 
-        private void Update()
+        public void ResetMeasurements()
+        {
+            initialized = false;
+            nextSampleTime = 0f;
+            lastSampleTime = Time.time;
+            LeftClosingSpeed = 0f;
+            RightClosingSpeed = 0f;
+            LeftTtc = float.PositiveInfinity;
+            RightTtc = float.PositiveInfinity;
+        }
+
+        private void FixedUpdate()
         {
             if (Time.time < nextSampleTime)
                 return;

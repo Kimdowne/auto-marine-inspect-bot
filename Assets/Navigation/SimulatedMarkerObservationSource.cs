@@ -37,9 +37,9 @@ namespace ShipRobot.Navigation
 
         private void Update()
         {
-            if (Time.unscaledTime < nextRefreshTime)
+            if (Time.time < nextRefreshTime)
                 return;
-            nextRefreshTime = Time.unscaledTime + refreshInterval;
+            nextRefreshTime = Time.time + refreshInterval;
             DetectVisibleMarker();
         }
 

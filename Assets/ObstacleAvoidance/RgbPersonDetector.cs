@@ -86,9 +86,9 @@ namespace ShipRobot.ObstacleAvoidance
 
         private void Update()
         {
-            if (!inferenceRunning && Time.unscaledTime >= nextInferenceTime)
+            if (!inferenceRunning && Time.time >= nextInferenceTime)
             {
-                nextInferenceTime = Time.unscaledTime + inferenceInterval;
+                nextInferenceTime = Time.time + inferenceInterval;
                 RunInferenceAsync();
             }
 

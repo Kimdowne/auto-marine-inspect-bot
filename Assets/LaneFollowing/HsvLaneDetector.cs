@@ -100,10 +100,10 @@ namespace ShipRobot.LaneFollowing
 
         private void Update()
         {
-            if (Time.unscaledTime < nextDetectionTime)
+            if (Time.time < nextDetectionTime)
                 return;
 
-            nextDetectionTime = Time.unscaledTime + detectionInterval;
+            nextDetectionTime = Time.time + detectionInterval;
             ProcessFrame();
         }
 
@@ -116,15 +116,23 @@ namespace ShipRobot.LaneFollowing
                 AllocateBuffers();
 
             RenderTexture previousActive = RenderTexture.active;
-            RenderTexture previousTarget = rgbCamera.targetTexture;
-
-            rgbCamera.targetTexture = renderTexture;
-            rgbCamera.Render();
+            RenderTexture displayedFrame = rgbCamera.targetTexture;
+            if (displayedFrame != null && displayedFrame != renderTexture)
+            {
+                // Reuse the already rendered camera preview. This prevents a second full URP
+                // camera render for every HSV sample during accelerated training.
+                Graphics.Blit(displayedFrame, renderTexture);
+            }
+            else if (displayedFrame == null)
+            {
+                rgbCamera.targetTexture = renderTexture;
+                rgbCamera.Render();
+                rgbCamera.targetTexture = null;
+            }
             RenderTexture.active = renderTexture;
             readbackTexture.ReadPixels(new Rect(0, 0, processingWidth, processingHeight), 0, 0, false);
             readbackTexture.Apply(false, false);
 
-            rgbCamera.targetTexture = previousTarget;
             RenderTexture.active = previousActive;
 
             pixels = readbackTexture.GetPixels32();

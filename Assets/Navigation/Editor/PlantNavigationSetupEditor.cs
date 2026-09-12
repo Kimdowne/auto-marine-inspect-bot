@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using ShipRobot.LaneFollowing;
 using ShipRobot.Navigation;
 using ShipRobot.ObstacleAvoidance;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Policies;
 
 namespace ShipRobot.Navigation.Editor
 {
@@ -87,8 +90,6 @@ namespace ShipRobot.Navigation.Editor
             GameObject robot = GameObject.Find("jetbot");
             coordinatorObject.FindProperty("laneFollower").objectReferenceValue =
                 robot != null ? robot.GetComponent<ShipRobot.LaneFollowing.LaneFollowerController>() : null;
-            if (robot != null)
-                AttachHumanGroundTruthSensor(robot);
             GameObject inspectionA1 = GameObject.Find("inspect_point_A1");
             GameObject inspectionA2 = GameObject.Find("inspect_point_A2");
             coordinatorObject.FindProperty("inspectionPointA1").objectReferenceValue =
@@ -103,22 +104,6 @@ namespace ShipRobot.Navigation.Editor
             Selection.activeGameObject = root;
             EditorSceneManager.MarkSceneDirty(root.scene);
             Debug.Log("AprilTag navigation setup complete: six markers, route graph, and mission planner created.", root);
-        }
-
-        [MenuItem("Tools/Ship Robot/Setup Human Ground-Truth Sensor")]
-        public static void SetupHumanGroundTruthSensor()
-        {
-            GameObject robot = GameObject.Find("jetbot");
-            if (robot == null)
-            {
-                Debug.LogError("jetbot was not found in the active scene.");
-                return;
-            }
-
-            HumanGroundTruthSensor sensor = AttachHumanGroundTruthSensor(robot);
-            Selection.activeGameObject = robot;
-            EditorSceneManager.MarkSceneDirty(robot.scene);
-            Debug.Log("Human ground-truth sensor setup complete. Save the scene and enter Play Mode.", sensor);
         }
 
         [MenuItem("Tools/Ship Robot/Setup Dual Front ToF Sensors")]
@@ -166,8 +151,7 @@ namespace ShipRobot.Navigation.Editor
             serializedSafety.FindProperty("laneFollower").objectReferenceValue =
                 robot.GetComponent<ShipRobot.LaneFollowing.LaneFollowerController>();
             RgbPersonDetector rgbDetector = robot.GetComponent<RgbPersonDetector>();
-            serializedSafety.FindProperty("personBearingProvider").objectReferenceValue =
-                rgbDetector != null ? rgbDetector : robot.GetComponent<HumanGroundTruthSensor>();
+            serializedSafety.FindProperty("personBearingProvider").objectReferenceValue = rgbDetector;
             serializedSafety.FindProperty("earlyWarningSpeedScale").floatValue = 0.65f;
             serializedSafety.FindProperty("centreSectorHalfWidth").floatValue = 0.20f;
             serializedSafety.FindProperty("emergencyStopDistance").floatValue = 0.80f;
@@ -218,6 +202,183 @@ namespace ShipRobot.Navigation.Editor
             Debug.Log("RGB YOLOX person detector setup complete. SafetySupervisor now uses RGB bearing.", detector);
         }
 
+        [MenuItem("Tools/Ship Robot/Setup Human Avoidance Agent")]
+        public static void SetupHumanAvoidanceAgent()
+        {
+            GameObject robot = GameObject.Find("jetbot");
+            if (robot == null)
+            {
+                Debug.LogError("jetbot was not found in the active scene.");
+                return;
+            }
+
+            HumanAvoidanceAgent agent = GetOrAddComponent<HumanAvoidanceAgent>(robot);
+            var serializedAgent = new SerializedObject(agent);
+            serializedAgent.FindProperty("tofRig").objectReferenceValue = robot.GetComponent<DualToFSensorRig>();
+            serializedAgent.FindProperty("personDetector").objectReferenceValue = robot.GetComponent<RgbPersonDetector>();
+            serializedAgent.FindProperty("laneFollower").objectReferenceValue =
+                robot.GetComponent<ShipRobot.LaneFollowing.LaneFollowerController>();
+            serializedAgent.FindProperty("safetySupervisor").objectReferenceValue =
+                robot.GetComponent<SafetySupervisor>();
+            serializedAgent.FindProperty("robotBody").objectReferenceValue = robot.GetComponent<Rigidbody>();
+            serializedAgent.FindProperty("scenarioReference").objectReferenceValue = robot.transform.Find("front_camera");
+            serializedAgent.FindProperty("applyPolicyActions").boolValue = false;
+            serializedAgent.FindProperty("policyActivationDistance").floatValue = 1.80f;
+            serializedAgent.FindProperty("maximumAvoidanceLaneOffset").floatValue = 0.28f;
+            serializedAgent.ApplyModifiedPropertiesWithoutUndo();
+            agent.enabled = true;
+
+            BehaviorParameters behavior = GetOrAddComponent<BehaviorParameters>(robot);
+            behavior.enabled = true;
+            behavior.BehaviorName = "HumanAvoidance";
+            behavior.BehaviorType = BehaviorType.HeuristicOnly;
+            behavior.BrainParameters.VectorObservationSize = HumanAvoidanceAgent.ObservationCount;
+            behavior.BrainParameters.NumStackedVectorObservations = 1;
+            behavior.BrainParameters.ActionSpec = ActionSpec.MakeDiscrete(4);
+            EditorUtility.SetDirty(behavior);
+
+            Unity.MLAgents.DecisionRequester requester =
+                GetOrAddComponent<Unity.MLAgents.DecisionRequester>(robot);
+            requester.enabled = false;
+            var serializedRequester = new SerializedObject(requester);
+            serializedRequester.FindProperty("DecisionPeriod").intValue = 2;
+            serializedRequester.FindProperty("TakeActionsBetweenDecisions").boolValue = true;
+            serializedRequester.ApplyModifiedPropertiesWithoutUndo();
+
+            JetBotAgent legacyAgent = robot.GetComponent<JetBotAgent>();
+            if (legacyAgent != null)
+                legacyAgent.enabled = false;
+
+            EditorUtility.SetDirty(agent);
+            EditorUtility.SetDirty(requester);
+            Selection.activeGameObject = robot;
+            EditorSceneManager.MarkSceneDirty(robot.scene);
+            Debug.Log("Human avoidance observation/action layer setup complete. Policy actions remain OFF for safe validation.", agent);
+        }
+
+        [MenuItem("Tools/Ship Robot/Training/Enable Human Avoidance Training")]
+        public static void EnableHumanAvoidanceTraining()
+        {
+            GameObject robot = GameObject.Find("jetbot");
+            HumanAvoidanceAgent agent = robot != null ? robot.GetComponent<HumanAvoidanceAgent>() : null;
+            if (agent == null)
+            {
+                Debug.LogError("Run Setup Human Avoidance Agent first.");
+                return;
+            }
+
+            GameObject person = GameObject.Find("Handyman_ver_1");
+            TrainingPedestrianMover mover = person != null
+                ? GetOrAddComponent<TrainingPedestrianMover>(person)
+                : null;
+            var serializedAgent = new SerializedObject(agent);
+            serializedAgent.FindProperty("trainingMode").boolValue = true;
+            serializedAgent.FindProperty("trainingStage").enumValueIndex = 0;
+            serializedAgent.FindProperty("applyPolicyActions").boolValue = true;
+            serializedAgent.FindProperty("trainingPerson").objectReferenceValue =
+                person != null ? person.transform : null;
+            serializedAgent.FindProperty("trainingMover").objectReferenceValue = mover;
+            serializedAgent.FindProperty("scenarioReference").objectReferenceValue = robot.transform.Find("front_camera");
+            serializedAgent.FindProperty("approachSpawnDistanceRange").vector2Value = new Vector2(4.0f, 6.0f);
+            serializedAgent.FindProperty("maximumApproachAngleDegrees").floatValue = 12f;
+            serializedAgent.FindProperty("approachTargetLateralRange").vector2Value = new Vector2(-0.30f, 0.30f);
+            serializedAgent.FindProperty("sidePassScenarioProbability").floatValue = 0.70f;
+            serializedAgent.FindProperty("sidePassLateralMagnitudeRange").vector2Value = new Vector2(0.55f, 0.80f);
+            serializedAgent.FindProperty("moderateScenarioProbability").floatValue = 0.20f;
+            serializedAgent.FindProperty("moderateLateralMagnitudeRange").vector2Value = new Vector2(0.30f, 0.50f);
+            serializedAgent.FindProperty("approachTargetForwardOffset").floatValue = 0.35f;
+            serializedAgent.FindProperty("pedestrianSpeedRange").vector2Value = new Vector2(0.30f, 0.60f);
+            serializedAgent.FindProperty("approachExtraTravelRange").vector2Value = new Vector2(1.0f, 1.5f);
+            serializedAgent.FindProperty("completionHoldSeconds").floatValue = 0.50f;
+            serializedAgent.FindProperty("maximumEpisodeSeconds").floatValue = 28f;
+            serializedAgent.ApplyModifiedPropertiesWithoutUndo();
+            agent.MaxStep = 2500;
+
+            SafetySupervisor safety = robot.GetComponent<SafetySupervisor>();
+            if (safety != null)
+            {
+                var serializedSafety = new SerializedObject(safety);
+                serializedSafety.FindProperty("enforceControl").boolValue = false;
+                serializedSafety.FindProperty("emergencyStopDistance").floatValue = 0.35f;
+                serializedSafety.FindProperty("emergencyStopTtc").floatValue = 0.75f;
+                serializedSafety.ApplyModifiedPropertiesWithoutUndo();
+                safety.SetControlEnforcement(false);
+                EditorUtility.SetDirty(safety);
+            }
+
+            BehaviorParameters behavior = robot.GetComponent<BehaviorParameters>();
+            if (behavior != null)
+            {
+                behavior.BrainParameters.ActionSpec = ActionSpec.MakeDiscrete(4);
+                behavior.BehaviorType = BehaviorType.Default;
+                EditorUtility.SetDirty(behavior);
+            }
+
+            Unity.MLAgents.DecisionRequester requester = robot.GetComponent<Unity.MLAgents.DecisionRequester>();
+            if (requester != null)
+            {
+                requester.enabled = false;
+                EditorUtility.SetDirty(requester);
+            }
+
+            EditorUtility.SetDirty(agent);
+            if (mover != null)
+                EditorUtility.SetDirty(mover);
+            EditorSceneManager.MarkSceneDirty(robot.scene);
+            Selection.activeGameObject = robot;
+            Debug.Log("Human avoidance TRAINING mode enabled. Safety is monitor-only; connect mlagents-learn before entering Play Mode.", agent);
+        }
+
+        [MenuItem("Tools/Ship Robot/Training/Restore Safe Validation Mode")]
+        public static void RestoreSafeAvoidanceValidationMode()
+        {
+            GameObject robot = GameObject.Find("jetbot");
+            HumanAvoidanceAgent agent = robot != null ? robot.GetComponent<HumanAvoidanceAgent>() : null;
+            if (agent == null)
+                return;
+
+            var serializedAgent = new SerializedObject(agent);
+            serializedAgent.FindProperty("trainingMode").boolValue = false;
+            serializedAgent.FindProperty("applyPolicyActions").boolValue = false;
+            serializedAgent.ApplyModifiedPropertiesWithoutUndo();
+            agent.MaxStep = 0;
+
+            SafetySupervisor safety = robot.GetComponent<SafetySupervisor>();
+            if (safety != null)
+            {
+                var serializedSafety = new SerializedObject(safety);
+                serializedSafety.FindProperty("enforceControl").boolValue = true;
+                serializedSafety.FindProperty("emergencyStopDistance").floatValue = 0.80f;
+                serializedSafety.FindProperty("emergencyStopTtc").floatValue = 1.50f;
+                serializedSafety.ApplyModifiedPropertiesWithoutUndo();
+                safety.SetControlEnforcement(true);
+                EditorUtility.SetDirty(safety);
+            }
+
+            TrainingPedestrianMover mover = UnityEngine.Object.FindAnyObjectByType<TrainingPedestrianMover>();
+            if (mover != null)
+                mover.StopMotion();
+
+            BehaviorParameters behavior = robot.GetComponent<BehaviorParameters>();
+            if (behavior != null)
+            {
+                behavior.BrainParameters.ActionSpec = ActionSpec.MakeDiscrete(4);
+                behavior.BehaviorType = BehaviorType.HeuristicOnly;
+                EditorUtility.SetDirty(behavior);
+            }
+
+            Unity.MLAgents.DecisionRequester requester = robot.GetComponent<Unity.MLAgents.DecisionRequester>();
+            if (requester != null)
+            {
+                requester.enabled = false;
+                EditorUtility.SetDirty(requester);
+            }
+
+            EditorUtility.SetDirty(agent);
+            EditorSceneManager.MarkSceneDirty(robot.scene);
+            Debug.Log("Safe validation mode restored. Policy actions and training resets are OFF.", agent);
+        }
+
         private static VirtualToFSensor CreateOrUpdateToFSensor(
             Transform parent, string objectName, Vector3 localPosition, float yaw)
         {
@@ -241,19 +402,6 @@ namespace ShipRobot.Navigation.Editor
             sensor.drawDebugRay = true;
             sensor.ignoreOwnHierarchy = true;
             EditorUtility.SetDirty(sensorObject);
-            return sensor;
-        }
-
-        private static HumanGroundTruthSensor AttachHumanGroundTruthSensor(GameObject robot)
-        {
-            HumanGroundTruthSensor sensor = GetOrAddComponent<HumanGroundTruthSensor>(robot);
-            var serializedSensor = new SerializedObject(sensor);
-            Transform cameraTransform = robot.transform.Find("front_camera");
-            serializedSensor.FindProperty("perceptionCamera").objectReferenceValue =
-                cameraTransform != null ? cameraTransform.GetComponent<Camera>() : null;
-            serializedSensor.FindProperty("surfaceSafetyMargin").floatValue = 0.10f;
-            serializedSensor.ApplyModifiedPropertiesWithoutUndo();
-            EditorUtility.SetDirty(sensor);
             return sensor;
         }
 

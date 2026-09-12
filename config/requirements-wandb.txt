@@ -1,0 +1,6 @@
+# W&B 0.16.6 does not require Pydantic 2's native _pydantic_core module and
+# remains compatible with the Protobuf 3.x range used by this ML-Agents setup.
+# setuptools 82 removed pkg_resources, which this W&B version still imports.
+setuptools==81.0.0
+wandb==0.16.6
+protobuf==3.20.3

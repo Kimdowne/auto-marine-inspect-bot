@@ -20,7 +20,7 @@ namespace ShipRobot.ObstacleAvoidance
         [SerializeField] private LaneFollowerController laneFollower;
         [SerializeField] private MonoBehaviour personBearingProvider;
 
-        [Header("Person early warning (ground truth stands in for RGB)")]
+        [Header("RGB person early warning")]
         [SerializeField, Range(0.1f, 1f)] private float earlyWarningSpeedScale = 0.65f;
         [SerializeField, Range(0f, 0.8f)] private float centreSectorHalfWidth = 0.20f;
 
@@ -32,6 +32,10 @@ namespace ShipRobot.ObstacleAvoidance
         [SerializeField, Min(0.05f)] private float releaseDistance = 1.00f;
         [SerializeField, Min(0f)] private float clearHoldSeconds = 0.50f;
 
+        [Header("Control enforcement")]
+        [Tooltip("Disable during RL training so the supervisor observes hazards without overriding policy actions.")]
+        [SerializeField] private bool enforceControl = true;
+
         [Header("Debug")]
         [SerializeField] private bool showDebugPanel = true;
 
@@ -42,6 +46,7 @@ namespace ShipRobot.ObstacleAvoidance
         public float AssociatedPersonConfidence { get; private set; }
         public float AssociatedTofDistance => associatedTofDistance;
         public float AssociatedTofTtc => associatedTofTtc;
+        public bool EnforceControl => enforceControl;
 
         private enum PersonSector { None, Left, Centre, Right }
         private PersonSector currentPersonSector;
@@ -53,6 +58,28 @@ namespace ShipRobot.ObstacleAvoidance
         private float safeSince = -1f;
         private GUIStyle titleStyle;
         private GUIStyle valueStyle;
+
+        public void ResetForTrainingEpisode()
+        {
+            State = SafetyState.Clear;
+            AppliedSpeedScale = 1f;
+            safeSince = -1f;
+            currentPersonSector = PersonSector.None;
+            associatedTofDistance = 0f;
+            associatedTofTtc = float.PositiveInfinity;
+            laneFollower?.SetSafetyStop(false);
+            laneFollower?.SetSafetySpeedScale(1f);
+        }
+
+        public void SetControlEnforcement(bool enabled)
+        {
+            enforceControl = enabled;
+            if (!enforceControl && laneFollower != null)
+            {
+                laneFollower.SetSafetyStop(false);
+                laneFollower.SetSafetySpeedScale(1f);
+            }
+        }
 
         private void Update()
         {
@@ -85,14 +112,14 @@ namespace ShipRobot.ObstacleAvoidance
                 }
 
                 State = SafetyState.WaitingForClear;
-                laneFollower.SetSafetyStop(true);
                 AppliedSpeedScale = 0f;
+                ApplyControl(true, 0f);
                 if (safeSince < 0f)
                     safeSince = Time.time;
                 if (Time.time - safeSince < clearHoldSeconds)
                     return;
 
-                laneFollower.SetSafetyStop(false);
+                ApplyControl(false, 1f);
                 safeSince = -1f;
             }
 
@@ -103,8 +130,7 @@ namespace ShipRobot.ObstacleAvoidance
                     minimumSlowdownScale,
                     1f,
                     Mathf.InverseLerp(emergencyStopDistance, slowdownDistance, distance));
-                laneFollower.SetSafetyStop(false);
-                laneFollower.SetSafetySpeedScale(AppliedSpeedScale);
+                ApplyControl(false, AppliedSpeedScale);
                 return;
             }
 
@@ -112,23 +138,36 @@ namespace ShipRobot.ObstacleAvoidance
             {
                 State = SafetyState.EarlyWarning;
                 AppliedSpeedScale = earlyWarningSpeedScale;
-                laneFollower.SetSafetyStop(false);
-                laneFollower.SetSafetySpeedScale(AppliedSpeedScale);
+                ApplyControl(false, AppliedSpeedScale);
                 return;
             }
 
             State = SafetyState.Clear;
             AppliedSpeedScale = 1f;
-            laneFollower.SetSafetyStop(false);
-            laneFollower.SetSafetySpeedScale(1f);
+            ApplyControl(false, 1f);
         }
 
         private void EnterEmergencyStop()
         {
             State = SafetyState.EmergencyStop;
             AppliedSpeedScale = 0f;
-            laneFollower.SetSafetySpeedScale(0f);
-            laneFollower.SetSafetyStop(true);
+            ApplyControl(true, 0f);
+        }
+
+        private void ApplyControl(bool stopped, float speedScale)
+        {
+            if (laneFollower == null)
+                return;
+            if (enforceControl)
+            {
+                laneFollower.SetSafetySpeedScale(speedScale);
+                laneFollower.SetSafetyStop(stopped);
+            }
+            else
+            {
+                laneFollower.SetSafetySpeedScale(1f);
+                laneFollower.SetSafetyStop(false);
+            }
         }
 
         private void UpdatePersonTofAssociation()
@@ -188,7 +227,8 @@ namespace ShipRobot.ObstacleAvoidance
                 ? Color.red
                 : State == SafetyState.Slowdown || State == SafetyState.EarlyWarning ? Color.yellow : Color.green;
             titleStyle.normal.textColor = stateColour;
-            GUI.Label(new Rect(panel.x + 10f, panel.y + 6f, 345f, 20f), $"SAFETY: {State}", titleStyle);
+            string mode = enforceControl ? "SAFETY" : "SAFETY MONITOR";
+            GUI.Label(new Rect(panel.x + 10f, panel.y + 6f, 345f, 20f), $"{mode}: {State}", titleStyle);
 
             if (tofRig == null || !tofRig.IsInitialized)
             {
@@ -201,7 +241,8 @@ namespace ShipRobot.ObstacleAvoidance
             GUI.Label(new Rect(panel.x + 10f, panel.y + 29f, 345f, 68f),
                 $"min distance {tofRig.MinimumDistance:F2} m   min TTC {ttc}\n" +
                 $"person {currentPersonSector} x {AssociatedPersonScreenX:F2} conf {AssociatedPersonConfidence:F2}\n" +
-                $"selected {associatedSensorName} {associatedTofDistance:F2}m TTC {personTtc}  speed {AppliedSpeedScale:F2}",
+                $"selected {associatedSensorName} {associatedTofDistance:F2}m TTC {personTtc}  suggested {AppliedSpeedScale:F2}\n" +
+                $"control {(enforceControl ? "ENFORCED" : "MONITOR ONLY")}",
                 valueStyle);
         }
 

@@ -41310,7 +41310,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 571172941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 33167591}
+  m_Script: {fileID: 11500000, guid: c4bd80d8d0f44f88942e1a717ccb6d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.NavigationMarker
   nodeId: 3
@@ -67249,7 +67249,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1059295433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 33167591}
+  m_Script: {fileID: 11500000, guid: c4bd80d8d0f44f88942e1a717ccb6d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.NavigationMarker
   nodeId: 6
@@ -73967,6 +73967,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2440466049646508830, guid: 68df0c2a87566234f803f90fd75f6444, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1198685232}
+    - targetCorrespondingSourceObject: {fileID: 2440466049646508830, guid: 68df0c2a87566234f803f90fd75f6444, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1198685235}
   m_SourcePrefab: {fileID: 100100000, guid: 68df0c2a87566234f803f90fd75f6444, type: 3}
 --- !u!1 &1198685231 stripped
 GameObject:
@@ -74021,6 +74024,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!4 &1198685234 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3068524050472296868, guid: 68df0c2a87566234f803f90fd75f6444, type: 3}
+  m_PrefabInstance: {fileID: 1198685230}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1198685235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198685231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525f189f104a0614a9da80354ec2eac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.ObstacleAvoidance.TrainingPedestrianMover
 --- !u!64 &1199441586
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -81419,37 +81439,6 @@ MonoBehaviour:
   m_Script: {fileID: 1939140693}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.PlantRouteGraph
-  useMarkerDistanceAsCost: 1
-  markers: []
-  edges:
-  - from: 1
-    to: 3
-    cost: 1
-    bidirectional: 1
-  - from: 3
-    to: 2
-    cost: 1
-    bidirectional: 1
-  - from: 4
-    to: 6
-    cost: 1
-    bidirectional: 1
-  - from: 6
-    to: 5
-    cost: 1
-    bidirectional: 1
-  - from: 1
-    to: 4
-    cost: 1
-    bidirectional: 1
-  - from: 3
-    to: 6
-    cost: 1
-    bidirectional: 1
-  - from: 2
-    to: 5
-    cost: 1
-    bidirectional: 1
 --- !u!4 &1263303035
 Transform:
   m_ObjectHideFlags: 0
@@ -81571,7 +81560,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1263303032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 343615916}
+  m_Script: {fileID: 11500000, guid: d590955f424149c6a8a865e388a6023d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.PlantRouteGraph
   useMarkerDistanceAsCost: 1
@@ -85355,7 +85344,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1347138808}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 33167591}
+  m_Script: {fileID: 11500000, guid: c4bd80d8d0f44f88942e1a717ccb6d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.NavigationMarker
   nodeId: 2
@@ -86920,16 +86909,14 @@ GameObject:
   - component: {fileID: 1374980274}
   - component: {fileID: 1374980276}
   - component: {fileID: 1374980277}
-  - component: {fileID: 1374980281}
-  - component: {fileID: 1374980280}
   - component: {fileID: 1374980279}
   - component: {fileID: 1374980282}
   - component: {fileID: 1374980278}
   - component: {fileID: 1374980283}
-  - component: {fileID: 1374980284}
   - component: {fileID: 1374980285}
   - component: {fileID: 1374980286}
   - component: {fileID: 1374980287}
+  - component: {fileID: 1374980288}
   m_Layer: 0
   m_Name: jetbot
   m_TagString: Untagged
@@ -87029,113 +87016,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374980273}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 8
+    VectorObservationSize: 18
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 2
-      BranchSizes: 
-    VectorActionSize: 02000000
+      m_NumContinuousActions: 0
+      BranchSizes: 04000000
+    VectorActionSize: 04000000
     VectorActionDescriptions: []
-    VectorActionSpaceType: 1
+    VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: JetBotNavigation
+  m_BehaviorName: HumanAvoidance
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
---- !u!114 &1374980280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1374980273}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dae14fa1b3e1ca47a85beb61d240b0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrackedRobotController
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
-  frontLeftWheel: {fileID: 406733238}
-  rearLeftWheel: {fileID: 1116931130}
-  frontRightWheel: {fileID: 1377104036}
-  rearRightWheel: {fileID: 1377104036}
-  maxMotorTorque: 10
-  baseMoveCommand: 0.4
-  idleBrakeTorque: 2
-  tofLeft: {fileID: 0}
-  tofFront: {fileID: 0}
-  tofRight: {fileID: 0}
-  obstacleActivationDistance: 1.2
-  emergencyDistance: 0.25
-  waypoints:
-  - {fileID: 42513820}
-  - {fileID: 1563359123}
-  - {fileID: 970548841}
-  - {fileID: 723182701}
-  - {fileID: 1962752285}
-  - {fileID: 1713723527}
-  - {fileID: 26486506}
-  - {fileID: 1469943543}
-  - {fileID: 275492932}
-  - {fileID: 1619178453}
-  - {fileID: 1200668325}
-  - {fileID: 1232336274}
-  - {fileID: 1357198854}
-  - {fileID: 647771558}
-  - {fileID: 485334674}
-  - {fileID: 308770813}
-  - {fileID: 1164270756}
-  - {fileID: 399877083}
-  - {fileID: 529076058}
-  - {fileID: 1526374351}
-  - {fileID: 1570856582}
-  - {fileID: 622788509}
-  - {fileID: 407545119}
-  waypointReachDistance: 0.4
-  maxPathAngle: 45
-  pathTurnGain: 0.25
-  minimumCornerSpeedScale: 0.4
-  maxPathTurn: 0.25
-  maxSteeringCorrection: 1
-  minimumSpeedScale: 0.1
-  inspectionDebugLog: 1
-  progressRewardScale: 1
-  waypointReward: 1
-  inspectionReward: 1
-  goalReward: 10
-  collisionPenalty: -5
-  timePenalty: -0.001
-  obstaclePenaltyScale: 0.002
-  steeringCorrectionPenaltyScale: 0.0001
-  steeringChangePenaltyScale: 0.0002
-  debugLog: 0
-  drawDebug: 1
---- !u!114 &1374980281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1374980273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 884fa9ca2c17f9c47bd3eea508b17ce6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &1374980282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87172,6 +87076,7 @@ MonoBehaviour:
   rearRightWheel: {fileID: 1116931130}
   cruiseCommand: 0.55
   minimumCornerCommand: 0.2
+  minimumConfidenceSpeedScale: 0.25
   lateralGain: 0.85
   headingGain: 0.55
   derivativeGain: 0.08
@@ -87179,30 +87084,14 @@ MonoBehaviour:
   maxMotorTorque: 10
   stoppedBrakeTorque: 2
   controlSlewRate: 3
+  avoidanceOffsetSlewRate: 0.8
+  avoidanceLaneLossGraceSeconds: 1.5
+  avoidanceLaneLossMoveCommand: 0.3
+  largeAvoidanceOffsetThreshold: 0.4
+  largeAvoidanceLaneLossGraceSeconds: 5
+  largeAvoidanceLaneLossTurnCommand: 0.22
+  largeAvoidanceLaneLossTurnSeconds: 0.8
   debugLog: 0
---- !u!114 &1374980284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1374980273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20c7b317cccb7b847a41fd9ac59403a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.ObstacleAvoidance.HumanGroundTruthSensor
-  perceptionCamera: {fileID: 554837947}
-  maximumRange: 12
-  horizontalFieldOfView: 90
-  requireLineOfSight: 1
-  occlusionMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  candidateRefreshInterval: 1
-  surfaceSafetyMargin: 0.1
-  showDebugPanel: 1
-  drawDebugGizmos: 1
 --- !u!114 &1374980285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87238,12 +87127,13 @@ MonoBehaviour:
   personBearingProvider: {fileID: 1374980287}
   earlyWarningSpeedScale: 0.65
   centreSectorHalfWidth: 0.2
-  emergencyStopDistance: 0.8
-  emergencyStopTtc: 1.5
+  emergencyStopDistance: 0.35
+  emergencyStopTtc: 0.75
   slowdownDistance: 1.5
   minimumSlowdownScale: 0.25
   releaseDistance: 1
   clearHoldSeconds: 0.5
+  enforceControl: 0
   showDebugPanel: 1
 --- !u!114 &1374980287
 MonoBehaviour:
@@ -87262,9 +87152,104 @@ MonoBehaviour:
   minimumPersonConfidence: 0.2
   maximumObservationAge: 0.5
   backend: 256
-  modelFolder: Models
+  enablePersonShapeFilter: 0
+  minimumPersonAspectRatio: 1.15
+  maximumPersonBoxWidth: 0.55
+  maximumPersonBoxArea: 0.5
+  invalidFullFrameThreshold: 0.95
   showOverlay: 1
   cameraPreview: {fileID: 0}
+--- !u!114 &1374980288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374980273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7506d16535bb6c4a87bc3b936dc21c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.ObstacleAvoidance.HumanAvoidanceAgent
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 2500
+  tofRig: {fileID: 1374980285}
+  personDetector: {fileID: 1374980287}
+  laneFollower: {fileID: 1374980283}
+  safetySupervisor: {fileID: 1374980286}
+  robotBody: {fileID: 1374980276}
+  scenarioReference: {fileID: 554837944}
+  applyPolicyActions: 1
+  policyActivationDistance: 1.8
+  smallAvoidanceLaneOffset: 0.28
+  mediumAvoidanceLaneOffset: 0.45
+  largeAvoidanceLaneOffset: 0.6
+  mediumAvoidanceDistance: 1.5
+  largeAvoidanceDistance: 1.05
+  mediumAvoidanceTtc: 2.25
+  largeAvoidanceTtc: 1.25
+  mediumPersonBoxHeight: 0.35
+  largePersonBoxHeight: 0.6
+  minimumSelectedSideDistance: 0.55
+  deterministicStopDistance: 0.35
+  deterministicStopTtc: 0.75
+  fullSpeedTtc: 3
+  minimumAvoidanceSpeedScale: 0.25
+  decisionReleaseDistance: 1.6
+  decisionReleaseHoldSeconds: 0.6
+  reverseSpeedScale: 0.3
+  maximumReverseSeconds: 1
+  rearProbeRange: 2
+  minimumRearClearance: 0.6
+  rearProbeHeight: 0.15
+  rearObstacleMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  showDebugPanel: 1
+  trainingMode: 1
+  trainingStage: 0
+  trainingPerson: {fileID: 1198685234}
+  trainingMover: {fileID: 1198685235}
+  randomizeTrainingPerson: 1
+  approachSpawnDistanceRange: {x: 4, y: 6}
+  maximumApproachAngleDegrees: 12
+  scenarioCurriculum: 0
+  automaticallyAdvanceScenarioCurriculum: 1
+  curriculumEvaluationEpisodes: 100
+  curriculumAdvanceSuccessRate: 0.7
+  foundationActiveAvoidanceProbability: 0.8
+  foundationYieldProbability: 0.2
+  mixedActiveAvoidanceProbability: 0.6
+  mixedYieldProbability: 0.25
+  activeImpactLateralRange: {x: -0.15, y: 0.15}
+  yieldEncounterDistanceRange: {x: 2.5, y: 3.5}
+  naturalPassLateralMagnitudeRange: {x: 0.8, y: 1.1}
+  trainingNominalRobotSpeed: 0.35
+  counterfactualSafetyClearance: 0.55
+  scenarioGenerationAttempts: 8
+  pedestrianSpeedRange: {x: 0.3, y: 0.6}
+  approachExtraTravelRange: {x: 1, y: 1.5}
+  completionHoldSeconds: 0.5
+  maximumEpisodeSeconds: 28
+  trainingMinimumLaneConfidence: 0.15
+  trainingMaximumLaneObservationAge: 1.5
+  trainingMinimumConfidenceSpeedScale: 0.55
+  stepPenalty: 0.0005
+  progressRewardScale: 0.002
+  laneErrorPenaltyScale: 0.001
+  unsafeDistancePenaltyScale: 0.004
+  offsetPenaltyScale: 0.0005
+  successfulAvoidanceReward: 2
+  yieldStopReward: 1.2
+  yieldMovingReward: 1
+  safePassReward: 0.05
+  passiveFailurePenalty: -1
+  emergencyStopPenalty: -2
+  collisionPenalty: -5
+  maximumLaneError: 0.75
+  laneFailureDecisionLimit: 15
 --- !u!64 &1376507692
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -87994,7 +87979,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399704993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 33167591}
+  m_Script: {fileID: 11500000, guid: c4bd80d8d0f44f88942e1a717ccb6d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.NavigationMarker
   nodeId: 4
@@ -104592,7 +104577,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1676303587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 33167591}
+  m_Script: {fileID: 11500000, guid: c4bd80d8d0f44f88942e1a717ccb6d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.NavigationMarker
   nodeId: 5
@@ -123480,7 +123465,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2078207397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 33167591}
+  m_Script: {fileID: 11500000, guid: c4bd80d8d0f44f88942e1a717ccb6d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.NavigationMarker
   nodeId: 1

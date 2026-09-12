@@ -1,0 +1,999 @@
+{
+    "name": "root",
+    "gauges": {
+        "HumanAvoidance.Policy.Entropy.mean": {
+            "value": 0.8104901313781738,
+            "min": 0.5839199423789978,
+            "max": 1.3848909139633179,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.Entropy.sum": {
+            "value": 1624.22216796875,
+            "min": 1168.423828125,
+            "max": 2779.47607421875,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Sensors.MinimumDistance.mean": {
+            "value": 1.7379734273367895,
+            "min": 1.6644925529897632,
+            "max": 1.9080964952484332,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Sensors.MinimumDistance.sum": {
+            "value": 6965.797496765852,
+            "min": 6637.996301323175,
+            "max": 7651.466945946217,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Sensors.MinimumTTC.mean": {
+            "value": 4.338999004093949,
+            "min": 3.9707262676952775,
+            "max": 4.873125363377264,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Sensors.MinimumTTC.sum": {
+            "value": 17390.708008408546,
+            "min": 15835.256355568767,
+            "max": 19541.23270714283,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Sensors.PersonDetected.mean": {
+            "value": 0.8837325349301397,
+            "min": 0.4768079800498753,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Sensors.PersonDetected.sum": {
+            "value": 3542.0,
+            "min": 1912.0,
+            "max": 4028.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Sensors.PersonConfidence.mean": {
+            "value": 0.7610703746894163,
+            "min": 0.4191146072083875,
+            "max": 0.8798482198333205,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Sensors.PersonConfidence.sum": {
+            "value": 3050.3700617551804,
+            "min": 1680.649574905634,
+            "max": 3528.1913615316153,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Lane.Usable.mean": {
+            "value": 0.846307385229541,
+            "min": 0.3408977556109726,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Lane.Usable.sum": {
+            "value": 3392.0,
+            "min": 1367.0,
+            "max": 4028.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Lane.RawConfidence.mean": {
+            "value": 0.17822091249440483,
+            "min": 0.08383631801739001,
+            "max": 0.21535577333962905,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Lane.RawConfidence.sum": {
+            "value": 714.3094172775745,
+            "min": 336.1836352497339,
+            "max": 864.1779393255711,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Lane.ObservationAge.mean": {
+            "value": 0.0831310131980135,
+            "min": 0.0831310131980135,
+            "max": 0.09640995662357318,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Lane.ObservationAge.sum": {
+            "value": 333.1891008976381,
+            "min": 330.5273699259851,
+            "max": 386.98956588702276,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Lane.AbsoluteError.mean": {
+            "value": 0.181582823231214,
+            "min": 0.03182289248225891,
+            "max": 0.6704070849755798,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Lane.AbsoluteError.sum": {
+            "value": 727.7839555107057,
+            "min": 126.90969521924853,
+            "max": 2688.332410752075,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.Active.mean": {
+            "value": 1.0,
+            "min": 0.999749498997996,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.Active.sum": {
+            "value": 4008.0,
+            "min": 3970.0,
+            "max": 4030.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.Latched.mean": {
+            "value": 1.0,
+            "min": 0.999749498997996,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.Latched.sum": {
+            "value": 4008.0,
+            "min": 3970.0,
+            "max": 4030.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.RuleSpeedScale.mean": {
+            "value": 0.15845613258922409,
+            "min": -0.014781297721594287,
+            "max": 0.6161957532836315,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.RuleSpeedScale.sum": {
+            "value": 635.0921794176102,
+            "min": -58.800002336502075,
+            "max": 2470.944970667362,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.TargetLaneOffset.mean": {
+            "value": -0.05673153765365749,
+            "min": -0.18912294049789644,
+            "max": 0.11160349258014983,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.TargetLaneOffset.sum": {
+            "value": -227.38000291585922,
+            "min": -756.8700078725815,
+            "max": 447.53000524640083,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.AvoidanceMagnitude.mean": {
+            "value": 0.2340319361277445,
+            "min": 0.0,
+            "max": 1.082171314741036,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Policy.AvoidanceMagnitude.sum": {
+            "value": 938.0,
+            "min": 0.0,
+            "max": 4346.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Robot.ForwardSpeed.mean": {
+            "value": 0.027061835583869612,
+            "min": 9.173520362024642e-11,
+            "max": 0.15762484714065939,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Robot.ForwardSpeed.sum": {
+            "value": 108.4638370201494,
+            "min": 3.6950940018235256e-07,
+            "max": 633.021386116888,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Robot.LinearSpeed.mean": {
+            "value": 0.03835394817390146,
+            "min": 0.010022450244655912,
+            "max": 0.1694734720938345,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Robot.LinearSpeed.sum": {
+            "value": 153.72262428099705,
+            "min": 40.02966627715571,
+            "max": 680.6054639288394,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Safety.AppliedSpeedScale.mean": {
+            "value": 0.7015316648977602,
+            "min": 0.6524037476536165,
+            "max": 0.8382626347559646,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Safety.AppliedSpeedScale.sum": {
+            "value": 2811.738912910223,
+            "min": 2606.8192041516304,
+            "max": 3361.433165371418,
+            "count": 125
+        },
+        "HumanAvoidance.Step.mean": {
+            "value": 249992.0,
+            "min": 1991.0,
+            "max": 249992.0,
+            "count": 125
+        },
+        "HumanAvoidance.Step.sum": {
+            "value": 249992.0,
+            "min": 1991.0,
+            "max": 249992.0,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.ExtrinsicValueEstimate.mean": {
+            "value": -0.6860259175300598,
+            "min": -0.8444305658340454,
+            "max": 0.04828790947794914,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.ExtrinsicValueEstimate.sum": {
+            "value": -88.49734497070312,
+            "min": -110.62040710449219,
+            "max": 6.132564544677734,
+            "count": 125
+        },
+        "HumanAvoidance.Environment.EpisodeLength.mean": {
+            "value": 271.57142857142856,
+            "min": 195.2,
+            "max": 380.8,
+            "count": 125
+        },
+        "HumanAvoidance.Environment.EpisodeLength.sum": {
+            "value": 1901.0,
+            "min": 1647.0,
+            "max": 2341.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.SuccessRate.mean": {
+            "value": 0.14285714285714285,
+            "min": 0.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.SuccessRate.sum": {
+            "value": 1.0,
+            "min": 0.0,
+            "max": 5.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.AvoidanceSuccessRate.mean": {
+            "value": 0.14285714285714285,
+            "min": 0.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.AvoidanceSuccessRate.sum": {
+            "value": 1.0,
+            "min": 0.0,
+            "max": 5.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.SafePassRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.SafePassRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.CollisionRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.125,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.CollisionRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.EmergencyStopRate.mean": {
+            "value": 0.8571428571428571,
+            "min": 0.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.EmergencyStopRate.sum": {
+            "value": 6.0,
+            "min": 0.0,
+            "max": 10.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.LaneExitRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.LaneExitRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.TimeoutRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.TimeoutRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.PassiveFailureRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.PassiveFailureRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MinimumDistance.mean": {
+            "value": 0.38554287382534574,
+            "min": 0.32582999978746685,
+            "max": 1.3245595335960387,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MinimumDistance.sum": {
+            "value": 2.69880011677742,
+            "min": 2.0264497697353363,
+            "max": 8.12820890545845,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MaximumForwardSpeed.mean": {
+            "value": 7.824107634795447e-08,
+            "min": 2.2970457900863195e-08,
+            "max": 0.42931019813228205,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MaximumForwardSpeed.sum": {
+            "value": 5.476875344356813e-07,
+            "min": 1.5993098179123422e-07,
+            "max": 2.8712347299258454,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.ExperiencedAvoidance.mean": {
+            "value": 1.0,
+            "min": 1.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.ExperiencedAvoidance.sum": {
+            "value": 7.0,
+            "min": 5.0,
+            "max": 10.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.InterventionRequired.mean": {
+            "value": 0.8571428571428571,
+            "min": 0.375,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.InterventionRequired.sum": {
+            "value": 6.0,
+            "min": 3.0,
+            "max": 10.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.InterventionSuccessRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.6,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.InterventionSuccessRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 3.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.ActiveAvoidanceRequired.mean": {
+            "value": 0.8571428571428571,
+            "min": 0.375,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.ActiveAvoidanceRequired.sum": {
+            "value": 6.0,
+            "min": 3.0,
+            "max": 10.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.ActiveAvoidanceSuccessRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.6,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.ActiveAvoidanceSuccessRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 3.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.YieldRequired.mean": {
+            "value": 0.14285714285714285,
+            "min": 0.0,
+            "max": 0.625,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.YieldRequired.sum": {
+            "value": 1.0,
+            "min": 0.0,
+            "max": 5.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.YieldSuccessRate.mean": {
+            "value": 0.14285714285714285,
+            "min": 0.0,
+            "max": 0.5,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.YieldSuccessRate.sum": {
+            "value": 1.0,
+            "min": 0.0,
+            "max": 4.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.NaturalSafePassRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.NaturalSafePassRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.StationaryPathClearance.mean": {
+            "value": 0.2604100640330996,
+            "min": 0.052354861183890274,
+            "max": 1.0825387102862198,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.StationaryPathClearance.sum": {
+            "value": 1.822870448231697,
+            "min": 0.32095105573534966,
+            "max": 8.324785912176594,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.NominalPathClearance.mean": {
+            "value": 0.2162738921386855,
+            "min": 0.023877347264165866,
+            "max": 0.4296382750783648,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.NominalPathClearance.sum": {
+            "value": 1.5139172449707985,
+            "min": 0.1432640835849952,
+            "max": 3.2475440582608144,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Curriculum.AvoidanceOnly.mean": {
+            "value": 1.0,
+            "min": 1.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Curriculum.AvoidanceOnly.sum": {
+            "value": 7.0,
+            "min": 5.0,
+            "max": 10.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Curriculum.LaneRecovery.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Curriculum.LaneRecovery.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.StopRate.mean": {
+            "value": 1.0,
+            "min": 0.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.StopRate.sum": {
+            "value": 7.0,
+            "min": 0.0,
+            "max": 8.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.LeftRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.42857142857142855,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.LeftRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 3.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.RightRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.3333333333333333,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.RightRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 2.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.ReverseRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.7142857142857143,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.ReverseRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 5.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.NoneRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.NoneRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.ForcedStopRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Decision.ForcedStopRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MaxMagnitudeSmallRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MaxMagnitudeSmallRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MaxMagnitudeMediumRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MaxMagnitudeMediumRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MaxMagnitudeLargeRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.6,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Episode.MaxMagnitudeLargeRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 4.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ApproachLeftRate.mean": {
+            "value": 0.5714285714285714,
+            "min": 0.0,
+            "max": 0.8333333333333334,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ApproachLeftRate.sum": {
+            "value": 4.0,
+            "min": 0.0,
+            "max": 7.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ApproachCentreRate.mean": {
+            "value": 0.42857142857142855,
+            "min": 0.0,
+            "max": 0.7142857142857143,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ApproachCentreRate.sum": {
+            "value": 3.0,
+            "min": 0.0,
+            "max": 5.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ApproachRightRate.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ApproachRightRate.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 6.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ApproachAngleDegrees.mean": {
+            "value": -4.191214425223214,
+            "min": -6.006067593892415,
+            "max": 7.743282477060954,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ApproachAngleDegrees.sum": {
+            "value": -29.3385009765625,
+            "min": -46.01767683029175,
+            "max": 46.45969486236572,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.InterventionMix.mean": {
+            "value": 0.8571428571428571,
+            "min": 0.375,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.InterventionMix.sum": {
+            "value": 6.0,
+            "min": 3.0,
+            "max": 10.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ModerateMix.mean": {
+            "value": 0.14285714285714285,
+            "min": 0.0,
+            "max": 0.625,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ModerateMix.sum": {
+            "value": 1.0,
+            "min": 0.0,
+            "max": 5.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.NaturalPassMix.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.NaturalPassMix.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ClassificationMatch.mean": {
+            "value": 1.0,
+            "min": 1.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Scenario.ClassificationMatch.sum": {
+            "value": 7.0,
+            "min": 5.0,
+            "max": 10.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Curriculum.ScenarioFoundation.mean": {
+            "value": 1.0,
+            "min": 1.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Curriculum.ScenarioFoundation.sum": {
+            "value": 7.0,
+            "min": 5.0,
+            "max": 10.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Curriculum.ScenarioMixed.mean": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.HumanAvoidance.Curriculum.ScenarioMixed.sum": {
+            "value": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 125
+        },
+        "HumanAvoidance.Environment.CumulativeReward.mean": {
+            "value": -2.2241616435348988,
+            "min": -3.04044852941297,
+            "max": 1.0438279341440648,
+            "count": 125
+        },
+        "HumanAvoidance.Environment.CumulativeReward.sum": {
+            "value": -15.569131504744291,
+            "min": -25.6716128308326,
+            "max": 5.219139670720324,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.ExtrinsicReward.mean": {
+            "value": -2.2241616435348988,
+            "min": -3.04044852941297,
+            "max": 1.0438279341440648,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.ExtrinsicReward.sum": {
+            "value": -15.569131504744291,
+            "min": -25.6716128308326,
+            "max": 5.219139670720324,
+            "count": 125
+        },
+        "HumanAvoidance.Losses.PolicyLoss.mean": {
+            "value": 0.06018276285612956,
+            "min": 0.05019151708499218,
+            "max": 0.0795714483053113,
+            "count": 125
+        },
+        "HumanAvoidance.Losses.PolicyLoss.sum": {
+            "value": 0.12036552571225911,
+            "min": 0.05019151708499218,
+            "max": 0.1591428966106226,
+            "count": 125
+        },
+        "HumanAvoidance.Losses.ValueLoss.mean": {
+            "value": 0.011888847196435865,
+            "min": 0.005734374086993436,
+            "max": 0.11611066820720832,
+            "count": 125
+        },
+        "HumanAvoidance.Losses.ValueLoss.sum": {
+            "value": 0.02377769439287173,
+            "min": 0.011412305408157408,
+            "max": 0.18252208353563523,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.LearningRate.mean": {
+            "value": 0.00027506025831324995,
+            "min": 0.00027506025831324995,
+            "max": 0.0002998967000344333,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.LearningRate.sum": {
+            "value": 0.0005501205166264999,
+            "min": 0.0002779004073665333,
+            "max": 0.0005994818001727333,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.Epsilon.mean": {
+            "value": 0.19168675000000002,
+            "min": 0.19168675000000002,
+            "max": 0.19996556666666668,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.Epsilon.sum": {
+            "value": 0.38337350000000003,
+            "min": 0.19263346666666667,
+            "max": 0.3998272666666667,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.Beta.mean": {
+            "value": 0.0045851688249999994,
+            "min": 0.0045851688249999994,
+            "max": 0.004998281776666667,
+            "count": 125
+        },
+        "HumanAvoidance.Policy.Beta.sum": {
+            "value": 0.009170337649999999,
+            "min": 0.004632409986666666,
+            "max": 0.009991380606666668,
+            "count": 125
+        },
+        "HumanAvoidance.IsTraining.mean": {
+            "value": 1.0,
+            "min": 1.0,
+            "max": 1.0,
+            "count": 125
+        },
+        "HumanAvoidance.IsTraining.sum": {
+            "value": 1.0,
+            "min": 1.0,
+            "max": 1.0,
+            "count": 125
+        }
+    },
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1788528835",
+        "python_version": "3.10.9 (tags/v3.10.9:1dd9be6, Dec  6 2022, 20:01:21) [MSC v.1934 64 bit (AMD64)]",
+        "command_line_arguments": ".\\tools\\train_human_avoidance_wandb.py .\\config\\human_avoidance_ppo.yaml --run-id=HumanAvoidance_wandb_v26 --env=.\\Builds\\HumanAvoidanceTraining\\ship robot project.exe",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.13.0+cpu",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1788533593"
+    },
+    "total": 4758.402451700007,
+    "count": 1,
+    "self": 1.5644785000476986,
+    "children": {
+        "run_training.setup": {
+            "total": 0.06687129999045283,
+            "count": 1,
+            "self": 0.06687129999045283
+        },
+        "TrainerController.start_learning": {
+            "total": 4756.771101899969,
+            "count": 1,
+            "self": 7.041482701024506,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 8.177442000014707,
+                    "count": 1,
+                    "self": 8.177442000014707
+                },
+                "TrainerController.advance": {
+                    "total": 4741.54307149892,
+                    "count": 250502,
+                    "self": 6.405674810230266,
+                    "children": {
+                        "env_step": {
+                            "total": 4630.950219992024,
+                            "count": 250502,
+                            "self": 4224.8189565742505,
+                            "children": {
+                                "SubprocessEnvManager._take_step": {
+                                    "total": 401.6430933214142,
+                                    "count": 250502,
+                                    "self": 18.8121486074524,
+                                    "children": {
+                                        "TorchPolicy.evaluate": {
+                                            "total": 382.8309447139618,
+                                            "count": 250008,
+                                            "self": 382.8309447139618
+                                        }
+                                    }
+                                },
+                                "workers": {
+                                    "total": 4.488170096359681,
+                                    "count": 250502,
+                                    "self": 0.0,
+                                    "children": {
+                                        "worker_root": {
+                                            "total": 4738.371850470663,
+                                            "count": 250502,
+                                            "is_parallel": true,
+                                            "self": 887.8346486787195,
+                                            "children": {
+                                                "steps_from_proto": {
+                                                    "total": 0.0016793000395409763,
+                                                    "count": 1,
+                                                    "is_parallel": true,
+                                                    "self": 0.0002671999973244965,
+                                                    "children": {
+                                                        "_process_rank_one_or_two_observation": {
+                                                            "total": 0.0014121000422164798,
+                                                            "count": 2,
+                                                            "is_parallel": true,
+                                                            "self": 0.0014121000422164798
+                                                        }
+                                                    }
+                                                },
+                                                "UnityEnvironment.step": {
+                                                    "total": 3850.535522491904,
+                                                    "count": 250502,
+                                                    "is_parallel": true,
+                                                    "self": 89.89362173061818,
+                                                    "children": {
+                                                        "UnityEnvironment._generate_step_input": {
+                                                            "total": 26.526051665947307,
+                                                            "count": 250502,
+                                                            "is_parallel": true,
+                                                            "self": 26.526051665947307
+                                                        },
+                                                        "communicator.exchange": {
+                                                            "total": 3654.8725864959415,
+                                                            "count": 250502,
+                                                            "is_parallel": true,
+                                                            "self": 3654.8725864959415
+                                                        },
+                                                        "steps_from_proto": {
+                                                            "total": 79.24326259939699,
+                                                            "count": 250502,
+                                                            "is_parallel": true,
+                                                            "self": 42.98602537455736,
+                                                            "children": {
+                                                                "_process_rank_one_or_two_observation": {
+                                                                    "total": 36.25723722483963,
+                                                                    "count": 501004,
+                                                                    "is_parallel": true,
+                                                                    "self": 36.25723722483963
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trainer_advance": {
+                            "total": 104.18717669666512,
+                            "count": 250502,
+                            "self": 8.89287991344463,
+                            "children": {
+                                "process_trajectory": {
+                                    "total": 56.611964183917735,
+                                    "count": 250502,
+                                    "self": 56.59590628388105,
+                                    "children": {
+                                        "RLTrainer._checkpoint": {
+                                            "total": 0.01605790003668517,
+                                            "count": 1,
+                                            "self": 0.01605790003668517
+                                        }
+                                    }
+                                },
+                                "_update_policy": {
+                                    "total": 38.682332599302754,
+                                    "count": 242,
+                                    "self": 18.7648443991784,
+                                    "children": {
+                                        "TorchPPOOptimizer.update": {
+                                            "total": 19.917488200124353,
+                                            "count": 5808,
+                                            "self": 19.917488200124353
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "TrainerController._save_models": {
+                    "total": 0.009105700009968132,
+                    "count": 1,
+                    "self": 1.580000389367342e-05,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.009089900006074458,
+                            "count": 1,
+                            "self": 0.009089900006074458
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

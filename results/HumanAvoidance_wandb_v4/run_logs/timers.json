@@ -1,0 +1,73 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1788352163",
+        "python_version": "3.10.9 (tags/v3.10.9:1dd9be6, Dec  6 2022, 20:01:21) [MSC v.1934 64 bit (AMD64)]",
+        "command_line_arguments": "tools/train_human_avoidance_wandb.py config/human_avoidance_ppo.yaml --run-id=HumanAvoidance_wandb_v4 --force",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.13.0+cpu",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1788352228"
+    },
+    "total": 64.57290120003745,
+    "count": 1,
+    "self": 0.007235000026412308,
+    "children": {
+        "run_training.setup": {
+            "total": 0.06303479999769479,
+            "count": 1,
+            "self": 0.06303479999769479
+        },
+        "TrainerController.start_learning": {
+            "total": 64.50263140001334,
+            "count": 1,
+            "self": 0.0014550000196322799,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 20.008413399977144,
+                    "count": 1,
+                    "self": 20.008413399977144
+                },
+                "TrainerController.advance": {
+                    "total": 44.450571400055196,
+                    "count": 1,
+                    "self": 2.1200045011937618e-05,
+                    "children": {
+                        "env_step": {
+                            "total": 44.450550200010184,
+                            "count": 1,
+                            "self": 44.45054590003565,
+                            "children": {
+                                "SubprocessEnvManager._take_step": {
+                                    "total": 4.299974534660578e-06,
+                                    "count": 1,
+                                    "self": 4.299974534660578e-06
+                                }
+                            }
+                        }
+                    }
+                },
+                "trainer_threads": {
+                    "total": 1.00000761449337e-06,
+                    "count": 1,
+                    "self": 1.00000761449337e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 0.042190599953755736,
+                    "count": 1,
+                    "self": 5.129998316988349e-05,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.04213929997058585,
+                            "count": 1,
+                            "self": 0.04213929997058585
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

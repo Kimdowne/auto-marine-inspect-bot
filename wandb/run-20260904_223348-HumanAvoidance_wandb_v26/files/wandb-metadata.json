@@ -1,0 +1,57 @@
+{
+    "os": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.9",
+    "heartbeatAt": "2026-09-04T13:33:53.062198",
+    "startedAt": "2026-09-04T13:33:48.155747",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        ".\\config\\human_avoidance_ppo.yaml",
+        "--run-id=HumanAvoidance_wandb_v26",
+        "--env=.\\Builds\\HumanAvoidanceTraining\\ship robot project.exe"
+    ],
+    "state": "running",
+    "program": "C:\\Users\\kimsumi\\ship robot project\\tools\\train_human_avoidance_wandb.py",
+    "codePathLocal": "tools\\train_human_avoidance_wandb.py",
+    "codePath": "tools\\train_human_avoidance_wandb.py",
+    "git": {
+        "remote": "https://github.com/Kimsumi111/auto-marine-inspect-bot.git",
+        "commit": "88763043abee79b8c65c6274d79302bfd0f87da9"
+    },
+    "email": "rlatnal412@gmail.com",
+    "root": "C:/Users/kimsumi/ship robot project",
+    "host": "DESKTOP-KOE1U4K",
+    "username": "kimsumi",
+    "executable": "C:\\Users\\kimsumi\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "cpu_count": 10,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 2500.0,
+        "min": 0.0,
+        "max": 2500.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2500.0,
+            "min": 0.0,
+            "max": 2500.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 952.5331993103027,
+            "used": 305.9281005859375
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": 12884901888
+        }
+    ],
+    "memory": {
+        "total": 15.817798614501953
+    }
+}

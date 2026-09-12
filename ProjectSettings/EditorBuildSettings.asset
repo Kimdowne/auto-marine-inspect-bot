@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Warehouse.unity
     guid: e75da33b1ea674ae9be4679f2af1d8b9
+  - enabled: 1
+    path: Assets/jetbot_env.unity
+    guid: ceb55cde2c84f6e40aeedb8d6aaa7032
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 44c1051d787470240aaa80d4be983a3e, type: 3}
