@@ -232,7 +232,7 @@ namespace ShipRobot.ObstacleAvoidance
                 return;
             GUI.depth = -110;
             EnsureStyles();
-            Rect panel = new Rect(Screen.width - 375f, 10f, 365f, 68f);
+            Rect panel = new Rect(Screen.width - 375f, Mathf.Max(280f, Screen.height - 416f), 365f, 68f);
             GUI.Box(panel, GUIContent.none);
             GUI.Label(new Rect(panel.x + 10f, panel.y + 5f, 345f, 20f), $"RGB {detectorName} PERSON", titleStyle);
             string detail = HasPerson

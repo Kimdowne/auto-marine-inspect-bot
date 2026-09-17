@@ -25,7 +25,6 @@ namespace ShipRobot.ObstacleAvoidance
             Stop = 0,
             Left = 1,
             Right = 2,
-            Reverse = 3,
             None = 4
         }
 
@@ -67,7 +66,7 @@ namespace ShipRobot.ObstacleAvoidance
             NaturalPass
         }
 
-        public const int ObservationCount = 18;
+        public const int ObservationCount = 20;
 
         [Header("Connections")]
         [SerializeField] private DualToFSensorRig tofRig;
@@ -75,6 +74,7 @@ namespace ShipRobot.ObstacleAvoidance
         [SerializeField] private LaneFollowerController laneFollower;
         [SerializeField] private SafetySupervisor safetySupervisor;
         [SerializeField] private Rigidbody robotBody;
+        [SerializeField] private ShipRobot.Navigation.NavigationCoordinator demoMission;
         [Tooltip("Physical lane centre reference. Use front_camera, located between the two front ToF sensors.")]
         [SerializeField] private Transform scenarioReference;
 
@@ -103,14 +103,16 @@ namespace ShipRobot.ObstacleAvoidance
         [SerializeField, Min(0f)] private float decisionReleaseDistance = 1.60f;
         [SerializeField, Min(0f)] private float decisionReleaseHoldSeconds = 0.60f;
 
-        [Header("Reverse safety")]
-        [Tooltip("Magnitude of the signed lane-follower command while reversing.")]
-        [SerializeField, Range(0.05f, 1f)] private float reverseSpeedScale = 0.30f;
-        [SerializeField, Min(0.1f)] private float maximumReverseSeconds = 1.00f;
-        [SerializeField, Min(0.1f)] private float rearProbeRange = 2.00f;
-        [SerializeField, Min(0.05f)] private float minimumRearClearance = 0.60f;
-        [SerializeField, Min(0f)] private float rearProbeHeight = 0.15f;
-        [SerializeField] private LayerMask rearObstacleMask = ~0;
+        [Header("Algorithmic recovery (deployment only)")]
+        [SerializeField, Min(1f)] private float recoveryTimeout = 12f;
+        private bool recovering;
+        private bool recoveryFailed;
+        private float recoveryStartedAt;
+        private float recoveryLaneSince = -1f;
+        private float avoidanceEntryYaw;
+        private Vector3 avoidanceEntryPosition;
+        private float recoveryHandoffUntil;
+        private float policyMove, policyTurn;
 
         [Header("Debug")]
         [SerializeField] private bool showDebugPanel = true;
@@ -151,6 +153,19 @@ namespace ShipRobot.ObstacleAvoidance
         [SerializeField] private Vector2 approachExtraTravelRange = new Vector2(1.0f, 1.5f);
         [SerializeField, Min(0f)] private float completionHoldSeconds = 0.50f;
         [SerializeField, Min(1f)] private float maximumEpisodeSeconds = 28f;
+        [Header("Yellow-line track (coordinates relative to Line transform)")]
+        [SerializeField] private Transform trackReference;
+        // Intersections of the vertical/horizontal yellow stripe centre lines
+        // in jetbot_env: outer perimeter minus the two equipment islands.
+        [SerializeField] private Rect trackOuterArea = new Rect(-5.07f, -0.70f, 16.34f, 15.61f);
+        [SerializeField] private Rect[] trackExcludedAreas = {
+            new Rect(-2.88f, 0.883f, 5.68f, 12.917f),
+            new Rect(5.11f, 0.88f, 4.51f, 13.01f)
+        };
+        [SerializeField, Min(0.01f)] private float allowedTrackExitDistance = 0.5f;
+        [SerializeField] private float trainingBoundsExitPenalty = -3f;
+        private float trackOutsideDistance;
+
         [Header("Training lane perception override")]
         [SerializeField, Range(0f, 1f)] private float trainingMinimumLaneConfidence = 0.15f;
         [SerializeField, Min(0.05f)] private float trainingMaximumLaneObservationAge = 1.50f;
@@ -176,6 +191,19 @@ namespace ShipRobot.ObstacleAvoidance
         public AvoidanceDecision SelectedDecision { get; private set; } = AvoidanceDecision.None;
         public AvoidanceMagnitude CurrentAvoidanceMagnitude { get; private set; } = AvoidanceMagnitude.None;
         public bool IsPolicyActive => decisionLatched;
+        public bool HasAvoidanceControl => decisionLatched || recovering || recoveryFailed;
+        public bool IsTraining => trainingMode;
+
+        public void CancelDemoAvoidance()
+        {
+            if (trainingMode) return;
+            decisionLatched = decisionPending = recovering = recoveryFailed = false;
+            recoveryHandoffUntil = 0f;
+            policyMove = policyTurn = 0f;
+            clearSince = -1f;
+            SelectedDecision = AvoidanceDecision.None;
+            laneFollower?.SetContinuousAvoidanceCommand(false);
+        }
         public HumanResponsePhase Phase { get; private set; }
 
         private PersonBearingObservation person;
@@ -207,6 +235,9 @@ namespace ShipRobot.ObstacleAvoidance
         private float episodeStartedAt;
         private float clearSince = -1f;
         private bool decisionPending;
+        [SerializeField, Min(0.02f)] private float policyDecisionInterval = 0.2f;
+        [SerializeField, Min(0f)] private float actionChangePenalty = 0.002f;
+        private float nextPolicyDecisionAt;
         private bool decisionLatched;
         private bool decisionForcedToStop;
         private float decisionLatchedAt;
@@ -214,6 +245,7 @@ namespace ShipRobot.ObstacleAvoidance
 
         public override void Initialize()
         {
+            if (!trainingMode && demoMission != null) Time.timeScale = 1f;
             if (robotBody == null)
                 robotBody = GetComponent<Rigidbody>();
             if (safetySupervisor == null)
@@ -230,6 +262,10 @@ namespace ShipRobot.ObstacleAvoidance
                     : Vector3.zero;
             episodeRobotCentrePosition = episodeStartPosition +
                 episodeStartRotation * robotCentreLocalOffset;
+            if (trackReference == null)
+                trackReference = GameObject.Find("Line")?.transform;
+            if (trackReference == null && trainingMode)
+                throw new System.InvalidOperationException("Assign the yellow-line track reference before training.");
             scenarioReferenceLocalRotation = scenarioReference != null
                 ? Quaternion.Inverse(transform.rotation) * scenarioReference.rotation
                 : Quaternion.identity;
@@ -262,7 +298,11 @@ namespace ShipRobot.ObstacleAvoidance
             episodeStartedAt = Time.time;
             clearSince = -1f;
             decisionPending = false;
+            recovering = recoveryFailed = false;
+            policyMove = policyTurn = 0f;
+            laneFollower?.SetContinuousAvoidanceCommand(false);
             decisionLatched = false;
+            nextPolicyDecisionAt = Time.time;
             decisionForcedToStop = false;
             decisionLatchedAt = -1f;
             SelectedDecision = AvoidanceDecision.None;
@@ -273,6 +313,7 @@ namespace ShipRobot.ObstacleAvoidance
             tofRig?.ResetMeasurements();
             safetySupervisor?.ResetForTrainingEpisode();
             laneFollower?.ResumeLaneFollowing();
+            laneFollower?.SetContinuousAvoidanceCommand(false);
             laneFollower?.SetAvoidanceIntent(false, 1f, 0f);
             ApplyLanePerceptionProfile();
             if (robotBody != null)
@@ -516,153 +557,165 @@ namespace ShipRobot.ObstacleAvoidance
             sensor.AddObservation(laneFollower != null ? laneFollower.MoveCommand : 0f);          // 15
             sensor.AddObservation(laneFollower != null ? laneFollower.TurnCommand : 0f);          // 16
             sensor.AddObservation(robotBody != null ? Mathf.Clamp(robotBody.angularVelocity.y / 5f, -1f, 1f) : 0f); // 17
-            sensor.AddObservation(Mathf.Clamp01(GetRearClearance() / Mathf.Max(rearProbeRange, 0.01f))); // 18
+            sensor.AddObservation(robotBody != null ? Mathf.Clamp(Vector3.Dot(robotBody.linearVelocity, transform.forward) / 2f, -1f, 1f) : 0f); // 18
+            Vector3 trackCorrection = transform.InverseTransformDirection(GetTrackCorrection());
+            sensor.AddObservation(Mathf.Clamp(trackCorrection.x / allowedTrackExitDistance, -1f, 1f)); // 19
+            sensor.AddObservation(Mathf.Clamp(trackCorrection.z / allowedTrackExitDistance, -1f, 1f)); // 20
         }
 
         public override void OnActionReceived(ActionBuffers actions)
         {
-            decisionPending = false;
-            if (decisionLatched || actions.DiscreteActions.Length == 0)
+            if (!trainingMode && (!decisionPending ||
+                (laneFollower != null && laneFollower.IsSafetyStopped)))
+            {
+                decisionPending = false;
                 return;
-
-            AvoidanceDecision requested = (AvoidanceDecision)Mathf.Clamp(actions.DiscreteActions[0], 0, 3);
-            SelectedDecision = ValidateDecision(requested);
-            decisionForcedToStop = requested != AvoidanceDecision.Stop &&
-                                   SelectedDecision == AvoidanceDecision.Stop;
+            }
+            decisionPending = false;
+            if (!applyPolicyActions || actions.ContinuousActions.Length != 2 || episodeTerminating ||
+                (!trainingMode && demoMission != null && !demoMission.IsMotionRequested))
+                return;
+            if (!decisionLatched)
+            {
+                avoidanceEntryYaw = transform.eulerAngles.y;
+                avoidanceEntryPosition = transform.position;
+            }
+            float move = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
+            float turn = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
+            if (trainingMode && decisionLatched)
+                AddReward(-actionChangePenalty * (Mathf.Abs(move - policyMove) + Mathf.Abs(turn - policyTurn)));
+            policyMove = move;
+            policyTurn = turn;
+            // Legacy direction labels are diagnostic only; they do not gate commands/rewards.
+            SelectedDecision = Mathf.Abs(move) < 0.01f && Mathf.Abs(turn) < 0.01f
+                ? AvoidanceDecision.Stop : turn < 0f ? AvoidanceDecision.Left : AvoidanceDecision.Right;
+            decisionForcedToStop = false;
             decisionLatched = true;
-            decisionLatchedAt = Time.time;
+            recovering = recoveryFailed = false;
             experiencedAvoidance = true;
+            Academy.Instance.StatsRecorder.Add("policy/move_command", policyMove);
+            Academy.Instance.StatsRecorder.Add("policy/turn_command", policyTurn);
             ApplyDeterministicAvoidance(GetMinimumDistance());
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
         {
-            // A missing model must fail safely instead of inventing a passing direction.
-            ActionSegment<int> actions = actionsOut.DiscreteActions;
-            actions[0] = (int)AvoidanceDecision.Stop;
+            var actions = actionsOut.ContinuousActions;
+            actions[0] = 0f;
+            actions[1] = 0f;
         }
 
         private void FixedUpdate()
         {
+            if (!trainingMode && demoMission != null && !demoMission.IsMotionRequested)
+            {
+                CancelDemoAvoidance();
+                return;
+            }
             hasPerson = personDetector != null && personDetector.TryGetPersonBearing(out person);
             float minimumDistance = GetMinimumDistance();
             UpdateResponsePhase(minimumDistance);
 
-            if (applyPolicyActions && !decisionLatched && !decisionPending &&
-                Phase == HumanResponsePhase.AvoidanceActive)
+            if (!trainingMode && laneFollower != null && laneFollower.IsSafetyStopped)
             {
-                decisionPending = true;
-                RequestDecision();
+                // Emergency braking owns the drive. Do not consume recovery timeout
+                // while stopped by ADAS, or replay commands sampled during the stop.
+                if (recovering) recoveryStartedAt += Time.fixedDeltaTime;
+                return;
             }
 
             if (decisionLatched)
                 UpdateDecisionRelease(minimumDistance);
+
+            // A briefly valid lane must not leave the robot stranded at the edge
+            // immediately after control is handed back to lane following.
+            if (!trainingMode && !decisionLatched && !recovering && !recoveryFailed &&
+                Time.time < recoveryHandoffUntil && laneFollower != null &&
+                !laneFollower.HasUsableLane)
+            {
+                recovering = true;
+                recoveryStartedAt = Time.time;
+                recoveryLaneSince = -1f;
+                recoveryHandoffUntil = 0f;
+            }
+
+            if (applyPolicyActions && !decisionPending && Time.time >= nextPolicyDecisionAt &&
+                (trainingMode || decisionLatched || Phase == HumanResponsePhase.AvoidanceActive))
+            {
+                nextPolicyDecisionAt = Time.time + Mathf.Max(Time.fixedDeltaTime, policyDecisionInterval);
+                decisionPending = true;
+                RequestDecision();
+            }
+
             ApplyDeterministicAvoidance(minimumDistance);
 
             if (trainingMode && episodeStarted && !episodeTerminating)
                 EvaluateTrainingStep(minimumDistance);
         }
 
-        private AvoidanceDecision ValidateDecision(AvoidanceDecision requested)
-        {
-            if (requested == AvoidanceDecision.Reverse)
-                return GetRearClearance() >= minimumRearClearance
-                    ? requested
-                    : AvoidanceDecision.Stop;
-            if (requested == AvoidanceDecision.Stop || tofRig == null || !tofRig.IsInitialized)
-                return requested;
-
-            float selectedDistance = requested == AvoidanceDecision.Left
-                ? tofRig.LeftDistance
-                : tofRig.RightDistance;
-            return selectedDistance >= minimumSelectedSideDistance
-                ? requested
-                : AvoidanceDecision.Stop;
-        }
-
         private void ApplyDeterministicAvoidance(float minimumDistance)
         {
             if (laneFollower == null)
                 return;
-            if (!applyPolicyActions || !decisionLatched)
+            laneFollower.SetAvoidanceIntent(false, 1f, 0f);
+            TargetLaneOffset = 0f;
+            CurrentAvoidanceMagnitude = AvoidanceMagnitude.None;
+            if (!applyPolicyActions)
             {
-                LastSpeedScale = 1f;
-                TargetLaneOffset = 0f;
-                CurrentAvoidanceMagnitude = AvoidanceMagnitude.None;
-                laneFollower.SetAvoidanceIntent(false, 1f, 0f);
+                laneFollower.SetContinuousAvoidanceCommand(false);
                 return;
             }
-
-            if (SelectedDecision == AvoidanceDecision.Stop)
+            if (decisionLatched)
             {
-                LastSpeedScale = 0f;
-                TargetLaneOffset = 0f;
-                CurrentAvoidanceMagnitude = AvoidanceMagnitude.None;
-                laneFollower.SetAvoidanceIntent(true, 0f, 0f);
-                return;
+                LastSpeedScale = policyMove;
+                laneFollower.SetContinuousAvoidanceCommand(true, policyMove, policyTurn);
             }
-
-            if (SelectedDecision == AvoidanceDecision.Reverse)
-            {
-                bool reverseTimeAvailable = Time.time - decisionLatchedAt < maximumReverseSeconds;
-                bool rearIsClear = GetRearClearance() >= minimumRearClearance;
-                LastSpeedScale = reverseTimeAvailable && rearIsClear ? -reverseSpeedScale : 0f;
-                TargetLaneOffset = 0f;
-                CurrentAvoidanceMagnitude = AvoidanceMagnitude.None;
-                laneFollower.SetAvoidanceIntent(true, LastSpeedScale, 0f);
-                return;
-            }
-
-            float selectedDistance = tofRig == null || !tofRig.IsInitialized
-                ? 2f
-                : SelectedDecision == AvoidanceDecision.Left
-                    ? tofRig.LeftDistance
-                    : tofRig.RightDistance;
-            float minimumTtc = tofRig != null ? tofRig.MinimumTtc : float.PositiveInfinity;
-            bool mustStop = selectedDistance < minimumSelectedSideDistance ||
-                            minimumDistance <= deterministicStopDistance ||
-                            (!float.IsPositiveInfinity(minimumTtc) && minimumTtc <= deterministicStopTtc);
-
-            float distanceScale = Mathf.InverseLerp(
-                deterministicStopDistance,
-                policyActivationDistance,
-                minimumDistance);
-            float ttcScale = float.IsPositiveInfinity(minimumTtc)
-                ? 1f
-                : Mathf.InverseLerp(deterministicStopTtc, fullSpeedTtc, minimumTtc);
-            LastSpeedScale = mustStop
-                ? 0f
-                : Mathf.Lerp(minimumAvoidanceSpeedScale, 1f, Mathf.Min(distanceScale, ttcScale));
-            CurrentAvoidanceMagnitude = SelectAvoidanceMagnitude(minimumDistance, minimumTtc);
-            if ((int)CurrentAvoidanceMagnitude > (int)episodeMaximumAvoidanceMagnitude)
-                episodeMaximumAvoidanceMagnitude = CurrentAvoidanceMagnitude;
-            TargetLaneOffset = (SelectedDecision == AvoidanceDecision.Left ? -1f : 1f) *
-                GetAvoidanceOffset(CurrentAvoidanceMagnitude);
-            laneFollower.SetAvoidanceIntent(true, LastSpeedScale, TargetLaneOffset);
+            else if (recovering)
+                UpdateLaneRecovery();
+            else
+                laneFollower.SetContinuousAvoidanceCommand(recoveryFailed);
         }
 
-        private AvoidanceMagnitude SelectAvoidanceMagnitude(float minimumDistance, float minimumTtc)
+        private void UpdateLaneRecovery()
         {
-            float boxHeight = hasPerson ? person.normalizedBoxHeight : 0f;
-            if (minimumDistance <= largeAvoidanceDistance ||
-                (!float.IsPositiveInfinity(minimumTtc) && minimumTtc <= largeAvoidanceTtc) ||
-                boxHeight >= largePersonBoxHeight)
-                return AvoidanceMagnitude.Large;
-            if (minimumDistance <= mediumAvoidanceDistance ||
-                (!float.IsPositiveInfinity(minimumTtc) && minimumTtc <= mediumAvoidanceTtc) ||
-                boxHeight >= mediumPersonBoxHeight)
-                return AvoidanceMagnitude.Medium;
-            return AvoidanceMagnitude.Small;
-        }
-
-        private float GetAvoidanceOffset(AvoidanceMagnitude magnitude)
-        {
-            switch (magnitude)
+            if (Time.time - recoveryStartedAt >= recoveryTimeout)
             {
-                case AvoidanceMagnitude.Large: return largeAvoidanceLaneOffset;
-                case AvoidanceMagnitude.Medium: return mediumAvoidanceLaneOffset;
-                case AvoidanceMagnitude.Small: return smallAvoidanceLaneOffset;
-                default: return 0f;
+                recovering = false;
+                recoveryFailed = true;
+                laneFollower.SetContinuousAvoidanceCommand(true);
+                Debug.LogWarning("Lane recovery timed out; drive held stopped.", this);
+                return;
+            }
+            bool usable = laneFollower.HasUsableLane &&
+                laneFollower.TryGetLaneDetection(out HsvLaneDetector.Detection ignored);
+            if (usable && laneFollower.TryGetLaneDetection(out HsvLaneDetector.Detection lane))
+            {
+                float turn = Mathf.Clamp(lane.lateralError * 0.85f + lane.headingError * 0.55f, -0.5f, 0.5f);
+                laneFollower.SetContinuousAvoidanceCommand(true, 0.2f, turn);
+                bool aligned = Mathf.Abs(lane.lateralError) < 0.2f && Mathf.Abs(lane.headingError) < 0.2f;
+                if (!aligned) recoveryLaneSince = -1f;
+                else if (recoveryLaneSince < 0f) recoveryLaneSince = Time.time;
+                else if (Time.time - recoveryLaneSince >= 0.5f)
+                {
+                    recovering = false;
+                    recoveryHandoffUntil = Time.time + 5f;
+                    laneFollower.SetContinuousAvoidanceCommand(false);
+                    laneFollower.ResumeLaneFollowing();
+                }
+            }
+            else
+            {
+                recoveryLaneSince = -1f;
+                // The camera can see only one boundary after a wide avoidance.
+                // Approach the path through the pre-avoidance pose at low speed,
+                // then let the camera take over once both boundaries are usable.
+                Vector3 pathRight = Quaternion.Euler(0f, avoidanceEntryYaw, 0f) * Vector3.right;
+                Vector3 displacement = transform.position - avoidanceEntryPosition;
+                float lateralOffset = Vector3.Dot(displacement, pathRight);
+                float targetYaw = avoidanceEntryYaw - Mathf.Atan2(lateralOffset, 1.2f) * Mathf.Rad2Deg;
+                float error = Mathf.DeltaAngle(transform.eulerAngles.y, targetYaw);
+                float move = Mathf.Abs(lateralOffset) > 0.15f && Mathf.Abs(error) < 55f ? 0.2f : 0f;
+                laneFollower.SetContinuousAvoidanceCommand(true, move, Mathf.Clamp(error / 60f, -0.4f, 0.4f));
             }
         }
 
@@ -683,6 +736,12 @@ namespace ShipRobot.ObstacleAvoidance
             if (Time.time - clearSince < decisionReleaseHoldSeconds)
                 return;
 
+            recovering = true;
+            recoveryHandoffUntil = 0f;
+            decisionPending = false;
+            recoveryFailed = false;
+            recoveryStartedAt = Time.time;
+            recoveryLaneSince = -1f;
             decisionLatched = false;
             SelectedDecision = AvoidanceDecision.None;
             CurrentAvoidanceMagnitude = AvoidanceMagnitude.None;
@@ -693,25 +752,6 @@ namespace ShipRobot.ObstacleAvoidance
 
         private float GetMinimumDistance() =>
             tofRig != null && tofRig.IsInitialized ? tofRig.MinimumDistance : 2f;
-
-        private float GetRearClearance()
-        {
-            Vector3 origin = transform.position + Vector3.up * rearProbeHeight;
-            RaycastHit[] hits = Physics.RaycastAll(
-                origin,
-                -transform.forward,
-                rearProbeRange,
-                rearObstacleMask,
-                QueryTriggerInteraction.Ignore);
-            float nearest = rearProbeRange;
-            foreach (RaycastHit hit in hits)
-            {
-                if (hit.transform == null || hit.transform.root == transform.root)
-                    continue;
-                nearest = Mathf.Min(nearest, hit.distance);
-            }
-            return nearest;
-        }
 
         private void ApplyLanePerceptionProfile()
         {
@@ -735,6 +775,7 @@ namespace ShipRobot.ObstacleAvoidance
             if (laneFollower != null)
             {
                 laneFollower.SetAvoidanceIntent(false, 1f, 0f);
+                laneFollower.SetContinuousAvoidanceCommand(false);
                 laneFollower.ClearPerceptionOverride();
             }
             base.OnDisable();
@@ -745,7 +786,7 @@ namespace ShipRobot.ObstacleAvoidance
             if (!showDebugPanel)
                 return;
             EnsureStyles();
-            Rect panel = new Rect(Screen.width - 375f, Screen.height - 500f, 365f, 158f);
+            Rect panel = new Rect(Screen.width - 375f, Mathf.Max(280f, Screen.height - 416f) + 76f, 365f, 150f);
             GUI.Box(panel, GUIContent.none);
             GUI.Label(new Rect(panel.x + 10f, panel.y + 6f, 345f, 20f), "RL AVOIDANCE I/O", titleStyle);
             string pedestrianState = trainingMover == null ? "NONE" :
@@ -754,10 +795,22 @@ namespace ShipRobot.ObstacleAvoidance
                 trainingMover.IsArmed ? "WAIT" : "OFF";
             float pedestrianDistance = trainingMover != null ? trainingMover.RobotDistanceToPedestrian : 0f;
             float forwardSpeed = GetForwardSpeed();
-            GUI.Label(new Rect(panel.x + 10f, panel.y + 29f, 345f, 124f),
+            if (!trainingMode && demoMission != null)
+            {
+                GUI.Label(new Rect(panel.x + 10f, panel.y + 29f, 345f, 116f),
+                    $"person {hasPerson}  ToF {GetMinimumDistance():F2}m  phase {Phase}\n" +
+                    $"PPO latch {decisionLatched} wait {decisionPending} rec {recovering} fault {recoveryFailed}\n" +
+                    $"move {policyMove:F2} turn {policyTurn:F2}\n" +
+                    $"robot {forwardSpeed:F2} m/s  lane {laneFollower?.HasUsableLane}  drive {laneFollower?.IsDriveEnabled}\n" +
+                    $"mission {demoMission.State}  motion {demoMission.IsMotionRequested}  safety-stop {laneFollower?.IsSafetyStopped}\n" +
+                    demoMission.StatusDetail,
+                    valueStyle);
+                return;
+            }
+            GUI.Label(new Rect(panel.x + 10f, panel.y + 29f, 345f, 116f),
                 $"person {hasPerson} x {(hasPerson ? person.normalizedHorizontalPosition : 0f):F2}  phase {Phase}\n" +
                 $"decision {SelectedDecision}/{CurrentAvoidanceMagnitude} latched {decisionLatched} forced-stop {decisionForcedToStop}\n" +
-                $"rule speed {LastSpeedScale:F2} target offset {TargetLaneOffset:F2}\n" +
+                $"PPO move {policyMove:F2} turn {policyTurn:F2} recovery {recovering} fault {recoveryFailed}\n" +
                 $"robot speed {forwardSpeed:F2} m/s  episode max {episodeMaximumForwardSpeed:F2} m/s\n" +
                 $"active {IsPolicyActive} apply {applyPolicyActions} train {trainingMode}/{trainingStage} connected {Academy.Instance.IsCommunicatorOn}\n" +
                 $"reward {GetCumulativeReward():F2} last {lastOutcomeLabel}\n" +
@@ -769,7 +822,7 @@ namespace ShipRobot.ObstacleAvoidance
 
         private void UpdateResponsePhase(float minimumDistance)
         {
-            bool emergencyStopped = safetySupervisor != null &&
+            bool emergencyStopped = safetySupervisor != null && safetySupervisor.EnforceControl &&
                 (safetySupervisor.State == SafetySupervisor.SafetyState.EmergencyStop ||
                  safetySupervisor.State == SafetySupervisor.SafetyState.WaitingForClear);
             if (emergencyStopped)
@@ -782,10 +835,78 @@ namespace ShipRobot.ObstacleAvoidance
                 Phase = HumanResponsePhase.EarlyWarning;
         }
 
+        private void OnDrawGizmosSelected()
+        {
+            if (trackReference == null) return;
+            Matrix4x4 previous = Gizmos.matrix;
+            Gizmos.matrix = trackReference.localToWorldMatrix;
+            Gizmos.color = Color.cyan;
+            DrawTrackRect(trackOuterArea);
+            Gizmos.color = Color.yellow;
+            foreach (Rect hole in trackExcludedAreas) DrawTrackRect(hole);
+            Gizmos.matrix = previous;
+            if (Application.isPlaying)
+            {
+                Vector3 centre = transform.TransformPoint(robotCentreLocalOffset);
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(centre, centre + GetTrackCorrection());
+            }
+        }
+
+        private static void DrawTrackRect(Rect area)
+        {
+            Vector3 a = new Vector3(area.xMin, 0f, area.yMin);
+            Vector3 b = new Vector3(area.xMax, 0f, area.yMin);
+            Vector3 c = new Vector3(area.xMax, 0f, area.yMax);
+            Vector3 d = new Vector3(area.xMin, 0f, area.yMax);
+            Gizmos.DrawLine(a, b); Gizmos.DrawLine(b, c);
+            Gizmos.DrawLine(c, d); Gizmos.DrawLine(d, a);
+        }
+
+        private Vector3 GetTrackCorrection()
+        {
+            if (trackReference == null) return Vector3.zero;
+            Vector3 centre = transform.TransformPoint(robotCentreLocalOffset);
+            Vector3 local = trackReference.InverseTransformPoint(centre);
+            Vector2 point = new Vector2(local.x, local.z);
+            Vector2 nearest = new Vector2(
+                Mathf.Clamp(point.x, trackOuterArea.xMin, trackOuterArea.xMax),
+                Mathf.Clamp(point.y, trackOuterArea.yMin, trackOuterArea.yMax));
+            foreach (Rect hole in trackExcludedAreas)
+            {
+                if (!hole.Contains(nearest)) continue;
+                Vector2[] candidates = {
+                    new Vector2(hole.xMin, nearest.y), new Vector2(hole.xMax, nearest.y),
+                    new Vector2(nearest.x, hole.yMin), new Vector2(nearest.x, hole.yMax)
+                };
+                float best = float.PositiveInfinity;
+                foreach (Vector2 candidate in candidates)
+                {
+                    Vector3 delta = trackReference.TransformVector(
+                        new Vector3(candidate.x - point.x, 0f, candidate.y - point.y));
+                    if (delta.sqrMagnitude >= best) continue;
+                    best = delta.sqrMagnitude;
+                    nearest = candidate;
+                }
+            }
+            return trackReference.TransformVector(new Vector3(nearest.x - point.x, 0f, nearest.y - point.y));
+        }
+
         private void EvaluateTrainingStep(float minimumDistance)
         {
             if (episodeTerminating)
                 return;
+
+            trackOutsideDistance = GetTrackCorrection().magnitude;
+            bool outsideBounds = trackOutsideDistance > allowedTrackExitDistance;
+            var boundsStats = Academy.Instance.StatsRecorder;
+            boundsStats.Add("HumanAvoidance/Bounds/OutsideTrackMetres", trackOutsideDistance);
+            if (outsideBounds)
+            {
+                boundsStats.Add("HumanAvoidance/Bounds/Exit", 1f);
+                FinishTrainingEpisode(trainingBoundsExitPenalty, TrainingOutcome.LaneExit);
+                return;
+            }
 
             AddReward(-stepPenalty);
             HsvLaneDetector.Detection lane = default;
@@ -813,7 +934,8 @@ namespace ShipRobot.ObstacleAvoidance
                 laneFailureDecisionCount++;
             }
 
-            if (!decisionLatched && laneFailureDecisionCount >= laneFailureDecisionLimit)
+            if (trainingStage == TrainingCurriculumStage.AvoidanceAndLaneRecovery &&
+                !decisionLatched && laneFailureDecisionCount >= laneFailureDecisionLimit)
             {
                 // Lane perception/control failures are outside the high-level policy's
                 // action space, so exclude them from PPO reward rather than blaming it.
@@ -867,12 +989,7 @@ namespace ShipRobot.ObstacleAvoidance
         {
             if (encounterClass == TrainingEncounterClass.ActiveAvoidanceRequired)
             {
-                bool activeManeuver = SelectedDecision == AvoidanceDecision.Left ||
-                                      SelectedDecision == AvoidanceDecision.Right ||
-                                      SelectedDecision == AvoidanceDecision.Reverse;
-                FinishTrainingEpisode(
-                    activeManeuver ? successfulAvoidanceReward : passiveFailurePenalty,
-                    activeManeuver ? TrainingOutcome.Success : TrainingOutcome.PassiveFailure);
+                FinishTrainingEpisode(successfulAvoidanceReward, TrainingOutcome.Success);
                 return;
             }
 
@@ -883,9 +1000,8 @@ namespace ShipRobot.ObstacleAvoidance
                     FinishTrainingEpisode(passiveFailurePenalty, TrainingOutcome.PassiveFailure);
                     return;
                 }
-                bool stopped = SelectedDecision == AvoidanceDecision.Stop;
                 FinishTrainingEpisode(
-                    stopped ? yieldStopReward : yieldMovingReward,
+                    yieldMovingReward,
                     TrainingOutcome.Success);
                 return;
             }
@@ -908,6 +1024,7 @@ namespace ShipRobot.ObstacleAvoidance
             episodeTerminating = true;
             AddReward(terminalReward);
             RecordEpisodeOutcome(outcome);
+            laneFollower?.SetContinuousAvoidanceCommand(false);
             laneFollower?.SetAvoidanceIntent(false, 1f, 0f);
             EndEpisode();
         }
@@ -916,6 +1033,7 @@ namespace ShipRobot.ObstacleAvoidance
         {
             episodeTerminating = true;
             RecordEpisodeOutcome(outcome);
+            laneFollower?.SetContinuousAvoidanceCommand(false);
             laneFollower?.SetAvoidanceIntent(false, 1f, 0f);
             EpisodeInterrupted();
         }
@@ -942,7 +1060,8 @@ namespace ShipRobot.ObstacleAvoidance
             stats.Add("HumanAvoidance/Policy/Active", IsPolicyActive ? 1f : 0f);
             stats.Add("HumanAvoidance/Policy/Latched", decisionLatched ? 1f : 0f);
             stats.Add("HumanAvoidance/Policy/RuleSpeedScale", LastSpeedScale);
-            stats.Add("HumanAvoidance/Policy/TargetLaneOffset", TargetLaneOffset);
+            stats.Add("HumanAvoidance/Policy/MoveCommand", policyMove);
+            stats.Add("HumanAvoidance/Policy/TurnCommand", policyTurn);
             stats.Add("HumanAvoidance/Policy/AvoidanceMagnitude", (float)CurrentAvoidanceMagnitude);
             stats.Add("HumanAvoidance/Robot/ForwardSpeed", GetForwardSpeed());
             stats.Add("HumanAvoidance/Robot/LinearSpeed",
@@ -998,7 +1117,7 @@ namespace ShipRobot.ObstacleAvoidance
             stats.Add("HumanAvoidance/Decision/RightRate",
                 SelectedDecision == AvoidanceDecision.Right ? 1f : 0f);
             stats.Add("HumanAvoidance/Decision/ReverseRate",
-                SelectedDecision == AvoidanceDecision.Reverse ? 1f : 0f);
+                0f); // Retain the legacy log key for existing dashboards.
             stats.Add("HumanAvoidance/Decision/NoneRate",
                 SelectedDecision == AvoidanceDecision.None ? 1f : 0f);
             stats.Add("HumanAvoidance/Decision/ForcedStopRate", decisionForcedToStop ? 1f : 0f);

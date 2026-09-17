@@ -18,7 +18,8 @@ namespace ShipRobot.Navigation
         PerimeterPatrol,
         InspectEquipmentA,
         InspectEquipmentB,
-        ReturnToBase
+        ReturnToBase,
+        InspectEquipmentAAndB
     }
 
     [Serializable]

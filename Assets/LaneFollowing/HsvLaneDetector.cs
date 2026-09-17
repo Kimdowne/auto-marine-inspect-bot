@@ -116,24 +116,22 @@ namespace ShipRobot.LaneFollowing
                 AllocateBuffers();
 
             RenderTexture previousActive = RenderTexture.active;
-            RenderTexture displayedFrame = rgbCamera.targetTexture;
-            if (displayedFrame != null && displayedFrame != renderTexture)
+            RenderTexture previousTarget = rgbCamera.targetTexture;
+            try
             {
-                // Reuse the already rendered camera preview. This prevents a second full URP
-                // camera render for every HSV sample during accelerated training.
-                Graphics.Blit(displayedFrame, renderTexture);
-            }
-            else if (displayedFrame == null)
-            {
+                // Preserve the original ADAS input: render at the detector's own
+                // resolution instead of resizing the camera preview.
                 rgbCamera.targetTexture = renderTexture;
                 rgbCamera.Render();
-                rgbCamera.targetTexture = null;
+                RenderTexture.active = renderTexture;
+                readbackTexture.ReadPixels(new Rect(0, 0, processingWidth, processingHeight), 0, 0, false);
+                readbackTexture.Apply(false, false);
             }
-            RenderTexture.active = renderTexture;
-            readbackTexture.ReadPixels(new Rect(0, 0, processingWidth, processingHeight), 0, 0, false);
-            readbackTexture.Apply(false, false);
-
-            RenderTexture.active = previousActive;
+            finally
+            {
+                rgbCamera.targetTexture = previousTarget;
+                RenderTexture.active = previousActive;
+            }
 
             pixels = readbackTexture.GetPixels32();
             BuildMask();

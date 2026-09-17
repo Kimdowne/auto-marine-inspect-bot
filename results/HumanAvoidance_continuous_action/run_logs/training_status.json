@@ -1,0 +1,29 @@
+{
+    "HumanAvoidance": {
+        "checkpoints": [
+            {
+                "steps": 76267,
+                "file_path": "results\\HumanAvoidance_continuous_action\\HumanAvoidance\\HumanAvoidance-76267.onnx",
+                "reward": 1.1365997418761253,
+                "creation_time": 1789286823.1730986,
+                "auxillary_file_paths": [
+                    "results\\HumanAvoidance_continuous_action\\HumanAvoidance\\HumanAvoidance-76267.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 76267,
+            "file_path": "results\\HumanAvoidance_continuous_action\\HumanAvoidance.onnx",
+            "reward": 1.1365997418761253,
+            "creation_time": 1789286823.1730986,
+            "auxillary_file_paths": [
+                "results\\HumanAvoidance_continuous_action\\HumanAvoidance\\HumanAvoidance-76267.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.13.0+cpu"
+    }
+}

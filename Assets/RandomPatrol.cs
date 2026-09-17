@@ -5,6 +5,7 @@ public class RandomPatrol : MonoBehaviour
 {
     public Transform[] points;
     public float randomRadius = 1.0f;
+    public bool deactivateAfterOneCircuit;
 
     [Header("Walking Speed")]
     public float minSpeed = 0.8f;
@@ -20,6 +21,11 @@ public class RandomPatrol : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
+        if (points == null || points.Length == 0)
+        {
+            enabled = false;
+            return;
+        }
         SetNextDestination();
     }
 
@@ -33,7 +39,14 @@ public class RandomPatrol : MonoBehaviour
             currentPoint++;
 
             if (currentPoint >= points.Length)
+            {
+                if (deactivateAfterOneCircuit)
+                {
+                    gameObject.SetActive(false);
+                    return;
+                }
                 currentPoint = 0;
+            }
 
             SetNextDestination();
         }

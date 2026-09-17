@@ -290,7 +290,7 @@ PrefabInstance:
     - target: {fileID: 2326224843802520868, guid: e51f745803fcc45499581d2be7f06050, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 99f10c4ed13d2b84eb976f37d30c5bf9, type: 2}
+      objectReference: {fileID: 2100000, guid: c44f0189d2ee89b4eb1de998fe1c6b0a, type: 2}
     - target: {fileID: 3415248223582523508, guid: e51f745803fcc45499581d2be7f06050, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -2141,21 +2141,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6694730386726524315, guid: 338c86de3d0d3514f9afad2da185e7ea, type: 3}
---- !u!115 &33167591
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 7
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_Type: 0
-  m_ExecutionOrder: 0
-  m_ClassName: NavigationMarker
-  m_Namespace: ShipRobot.Navigation
-  m_AssemblyName: Assembly-CSharp
 --- !u!1001 &33308497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8934,7 +8919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270986963681008907, guid: e3373ea929d3f3d4daf445b56dd08a94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.411279
+      value: 10.32
       objectReference: {fileID: 0}
     - target: {fileID: 8270986963681008907, guid: e3373ea929d3f3d4daf445b56dd08a94, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26342,21 +26327,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3752335351564399728, guid: 9d760ed038e2f0c439d4486218d9241a, type: 3}
---- !u!115 &343615916
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 7
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_Type: 0
-  m_ExecutionOrder: 0
-  m_ClassName: PlantRouteGraph
-  m_Namespace: ShipRobot.Navigation
-  m_AssemblyName: Assembly-CSharp
 --- !u!64 &343827173
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -48532,8 +48502,8 @@ Transform:
   m_GameObject: {fileID: 695980622}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.49, y: -0.52, z: 8.93}
-  m_LocalScale: {x: 0.14751846, y: 1, z: 16.372828}
+  m_LocalPosition: {x: -19.5, y: -0.52, z: 9.35}
+  m_LocalScale: {x: 0.14751846, y: 1, z: 17.2455}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 551033585}
@@ -60316,7 +60286,7 @@ Transform:
   m_GameObject: {fileID: 873221195}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.71, y: 0, z: 7.97}
+  m_LocalPosition: {x: 1.14, y: 0, z: 9.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63902,7 +63872,7 @@ PrefabInstance:
     - target: {fileID: 2326224843802520868, guid: e51f745803fcc45499581d2be7f06050, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: fab6fe9d7dd3e984d8b173f5b1f82862, type: 2}
+      objectReference: {fileID: 2100000, guid: 9b0d617dff0b3f647a70df1bb920045e, type: 2}
     - target: {fileID: 3415248223582523508, guid: e51f745803fcc45499581d2be7f06050, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -66660,8 +66630,8 @@ Transform:
   m_GameObject: {fileID: 1034154207}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.0700006, y: -0.52, z: 7.12}
-  m_LocalScale: {x: 0.14751846, y: 1, z: 15.766705}
+  m_LocalPosition: {x: -5.0700006, y: -0.52, z: 7.27}
+  m_LocalScale: {x: 0.14751846, y: 1, z: 17.506165}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 740544403}
@@ -67233,7 +67203,7 @@ Transform:
   m_GameObject: {fileID: 1059295433}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.051, y: 0, z: 0.48}
+  m_LocalPosition: {x: -0.82, y: 0, z: 0.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -73994,12 +73964,13 @@ MonoBehaviour:
   - {fileID: 1878960448}
   - {fileID: 461306363}
   - {fileID: 1399704994}
-  - {fileID: 2078207398}
-  - {fileID: 1347138809}
+  - {fileID: 1059295434}
   - {fileID: 1676303588}
   - {fileID: 1059295434}
-  - {fileID: 571172942}
+  - {fileID: 1399704994}
+  - {fileID: 1059295434}
   randomRadius: 1
+  deactivateAfterOneCircuit: 1
   minSpeed: 0.8
   maxSpeed: 1.5
 --- !u!195 &1198685233
@@ -74036,7 +74007,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198685231}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 525f189f104a0614a9da80354ec2eac2, type: 3}
   m_Name: 
@@ -81406,6 +81377,7 @@ GameObject:
   - component: {fileID: 1263303033}
   - component: {fileID: 1263303036}
   - component: {fileID: 1263303037}
+  - component: {fileID: 1263303038}
   m_Layer: 0
   m_Name: NavigationSystem
   m_TagString: Untagged
@@ -81436,9 +81408,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 1263303032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1939140693}
+  m_Script: {fileID: 11500000, guid: d590955f424149c6a8a865e388a6023d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.PlantRouteGraph
+  useMarkerDistanceAsCost: 1
+  markers: []
+  edges:
+  - from: 1
+    to: 3
+    cost: 1
+    bidirectional: 1
+  - from: 3
+    to: 2
+    cost: 1
+    bidirectional: 1
+  - from: 4
+    to: 6
+    cost: 1
+    bidirectional: 1
+  - from: 6
+    to: 5
+    cost: 1
+    bidirectional: 1
+  - from: 1
+    to: 4
+    cost: 1
+    bidirectional: 1
+  - from: 3
+    to: 6
+    cost: 1
+    bidirectional: 1
+  - from: 2
+    to: 5
+    cost: 1
+    bidirectional: 1
 --- !u!4 &1263303035
 Transform:
   m_ObjectHideFlags: 0
@@ -81470,8 +81473,11 @@ MonoBehaviour:
   missionPlanner: {fileID: 1263303033}
   markerSource: {fileID: 554837949}
   laneFollower: {fileID: 1374980283}
-  inspectionPointA1: {fileID: 0}
-  inspectionPointA2: {fileID: 0}
+  avoidanceAgent: {fileID: 1374980288}
+  inspectionPointA1: {fileID: 1200668325}
+  inspectionPointA2: {fileID: 1357198854}
+  inspectionPointB1: {fileID: 0}
+  inspectionPointB2: {fileID: 0}
   inspectionReachDistance: 1.2
   initialNode: 6
   markerDetectionDistance: 4
@@ -81479,12 +81485,16 @@ MonoBehaviour:
   minimumMarkerConfidence: 0.45
   requiredMarkerFrames: 3
   minimumApproachDistance: 0.1
+  postAvoidanceMinimumApproachDistance: 0.5
   maximumApproachDistance: 1.5
   requiredSideLossFrames: 30
   approachCommand: 0.16
   searchTurnCommand: 0.2
   minimumTurnBeforePair: 10
   maximumSearchTurn: 150
+  exitHeadingTolerance: 35
+  maximumExitLaneProbeDistance: 1.2
+  exitLaneProbeCommand: 0.1
   minimumPairConfidence: 0.1
   requiredPairFrames: 1
   visualAlignMoveCommand: 0.11
@@ -81497,6 +81507,7 @@ MonoBehaviour:
   minimumAlignTravel: 0.05
   maximumAlignTravel: 1.5
   pairLostFrameLimit: 12
+  maximumExitLaneRecoveryAttempts: 2
   maneuverOverrides:
   - entryNode: 6
     junctionNode: 3
@@ -81546,11 +81557,14 @@ MonoBehaviour:
   maximumStraightTravel: 3
   requiredStraightLossFrames: 2
   requiredStraightReacquireFrames: 3
+  turnCentrePastMarkerDistance: 0.65
+  rightBottomMaximumApproachDistance: 10
   fallbackStraightCommand: 0.1
   laneLostFramesBeforeFallback: 12
   maximumFallbackDistance: 8
   maximumFallbackSeconds: 30
   showMissionPanel: 1
+  autoStartEquipmentAAndBMission: 1
 --- !u!114 &1263303037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81600,6 +81614,34 @@ MonoBehaviour:
     to: 5
     cost: 1
     bidirectional: 1
+--- !u!114 &1263303038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263303032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a1f634c78f3493eaf06d1dd02cc518b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipRobot.Navigation.DemoPedestrianSequence
+  mission: {fileID: 1263303036}
+  routeGraph: {fileID: 1263303037}
+  avoidanceAgent: {fileID: 1374980288}
+  robot: {fileID: 1374980274}
+  person: {fileID: 1198685235}
+  extraScenePerson: {fileID: 1866116081}
+  firstStartFraction: {x: 0.55, y: 0.68}
+  laterStartFraction: {x: 0.55, y: 0.72}
+  appearanceDelaySeconds: 1.5
+  minimumLegProgressBeforeAppearance: 0.8
+  laterEncounterChance: 0.7
+  lateralVariation: 0.3
+  walkingSpeed: {x: 0.6, y: 0.85}
+  passBeyondLegStart: 1.5
+  hideAfterPassingDistance: 2.5
+  offstageOffset: {x: 100, y: 0, z: 100}
 --- !u!64 &1263692802
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -85328,7 +85370,7 @@ Transform:
   m_GameObject: {fileID: 1347138808}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.71, y: 0, z: 14.52}
+  m_LocalPosition: {x: 7.01, y: 0, z: 14.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -87022,23 +87064,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 18
-    NumStackedVectorObservations: 1
+    VectorObservationSize: 20
+    NumStackedVectorObservations: 4
     m_ActionSpec:
-      m_NumContinuousActions: 0
-      BranchSizes: 04000000
-    VectorActionSize: 04000000
+      m_NumContinuousActions: 2
+      BranchSizes: 
+    VectorActionSize: 02000000
     VectorActionDescriptions: []
-    VectorActionSpaceType: 0
+    VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 42a64cda498410f4aafbc1a2c959dfaf, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: HumanAvoidance
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
-  m_DeterministicInference: 0
+  m_DeterministicInference: 1
   m_ObservableAttributeHandling: 0
 --- !u!114 &1374980282
 MonoBehaviour:
@@ -87133,7 +87175,7 @@ MonoBehaviour:
   minimumSlowdownScale: 0.25
   releaseDistance: 1
   clearHoldSeconds: 0.5
-  enforceControl: 0
+  enforceControl: 1
   showDebugPanel: 1
 --- !u!114 &1374980287
 MonoBehaviour:
@@ -87174,12 +87216,13 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 2500
+  MaxStep: 0
   tofRig: {fileID: 1374980285}
   personDetector: {fileID: 1374980287}
   laneFollower: {fileID: 1374980283}
   safetySupervisor: {fileID: 1374980286}
   robotBody: {fileID: 1374980276}
+  demoMission: {fileID: 1263303036}
   scenarioReference: {fileID: 554837944}
   applyPolicyActions: 1
   policyActivationDistance: 1.8
@@ -87199,16 +87242,9 @@ MonoBehaviour:
   minimumAvoidanceSpeedScale: 0.25
   decisionReleaseDistance: 1.6
   decisionReleaseHoldSeconds: 0.6
-  reverseSpeedScale: 0.3
-  maximumReverseSeconds: 1
-  rearProbeRange: 2
-  minimumRearClearance: 0.6
-  rearProbeHeight: 0.15
-  rearObstacleMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  recoveryTimeout: 12
   showDebugPanel: 1
-  trainingMode: 1
+  trainingMode: 0
   trainingStage: 0
   trainingPerson: {fileID: 1198685234}
   trainingMover: {fileID: 1198685235}
@@ -87233,6 +87269,26 @@ MonoBehaviour:
   approachExtraTravelRange: {x: 1, y: 1.5}
   completionHoldSeconds: 0.5
   maximumEpisodeSeconds: 28
+  trackReference: {fileID: 1562788160}
+  trackOuterArea:
+    serializedVersion: 2
+    x: -5.07
+    y: -0.7
+    width: 16.34
+    height: 15.61
+  trackExcludedAreas:
+  - serializedVersion: 2
+    x: -2.88
+    y: 0.883
+    width: 5.68
+    height: 12.917
+  - serializedVersion: 2
+    x: 5.11
+    y: 0.88
+    width: 4.51
+    height: 13.01
+  allowedTrackExitDistance: 0.5
+  trainingBoundsExitPenalty: -3
   trainingMinimumLaneConfidence: 0.15
   trainingMaximumLaneObservationAge: 1.5
   trainingMinimumConfidenceSpeedScale: 0.55
@@ -87250,6 +87306,8 @@ MonoBehaviour:
   collisionPenalty: -5
   maximumLaneError: 0.75
   laneFailureDecisionLimit: 15
+  policyDecisionInterval: 0.2
+  actionChangePenalty: 0.002
 --- !u!64 &1376507692
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -87963,7 +88021,7 @@ Transform:
   m_GameObject: {fileID: 1399704993}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.794, y: 0, z: 1.025}
+  m_LocalPosition: {x: -7.739, y: 0, z: 1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -97268,8 +97326,8 @@ Transform:
   m_GameObject: {fileID: 1550809127}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.88, y: -0.52, z: 8.93}
-  m_LocalScale: {x: 0.14751846, y: 1, z: 16.372828}
+  m_LocalPosition: {x: -2.25, y: -0.52, z: 9.34}
+  m_LocalScale: {x: 0.14751846, y: 1, z: 17.191467}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 551033585}
@@ -104561,7 +104619,7 @@ Transform:
   m_GameObject: {fileID: 1676303587}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.846, y: 0, z: 0.492}
+  m_LocalPosition: {x: 5.93, y: 0, z: 0.231}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -116078,6 +116136,7 @@ MonoBehaviour:
   - {fileID: 1059295434}
   - {fileID: 571172942}
   randomRadius: 1
+  deactivateAfterOneCircuit: 1
   minSpeed: 0.8
   maxSpeed: 1.5
 --- !u!195 &1866116083
@@ -116505,7 +116564,7 @@ Transform:
   m_GameObject: {fileID: 1878960447}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.73, y: 0, z: 7.75}
+  m_LocalPosition: {x: -0.46, y: 0, z: 6.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -117088,8 +117147,8 @@ Transform:
   m_GameObject: {fileID: 1903973514}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.27, y: -0.52, z: 7.12}
-  m_LocalScale: {x: 0.14751846, y: 1, z: 15.766705}
+  m_LocalPosition: {x: 11.95, y: -0.52, z: 7.31}
+  m_LocalScale: {x: 0.14751846, y: 1, z: 17.180231}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 740544403}
@@ -118187,21 +118246,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6618149923157772368, guid: 9d760ed038e2f0c439d4486218d9241a, type: 3}
---- !u!115 &1939140693
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 7
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_Type: 0
-  m_ExecutionOrder: 0
-  m_ClassName: PlantRouteGraph
-  m_Namespace: ShipRobot.Navigation
-  m_AssemblyName: Assembly-CSharp
 --- !u!64 &1940058990
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -123449,7 +123493,7 @@ Transform:
   m_GameObject: {fileID: 2078207397}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.553, y: 0, z: 14.7}
+  m_LocalPosition: {x: -6.71, y: 0, z: 15.239}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

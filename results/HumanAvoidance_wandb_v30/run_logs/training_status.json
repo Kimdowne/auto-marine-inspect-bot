@@ -1,0 +1,65 @@
+{
+    "HumanAvoidance": {
+        "checkpoints": [
+            {
+                "steps": 499901,
+                "file_path": "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-499901.onnx",
+                "reward": -1.0396836623549461,
+                "creation_time": 1789264223.5890322,
+                "auxillary_file_paths": [
+                    "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-499901.pt"
+                ]
+            },
+            {
+                "steps": 749965,
+                "file_path": "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-749965.onnx",
+                "reward": -0.02657086153825124,
+                "creation_time": 1789271098.445213,
+                "auxillary_file_paths": [
+                    "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-749965.pt"
+                ]
+            },
+            {
+                "steps": 999893,
+                "file_path": "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-999893.onnx",
+                "reward": -2.468135818839073,
+                "creation_time": 1789277975.308436,
+                "auxillary_file_paths": [
+                    "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-999893.pt"
+                ]
+            },
+            {
+                "steps": 1249997,
+                "file_path": "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-1249997.onnx",
+                "reward": -1.9526994787156582,
+                "creation_time": 1789284817.9961336,
+                "auxillary_file_paths": [
+                    "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-1249997.pt"
+                ]
+            },
+            {
+                "steps": 1255433,
+                "file_path": "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-1255433.onnx",
+                "reward": -0.20084920028845468,
+                "creation_time": 1789284972.0666332,
+                "auxillary_file_paths": [
+                    "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-1255433.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1255433,
+            "file_path": "results\\HumanAvoidance_wandb_v30\\HumanAvoidance.onnx",
+            "reward": -0.20084920028845468,
+            "creation_time": 1789284972.0666332,
+            "auxillary_file_paths": [
+                "results\\HumanAvoidance_wandb_v30\\HumanAvoidance\\HumanAvoidance-1255433.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.13.0+cpu"
+    }
+}

@@ -4,8 +4,8 @@ using UnityEngine.AI;
 namespace ShipRobot.ObstacleAvoidance
 {
     /// <summary>
-    /// Training-only pedestrian motion. The pedestrian starts in the front camera's
-    /// field of view and approaches the robot along a configured straight path.
+    /// Scripted pedestrian motion for training episodes and the inspection demo.
+    /// The pedestrian approaches the robot along a configured straight path.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class TrainingPedestrianMover : MonoBehaviour
@@ -92,6 +92,21 @@ namespace ShipRobot.ObstacleAvoidance
             ScenarioLabel = "OFF";
             SetWalkingAnimation(0f);
             RestoreExistingMotion();
+        }
+
+        public void ParkOffCamera(Vector3 parkingPosition)
+        {
+            // Keep the GameObject and this mover enabled for the next encounter.
+            // Only the old patrol/NavMesh motion stays suspended.
+            SuspendExistingMotion();
+            IsArmed = false;
+            HasStartedWalking = false;
+            HasCompletedRoute = false;
+            RobotDistanceToPedestrian = float.PositiveInfinity;
+            ScenarioLabel = "PARKED";
+            SetWalkingAnimation(0f);
+            parkingPosition.y = transform.position.y;
+            transform.position = parkingPosition;
         }
 
         private void LateUpdate()

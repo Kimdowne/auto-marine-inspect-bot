@@ -65,6 +65,16 @@ namespace ShipRobot.LaneFollowing
         public float MoveCommand { get; private set; }
         public float TurnCommand { get; private set; }
 
+        // Independent motor authority: policy control never passes through lane/ToF scaling.
+        private bool continuousControl;
+        private float continuousMove, continuousTurn;
+        public void SetContinuousAvoidanceCommand(bool active, float move = 0f, float turn = 0f)
+        {
+            continuousControl = active;
+            continuousMove = Mathf.Clamp(move, -1f, 1f);
+            continuousTurn = Mathf.Clamp(turn, -1f, 1f);
+        }
+
         private float previousLateralError;
         private float lastLogTime;
         private bool driveEnabled = true;
@@ -107,6 +117,17 @@ namespace ShipRobot.LaneFollowing
                 return;
             }
 
+            if (continuousControl)
+            {
+                IsLaneLocked = false;
+                IsUsingAvoidanceLaneLossFallback = false;
+                MoveCommand = Mathf.MoveTowards(MoveCommand, continuousMove, controlSlewRate * Time.fixedDeltaTime);
+                TurnCommand = Mathf.MoveTowards(TurnCommand, continuousTurn, controlSlewRate * Time.fixedDeltaTime);
+                ApplyDrive(MoveCommand, TurnCommand,
+                    Mathf.Abs(MoveCommand) < 0.001f && Mathf.Abs(TurnCommand) < 0.001f);
+                return;
+            }
+
             if (avoidanceActive && Mathf.Abs(avoidanceSpeedScale) <= 0.001f)
             {
                 MoveCommand = 0f;
@@ -144,7 +165,8 @@ namespace ShipRobot.LaneFollowing
                 MoveCommand = manualMoveCommand * safetySpeedScale;
                 TurnCommand = manualTurnCommand;
                 IsLaneLocked = false;
-                ApplyDrive(MoveCommand, TurnCommand, false);
+                ApplyDrive(MoveCommand, TurnCommand,
+                    Mathf.Abs(MoveCommand) < 0.001f && Mathf.Abs(TurnCommand) < 0.001f);
                 return;
             }
 

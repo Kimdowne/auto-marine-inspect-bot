@@ -360,6 +360,49 @@ def argument_value(name: str, default: str) -> str:
     return default
 
 
+def keep_training_when_onnx_export_fails(run: Any) -> None:
+    """Make ONNX export best-effort while preserving PyTorch checkpoints.
+
+    ML-Agents writes both checkpoint.pt and the numbered .pt file before it
+    invokes TorchModelSaver.export().  Some PyTorch versions import
+    ``onnxscript`` only at that point.  A missing/blocked ONNX dependency must
+    not tear down the Unity connection, the trainer, and the W&B run after an
+    otherwise successful checkpoint save.
+    """
+    from mlagents.trainers.model_saver.torch_model_saver import TorchModelSaver
+
+    original_export = TorchModelSaver.export
+    failure_count = 0
+
+    def best_effort_export(self: Any, output_filepath: str, behavior_name: str) -> None:
+        nonlocal failure_count
+        try:
+            original_export(self, output_filepath, behavior_name)
+        except Exception as error:
+            failure_count += 1
+            error_text = f"{type(error).__name__}: {error}"
+            print(
+                "[WARNING] PyTorch checkpoint was saved, but ONNX export failed. "
+                "Training will continue. " + error_text,
+                file=sys.stderr,
+                flush=True,
+            )
+            try:
+                run.summary["diagnostic/onnx_export_failures"] = failure_count
+                run.summary["diagnostic/last_onnx_export_error"] = error_text[:1000]
+            except Exception as reporting_error:
+                # Diagnostics must never turn a recoverable export failure back
+                # into a trainer failure when W&B is temporarily unavailable.
+                print(
+                    "[WARNING] Could not report ONNX failure to W&B: "
+                    f"{reporting_error}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+
+    TorchModelSaver.export = best_effort_export
+
+
 def main() -> None:
     run_id = argument_value("--run-id", "HumanAvoidance")
     wandb_run_id = re.sub(r"[^A-Za-z0-9_-]", "-", run_id)[:128]
@@ -393,6 +436,7 @@ def main() -> None:
         wandb.define_metric("reward/episode_final", step_metric="episode/index")
         StatsReporter.add_writer(WandbStatsWriter(run))
 
+        keep_training_when_onnx_export_fails(run)
         from mlagents.trainers.learn import main as mlagents_main
 
         mlagents_main()

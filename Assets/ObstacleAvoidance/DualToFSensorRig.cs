@@ -84,10 +84,10 @@ namespace ShipRobot.ObstacleAvoidance
             if (!showDebugPanel)
                 return;
             EnsureStyles();
-            Rect panel = new Rect(Screen.width - 375f, Screen.height - 220f, 365f, 82f);
+            Rect panel = new Rect(Screen.width - 375f, Mathf.Max(280f, Screen.height - 416f) + 334f, 365f, 72f);
             GUI.Box(panel, GUIContent.none);
             GUI.Label(new Rect(panel.x + 10f, panel.y + 6f, 345f, 20f), "DUAL FRONT ToF", titleStyle);
-            GUI.Label(new Rect(panel.x + 10f, panel.y + 29f, 345f, 48f),
+            GUI.Label(new Rect(panel.x + 10f, panel.y + 29f, 345f, 38f),
                 $"LEFT  {LeftDistance:F2} m   closing {LeftClosingSpeed:F2} m/s   TTC {FormatTtc(LeftTtc)}\n" +
                 $"RIGHT {RightDistance:F2} m   closing {RightClosingSpeed:F2} m/s   TTC {FormatTtc(RightTtc)}",
                 valueStyle);

@@ -221,7 +221,7 @@ namespace ShipRobot.ObstacleAvoidance
             if (!showDebugPanel)
                 return;
             EnsureStyles();
-            Rect panel = new Rect(Screen.width - 375f, Screen.height - 330f, 365f, 102f);
+            Rect panel = new Rect(Screen.width - 375f, Mathf.Max(280f, Screen.height - 416f) + 234f, 365f, 92f);
             GUI.Box(panel, GUIContent.none);
             Color stateColour = State == SafetyState.EmergencyStop || State == SafetyState.WaitingForClear
                 ? Color.red
@@ -238,7 +238,7 @@ namespace ShipRobot.ObstacleAvoidance
 
             string ttc = float.IsPositiveInfinity(tofRig.MinimumTtc) ? "INF" : $"{tofRig.MinimumTtc:F2} s";
             string personTtc = float.IsPositiveInfinity(associatedTofTtc) ? "INF" : $"{associatedTofTtc:F2}s";
-            GUI.Label(new Rect(panel.x + 10f, panel.y + 29f, 345f, 68f),
+            GUI.Label(new Rect(panel.x + 10f, panel.y + 29f, 345f, 58f),
                 $"min distance {tofRig.MinimumDistance:F2} m   min TTC {ttc}\n" +
                 $"person {currentPersonSector} x {AssociatedPersonScreenX:F2} conf {AssociatedPersonConfidence:F2}\n" +
                 $"selected {associatedSensorName} {associatedTofDistance:F2}m TTC {personTtc}  suggested {AppliedSpeedScale:F2}\n" +

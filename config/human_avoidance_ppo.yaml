@@ -2,7 +2,7 @@ behaviors:
   HumanAvoidance:
     trainer_type: ppo
     hyperparameters:
-      # One high-level decision is collected per pedestrian encounter.
+      # Repeated decisions every 0.2 seconds of simulation time.
       batch_size: 128
       buffer_size: 1024
       learning_rate: 0.0003
@@ -21,7 +21,7 @@ behaviors:
         strength: 1.0
     checkpoint_interval: 250000
     max_steps: 3000000
-    time_horizon: 16
+    time_horizon: 128
     # Aggregate a wider window so long-run learning trends are easier to read.
     summary_freq: 2000
     keep_checkpoints: 5

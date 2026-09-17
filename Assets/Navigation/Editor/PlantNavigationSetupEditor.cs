@@ -233,8 +233,8 @@ namespace ShipRobot.Navigation.Editor
             behavior.BehaviorName = "HumanAvoidance";
             behavior.BehaviorType = BehaviorType.HeuristicOnly;
             behavior.BrainParameters.VectorObservationSize = HumanAvoidanceAgent.ObservationCount;
-            behavior.BrainParameters.NumStackedVectorObservations = 1;
-            behavior.BrainParameters.ActionSpec = ActionSpec.MakeDiscrete(4);
+            behavior.BrainParameters.NumStackedVectorObservations = 4;
+            behavior.BrainParameters.ActionSpec = ActionSpec.MakeContinuous(2);
             EditorUtility.SetDirty(behavior);
 
             Unity.MLAgents.DecisionRequester requester =
@@ -309,7 +309,7 @@ namespace ShipRobot.Navigation.Editor
             BehaviorParameters behavior = robot.GetComponent<BehaviorParameters>();
             if (behavior != null)
             {
-                behavior.BrainParameters.ActionSpec = ActionSpec.MakeDiscrete(4);
+                behavior.BrainParameters.ActionSpec = ActionSpec.MakeContinuous(2);
                 behavior.BehaviorType = BehaviorType.Default;
                 EditorUtility.SetDirty(behavior);
             }
@@ -362,7 +362,7 @@ namespace ShipRobot.Navigation.Editor
             BehaviorParameters behavior = robot.GetComponent<BehaviorParameters>();
             if (behavior != null)
             {
-                behavior.BrainParameters.ActionSpec = ActionSpec.MakeDiscrete(4);
+                behavior.BrainParameters.ActionSpec = ActionSpec.MakeContinuous(2);
                 behavior.BehaviorType = BehaviorType.HeuristicOnly;
                 EditorUtility.SetDirty(behavior);
             }
@@ -411,6 +411,9 @@ namespace ShipRobot.Navigation.Editor
             coordinator.FindProperty("junctionActionDistance").floatValue = 1.20f;
             coordinator.FindProperty("minimumTurnBeforePair").floatValue = 10f;
             coordinator.FindProperty("maximumSearchTurn").floatValue = 150f;
+            coordinator.FindProperty("exitHeadingTolerance").floatValue = 35f;
+            coordinator.FindProperty("maximumExitLaneProbeDistance").floatValue = 1.2f;
+            coordinator.FindProperty("exitLaneProbeCommand").floatValue = 0.10f;
             coordinator.FindProperty("minimumPairConfidence").floatValue = 0.10f;
             coordinator.FindProperty("requiredPairFrames").intValue = 1;
             coordinator.FindProperty("alignedLateralTolerance").floatValue = 0.35f;
@@ -419,6 +422,9 @@ namespace ShipRobot.Navigation.Editor
             coordinator.FindProperty("minimumAlignTravel").floatValue = 0.05f;
             coordinator.FindProperty("maximumAlignTravel").floatValue = 1.50f;
             coordinator.FindProperty("pairLostFrameLimit").intValue = 12;
+            coordinator.FindProperty("maximumExitLaneRecoveryAttempts").intValue = 2;
+            coordinator.FindProperty("turnCentrePastMarkerDistance").floatValue = 0.65f;
+            coordinator.FindProperty("rightBottomMaximumApproachDistance").floatValue = 10f;
             coordinator.FindProperty("fallbackStraightCommand").floatValue = 0.10f;
             coordinator.FindProperty("laneLostFramesBeforeFallback").intValue = 12;
             coordinator.FindProperty("maximumFallbackDistance").floatValue = 8f;

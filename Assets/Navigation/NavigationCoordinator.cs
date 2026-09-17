@@ -29,17 +29,20 @@ namespace ShipRobot.Navigation
             [Range(0.05f, 1f)] public float visualAlignMoveCommand;
         }
 
-        private enum ActiveMission { None, SingleEdge, Perimeter, EquipmentA }
+        private enum ActiveMission { None, SingleEdge, Perimeter, EquipmentA, EquipmentAAndB }
 
         [Header("Connections")]
         [SerializeField] private PlantRouteGraph routeGraph;
         [SerializeField] private MissionRoutePlanner missionPlanner;
         [SerializeField] private SimulatedMarkerObservationSource markerSource;
         [SerializeField] private LaneFollowerController laneFollower;
+        [SerializeField] private ShipRobot.ObstacleAvoidance.HumanAvoidanceAgent avoidanceAgent;
 
         [Header("Equipment A inspection")]
         [SerializeField] private Transform inspectionPointA1;
         [SerializeField] private Transform inspectionPointA2;
+        [SerializeField] private Transform inspectionPointB1;
+        [SerializeField] private Transform inspectionPointB2;
         [SerializeField, Min(0.1f)] private float inspectionReachDistance = 1.20f;
 
         [Header("Marker localization")]
@@ -52,6 +55,7 @@ namespace ShipRobot.Navigation
 
         [Header("Approach to junction centre")]
         [SerializeField, Min(0f)] private float minimumApproachDistance = 0.10f;
+        [SerializeField, Min(0f)] private float postAvoidanceMinimumApproachDistance = 0.50f;
         [SerializeField, Min(0.1f)] private float maximumApproachDistance = 1.50f;
         [SerializeField, Min(1)] private int requiredSideLossFrames = 30;
         [SerializeField, Range(0.05f, 1f)] private float approachCommand = 0.16f;
@@ -60,6 +64,9 @@ namespace ShipRobot.Navigation
         [SerializeField, Range(0.05f, 1f)] private float searchTurnCommand = 0.20f;
         [SerializeField, Range(0f, 90f)] private float minimumTurnBeforePair = 10f;
         [SerializeField, Range(45f, 175f)] private float maximumSearchTurn = 150f;
+        [SerializeField, Range(5f, 90f)] private float exitHeadingTolerance = 35f;
+        [SerializeField, Min(0.1f)] private float maximumExitLaneProbeDistance = 1.2f;
+        [SerializeField, Range(0.05f, 1f)] private float exitLaneProbeCommand = 0.10f;
         [SerializeField, Range(0f, 1f)] private float minimumPairConfidence = 0.10f;
         [SerializeField, Min(1)] private int requiredPairFrames = 1;
 
@@ -74,6 +81,7 @@ namespace ShipRobot.Navigation
         [SerializeField, Min(0f)] private float minimumAlignTravel = 0.05f;
         [SerializeField, Min(0.1f)] private float maximumAlignTravel = 1.50f;
         [SerializeField, Min(1)] private int pairLostFrameLimit = 12;
+        [SerializeField, Min(0)] private int maximumExitLaneRecoveryAttempts = 2;
         [SerializeField] private ManeuverOverride[] maneuverOverrides;
 
         [Header("Straight junction traversal")]
@@ -84,6 +92,10 @@ namespace ShipRobot.Navigation
         [SerializeField, Min(1)] private int requiredStraightLossFrames = 2;
         [SerializeField, Min(1)] private int requiredStraightReacquireFrames = 3;
 
+        [Header("Equipment demo bottom crossing")]
+        [SerializeField, Min(0f)] private float turnCentrePastMarkerDistance = 0.65f;
+        [SerializeField, Min(2f)] private float rightBottomMaximumApproachDistance = 10f;
+
         [Header("No-lane marker fallback")]
         [SerializeField, Range(0.05f, 1f)] private float fallbackStraightCommand = 0.10f;
         [SerializeField, Min(1)] private int laneLostFramesBeforeFallback = 12;
@@ -92,9 +104,34 @@ namespace ShipRobot.Navigation
 
         [Header("UI")]
         [SerializeField] private bool showMissionPanel = true;
+        [FormerlySerializedAs("autoStartEquipmentAMission")]
+        [SerializeField] private bool autoStartEquipmentAAndBMission;
 
         public MissionState State { get; private set; }
         public PlantNodeId CurrentNode { get; private set; }
+        public string StatusDetail => statusDetail;
+        public bool IsFollowingEquipmentLeg(PlantNodeId from, PlantNodeId to) =>
+            activeMission == ActiveMission.EquipmentAAndB &&
+            (State == MissionState.FollowingLane || State == MissionState.StraightToNextMarker) &&
+            CurrentNode == from &&
+            targetRouteIndex < activeRoute.Count && activeRoute[targetRouteIndex] == to;
+        public bool IsAlignedOnEquipmentLeg(PlantNodeId from, PlantNodeId to)
+        {
+            if (!IsFollowingEquipmentLeg(from, to) || State != MissionState.FollowingLane ||
+                laneFollower == null || !laneFollower.HasUsableLane ||
+                !laneFollower.TryGetBoundaryPair(minimumPairConfidence, out HsvLaneDetector.Detection detection))
+                return false;
+
+            return Mathf.Abs(detection.lateralError) <= alignedLateralTolerance &&
+                   Mathf.Abs(detection.headingError) <= alignedHeadingTolerance;
+        }
+        public bool IsMotionRequested => State != MissionState.Idle &&
+            State != MissionState.InspectingEquipment && State != MissionState.Completed &&
+            State != MissionState.Fault;
+        private bool avoidancePaused;
+        private bool avoidanceInterruptedCurrentLeg;
+        private Vector3 pausePosition;
+        private float pauseStarted;
 
         private readonly List<PlantNodeId> activeRoute = new();
         private ActiveMission activeMission;
@@ -104,6 +141,7 @@ namespace ShipRobot.Navigation
         private int pairFrames;
         private int alignedFrames;
         private int pairLostFrames;
+        private int exitLaneRecoveryAttempts;
         private int normalLaneLostFrames;
         private int straightLossFrames;
         private int straightReacquireFrames;
@@ -112,11 +150,13 @@ namespace ShipRobot.Navigation
         private double lastStraightObservationTimestamp = -1d;
         private float desiredExitYaw;
         private float searchStartYaw;
-        private float plannedTurnSign;
         private float minimumSearchAngle;
+        private Vector3 exitLaneProbeStartPosition;
+        private bool exitLaneProbeStarted;
         private Vector3 motionStartPosition;
         private float fallbackStartTime;
         private float activeApproachDistance;
+        private float activeMinimumApproachDistance;
         private float activeApproachCommand;
         private float activeSearchTurnCommand;
         private float activeVisualMoveCommand;
@@ -134,8 +174,35 @@ namespace ShipRobot.Navigation
             laneFollower?.SetDriveEnabled(false);
         }
 
+        private void Start()
+        {
+            if (autoStartEquipmentAAndBMission && (avoidanceAgent == null || !avoidanceAgent.IsTraining))
+                StartEquipmentAAndBMission();
+        }
+
         private void Update()
         {
+            if (IsMotionRequested && avoidanceAgent != null && !avoidanceAgent.IsTraining &&
+                (avoidanceAgent.HasAvoidanceControl || laneFollower.IsSafetyStopped))
+            {
+                if (avoidanceAgent.HasAvoidanceControl)
+                    avoidanceInterruptedCurrentLeg = true;
+                if (!avoidancePaused)
+                {
+                    avoidancePaused = true;
+                    pausePosition = laneFollower.transform.position;
+                    pauseStarted = Time.time;
+                }
+                return;
+            }
+            if (avoidancePaused)
+            {
+                // Avoidance travel/time is not junction approach/fallback progress.
+                motionStartPosition += laneFollower.transform.position - pausePosition;
+                fallbackStartTime += Time.time - pauseStarted;
+                markerFrames = sideLossFrames = pairFrames = alignedFrames = normalLaneLostFrames = 0;
+                avoidancePaused = false;
+            }
             switch (State)
             {
                 case MissionState.ApproachingTurnCenter:
@@ -169,6 +236,9 @@ namespace ShipRobot.Navigation
             if (TryBeginEquipmentInspection())
                 return;
 
+            if (TryArriveAtTargetAfterAvoidance())
+                return;
+
             PlantNodeId target = activeRoute[targetRouteIndex];
             bool targetVisible = markerSource.TryGetLatestObservation(out MarkerObservation observation) &&
                                  observation.nodeId == target &&
@@ -177,15 +247,12 @@ namespace ShipRobot.Navigation
             {
                 markerFrames = 0;
                 State = MissionState.FollowingLane;
-                bool pairPresent = laneFollower.TryGetBoundaryPair(minimumPairConfidence, out _);
-                normalLaneLostFrames = pairPresent ? 0 : normalLaneLostFrames + 1;
-                statusDetail = $"Following to ID {(int)target} ({target}), pairLost={normalLaneLostFrames}/{laneLostFramesBeforeFallback}";
+                CountUnusableLaneFrames();
+                statusDetail = $"Following to ID {(int)target} ({target}), laneLost={normalLaneLostFrames}/{laneLostFramesBeforeFallback}";
                 if (normalLaneLostFrames >= laneLostFramesBeforeFallback)
-                    EnterStraightMarkerFallback(false);
+                    EnterStraightMarkerFallback();
                 return;
             }
-
-            normalLaneLostFrames = 0;
 
             float distance = observation.cameraRelativePosition.magnitude;
             statusDetail = $"ID {(int)target} visible at {distance:F2} m";
@@ -193,11 +260,10 @@ namespace ShipRobot.Navigation
             {
                 markerFrames = 0;
                 State = MissionState.FollowingLane;
-                bool pairPresent = laneFollower.TryGetBoundaryPair(minimumPairConfidence, out _);
-                normalLaneLostFrames = pairPresent ? 0 : normalLaneLostFrames + 1;
-                statusDetail = $"Target far at {distance:F2} m, pairLost={normalLaneLostFrames}/{laneLostFramesBeforeFallback}";
+                CountUnusableLaneFrames();
+                statusDetail = $"Target far at {distance:F2} m, laneLost={normalLaneLostFrames}/{laneLostFramesBeforeFallback}";
                 if (normalLaneLostFrames >= laneLostFramesBeforeFallback)
-                    EnterStraightMarkerFallback(false);
+                    EnterStraightMarkerFallback();
                 return;
             }
 
@@ -205,19 +271,28 @@ namespace ShipRobot.Navigation
             {
                 markerFrames = 0;
                 State = MissionState.FollowingLane;
-                bool pairPresent = laneFollower.TryGetBoundaryPair(minimumPairConfidence, out _);
-                normalLaneLostFrames = pairPresent ? 0 : normalLaneLostFrames + 1;
+                CountUnusableLaneFrames();
                 statusDetail = $"ID {(int)target} detected at {distance:F2} m; action at {junctionActionDistance:F2} m, " +
-                               $"pairLost={normalLaneLostFrames}/{laneLostFramesBeforeFallback}";
+                               $"laneLost={normalLaneLostFrames}/{laneLostFramesBeforeFallback}";
                 if (normalLaneLostFrames >= laneLostFramesBeforeFallback)
-                    EnterStraightMarkerFallback(false);
+                    EnterStraightMarkerFallback();
                 return;
             }
 
+            normalLaneLostFrames = 0;
             State = MissionState.ConfirmingNode;
             markerFrames++;
             if (markerFrames >= requiredMarkerFrames)
                 ArriveAtTargetNode();
+        }
+
+        private void CountUnusableLaneFrames()
+        {
+            // The mission and motor controller must agree on whether lane following
+            // can actually move the robot. A visible boundary pair alone is not enough.
+            bool laneUsable = laneFollower.HasUsableLane &&
+                              laneFollower.TryGetBoundaryPair(minimumPairConfidence, out _);
+            normalLaneLostFrames = laneUsable ? 0 : normalLaneLostFrames + 1;
         }
 
         public void StartSingleEdgeMission() =>
@@ -252,6 +327,45 @@ namespace ShipRobot.Navigation
                 ActiveMission.EquipmentA);
         }
 
+        [ContextMenu("Start Equipment A And B Mission")]
+        public void StartEquipmentAAndBMission()
+        {
+            if (missionPlanner == null || routeGraph == null ||
+                inspectionPointA1 == null || inspectionPointA2 == null)
+            {
+                Fail("Equipment A/B inspection setup is incomplete");
+                return;
+            }
+
+            if (!routeGraph.TryGetMarker(PlantNodeId.UpperLeft, out NavigationMarker leftMarker) ||
+                !routeGraph.TryGetMarker(PlantNodeId.UpperRight, out NavigationMarker rightMarker))
+            {
+                Fail("Equipment B placement requires both upper route markers");
+                return;
+            }
+
+            // The A points sit under a translated waypoint parent, so use the
+            // actual lane-to-lane offset rather than negating world X.
+            float aisleOffsetX = rightMarker.transform.position.x - leftMarker.transform.position.x;
+            if (inspectionPointB1 == null)
+                inspectionPointB1 = CreateBInspectionPoint(inspectionPointA1, "inspect_point_B1", aisleOffsetX);
+            if (inspectionPointB2 == null)
+                inspectionPointB2 = CreateBInspectionPoint(inspectionPointA2, "inspect_point_B2", aisleOffsetX);
+
+            StartRoute(
+                missionPlanner.BuildMissionRoute(PlantMission.InspectEquipmentAAndB, CurrentNode),
+                ActiveMission.EquipmentAAndB);
+        }
+
+        private static Transform CreateBInspectionPoint(Transform source, string pointName, float aisleOffsetX)
+        {
+            Transform point = Instantiate(source, source.parent);
+            point.name = pointName;
+            Vector3 position = source.position;
+            point.position = new Vector3(position.x + aisleOffsetX, position.y, position.z);
+            return point;
+        }
+
         private void StartRoute(IReadOnlyList<PlantNodeId> route, ActiveMission mission)
         {
             if (!ConnectionsReady() || route == null || route.Count < 2)
@@ -262,6 +376,7 @@ namespace ShipRobot.Navigation
             activeRoute.Clear();
             for (int i = 0; i < route.Count; i++) activeRoute.Add(route[i]);
             activeMission = mission;
+            avoidanceInterruptedCurrentLeg = false;
             CurrentNode = activeRoute[0];
             targetRouteIndex = 1;
             markerFrames = 0;
@@ -275,17 +390,30 @@ namespace ShipRobot.Navigation
 
         private bool TryBeginEquipmentInspection()
         {
-            if (activeMission != ActiveMission.EquipmentA || activeInspectionIndex >= 2)
+            int inspectionCount = activeMission == ActiveMission.EquipmentAAndB ? 4 :
+                activeMission == ActiveMission.EquipmentA ? 2 : 0;
+            if (activeInspectionIndex >= inspectionCount)
                 return false;
 
-            Transform target = activeInspectionIndex == 0 ? inspectionPointA1 : inspectionPointA2;
-            if (target == null || PlanarDistance(laneFollower.transform.position, target.position) > inspectionReachDistance)
+            Transform target = activeInspectionIndex switch
+            {
+                0 => inspectionPointA1,
+                1 => inspectionPointA2,
+                2 => inspectionPointB2,
+                _ => inspectionPointB1
+            };
+            Collider footprint = laneFollower.GetComponent<Collider>();
+            Vector3 robotCentre = footprint is BoxCollider box
+                ? laneFollower.transform.TransformPoint(box.center)
+                : laneFollower.transform.position;
+            if (target == null || PlanarDistance(robotCentre, target.position) > inspectionReachDistance)
                 return false;
 
             activeInspectionPoint = target;
             InspectionPoint point = target.GetComponent<InspectionPoint>();
             inspectionTimeRemaining = point != null ? Mathf.Max(0f, point.inspectionTime) : 3f;
             State = MissionState.InspectingEquipment;
+            avoidanceAgent?.CancelDemoAvoidance();
             statusDetail = $"Inspecting {target.name}: {inspectionTimeRemaining:F1} s";
             laneFollower.SetDriveEnabled(false);
             return true;
@@ -309,6 +437,8 @@ namespace ShipRobot.Navigation
 
         private void ArriveAtTargetNode()
         {
+            bool arrivedAfterAvoidance = avoidanceInterruptedCurrentLeg;
+            avoidanceInterruptedCurrentLeg = false;
             CurrentNode = activeRoute[targetRouteIndex];
             markerFrames = 0;
             if (targetRouteIndex >= activeRoute.Count - 1)
@@ -338,6 +468,11 @@ namespace ShipRobot.Navigation
             }
 
             ResolveManeuver(entry, CurrentNode, exit);
+            exitLaneRecoveryAttempts = 0;
+            activeMinimumApproachDistance = arrivedAfterAvoidance
+                ? Mathf.Max(minimumApproachDistance,
+                    Mathf.Min(postAvoidanceMinimumApproachDistance, activeApproachDistance - 0.1f))
+                : minimumApproachDistance;
             sideLossFrames = 0;
             lastSideObservationTimestamp = -1d;
             motionStartPosition = laneFollower.transform.position;
@@ -352,24 +487,25 @@ namespace ShipRobot.Navigation
             bool bothSidesVisible = observationFresh &&
                                     detection.leftBoundaryVisible &&
                                     detection.rightBoundaryVisible;
-            bool mayAcceptSideLoss = travelled >= minimumApproachDistance;
+            bool mayAcceptSideLoss = travelled >= activeMinimumApproachDistance;
             bool newObservation = observationFresh &&
                                   detection.timestamp > lastSideObservationTimestamp;
             if (newObservation)
             {
                 lastSideObservationTimestamp = detection.timestamp;
-                sideLossFrames = mayAcceptSideLoss && !bothSidesVisible
+                sideLossFrames = !bothSidesVisible
                     ? sideLossFrames + 1
                     : 0;
             }
 
             statusDetail =
-                $"Approach {travelled:F2}/{activeApproachDistance:F2} m, " +
+                $"Approach {travelled:F2}/{activeApproachDistance:F2} m " +
+                $"(turn after {activeMinimumApproachDistance:F2}), " +
                 $"L={(detection.leftBoundaryVisible ? detection.leftBoundaryConfidence.ToString("F2") : "NO")}, " +
                 $"R={(detection.rightBoundaryVisible ? detection.rightBoundaryConfidence.ToString("F2") : "NO")}, " +
                 $"sideLost={sideLossFrames}/{requiredSideLossFrames}";
 
-            if (sideLossFrames >= requiredSideLossFrames)
+            if (mayAcceptSideLoss && sideLossFrames >= requiredSideLossFrames)
             {
                 BeginExitLaneSearch();
                 return;
@@ -377,21 +513,41 @@ namespace ShipRobot.Navigation
 
             if (travelled >= activeApproachDistance)
             {
-                Fail($"Both entry boundaries remained visible for {activeApproachDistance:F2} m");
+                // Some corners keep both painted entry lines visible all the way
+                // to the turn centre. Use the same bounded-distance fallback at
+                // every corner instead of faulting before the turn can begin.
+                BeginExitLaneSearch();
                 return;
             }
             laneFollower.SetManualCommand(activeApproachCommand, 0f);
+        }
+
+        private bool TryGetDemoTurnCentre(PlantNodeId entry, PlantNodeId junction,
+            out Vector3 turnCentre, out Vector3 incomingDirection)
+        {
+            turnCentre = default;
+            incomingDirection = default;
+            if (!routeGraph.TryGetMarker(entry, out NavigationMarker entryMarker) ||
+                !routeGraph.TryGetMarker(junction, out NavigationMarker cornerMarker))
+                return false;
+
+            incomingDirection = Vector3.ProjectOnPlane(
+                cornerMarker.transform.position - entryMarker.transform.position, Vector3.up).normalized;
+            if (incomingDirection.sqrMagnitude < 0.5f)
+                return false;
+            turnCentre = cornerMarker.transform.position + incomingDirection * turnCentrePastMarkerDistance;
+            return true;
         }
 
         private void BeginExitLaneSearch()
         {
             searchStartYaw = laneFollower.transform.eulerAngles.y;
             float plannedAngle = Mathf.DeltaAngle(searchStartYaw, desiredExitYaw);
-            plannedTurnSign = Mathf.Abs(plannedAngle) < 1f ? 1f : Mathf.Sign(plannedAngle);
             minimumSearchAngle = Mathf.Min(minimumTurnBeforePair, Mathf.Abs(plannedAngle) * 0.45f);
             pairFrames = 0;
+            exitLaneProbeStarted = false;
             State = MissionState.SearchingExitLane;
-            laneFollower.SetManualCommand(0f, plannedTurnSign * activeSearchTurnCommand);
+            laneFollower.SetManualCommand(0f, GetExitHeadingTurnCommand(plannedAngle));
         }
 
         private void UpdateExitLaneSearch()
@@ -404,17 +560,30 @@ namespace ShipRobot.Navigation
             }
 
             bool angleReady = turned >= minimumSearchAngle;
+            float signedHeadingError = Mathf.DeltaAngle(
+                laneFollower.transform.eulerAngles.y, desiredExitYaw);
+            float headingError = Mathf.Abs(signedHeadingError);
+            bool headingReady = headingError <= Mathf.Min(exitHeadingTolerance, 12f);
             bool pairUsable = laneFollower.TryGetBoundaryPair(
                 minimumPairConfidence, out HsvLaneDetector.Detection detection);
-            bool pairVisible = angleReady && pairUsable;
+            bool pairVisible = angleReady && headingReady && pairUsable;
             pairFrames = pairVisible ? pairFrames + 1 : Mathf.Max(0, pairFrames - 1);
+            if (headingReady && !exitLaneProbeStarted)
+            {
+                exitLaneProbeStarted = true;
+                exitLaneProbeStartPosition = laneFollower.transform.position;
+            }
+            float probeDistance = exitLaneProbeStarted
+                ? PlanarDistance(exitLaneProbeStartPosition, laneFollower.transform.position)
+                : 0f;
             float effectivePairConfidence = Mathf.Max(
                 detection.boundaryPairConfidence, detection.confidence);
             statusDetail =
-                $"Search: angle {turned:F1}/{minimumSearchAngle:F1} ready={(angleReady ? "YES" : "NO")}, " +
+                $"Search: angle {turned:F1}/{minimumSearchAngle:F1}, exit yaw error={headingError:F0} " +
+                $"ready={(angleReady && headingReady ? "YES" : "NO")}, " +
                 $"pair={(detection.hasBoundaryPair ? "YES" : "NO")}, conf={detection.confidence:F2}, " +
                 $"pairConf={detection.boundaryPairConfidence:F2}, effective={effectivePairConfidence:F2}, " +
-                $"stable={pairFrames}/{requiredPairFrames}";
+                $"stable={pairFrames}/{requiredPairFrames}, probe={probeDistance:F2}/{maximumExitLaneProbeDistance:F2} m";
 
             if (pairFrames >= requiredPairFrames)
             {
@@ -424,7 +593,26 @@ namespace ShipRobot.Navigation
                 State = MissionState.VisualAlign;
                 return;
             }
-            laneFollower.SetManualCommand(0f, plannedTurnSign * activeSearchTurnCommand);
+            if (probeDistance >= maximumExitLaneProbeDistance)
+            {
+                Fail($"Exit lane not visible after {probeDistance:F2} m at the planned heading");
+                return;
+            }
+
+            if (headingReady)
+                laneFollower.SetManualCommand(exitLaneProbeCommand, 0f);
+            else
+                laneFollower.SetManualCommand(0f, GetExitHeadingTurnCommand(signedHeadingError));
+        }
+
+        private float GetExitHeadingTurnCommand(float headingError)
+        {
+            if (Mathf.Abs(headingError) <= 8f)
+                return 0f;
+            float magnitude = Mathf.Clamp(
+                Mathf.Abs(headingError) / 45f * activeSearchTurnCommand,
+                Mathf.Min(0.10f, activeSearchTurnCommand), activeSearchTurnCommand);
+            return Mathf.Sign(headingError) * magnitude;
         }
 
         private void UpdateVisualAlignment()
@@ -443,11 +631,18 @@ namespace ShipRobot.Navigation
                 statusDetail = $"Boundary pair lost {pairLostFrames}/{pairLostFrameLimit}";
                 if (pairLostFrames > pairLostFrameLimit)
                 {
-                    EnterStraightMarkerFallback(true);
+                    if (exitLaneRecoveryAttempts >= maximumExitLaneRecoveryAttempts)
+                    {
+                        Fail($"Exit lane was not recovered after {exitLaneRecoveryAttempts} searches");
+                        return;
+                    }
+                    exitLaneRecoveryAttempts++;
+                    BeginExitLaneSearch();
+                    statusDetail = $"Re-searching exit lane ({exitLaneRecoveryAttempts}/{maximumExitLaneRecoveryAttempts})";
                 }
                 else
                 {
-                    laneFollower.SetManualCommand(activeVisualMoveCommand * 0.35f, 0f);
+                    laneFollower.SetManualCommand(0f, 0f);
                 }
                 return;
             }
@@ -494,6 +689,14 @@ namespace ShipRobot.Navigation
 
         private void UpdateStraightThroughJunction()
         {
+            if (activeMission == ActiveMission.EquipmentAAndB &&
+                CurrentNode == PlantNodeId.UnderMid &&
+                activeRoute[targetRouteIndex] == PlantNodeId.UnderRight)
+            {
+                UpdateRightBottomMarkerApproach();
+                return;
+            }
+
             float travelled = PlanarDistance(motionStartPosition, laneFollower.transform.position);
             if (travelled >= maximumStraightTravel)
             {
@@ -552,18 +755,50 @@ namespace ShipRobot.Navigation
             laneFollower.SetManualCommand(straightJunctionCommand, 0f);
         }
 
-        private void EnterStraightMarkerFallback(bool advanceToNextRouteNode)
+        private void UpdateRightBottomMarkerApproach()
         {
-            if (advanceToNextRouteNode)
+            if (!TryGetDemoTurnCentre(PlantNodeId.UnderMid, PlantNodeId.UnderRight,
+                    out Vector3 turnCentre, out Vector3 incomingDirection))
             {
-                if (targetRouteIndex >= activeRoute.Count - 1)
-                {
-                    CompleteMission();
-                    return;
-                }
-                targetRouteIndex++;
+                Fail("Right-bottom turn centre is missing");
+                return;
             }
 
+            Collider footprint = laneFollower.GetComponent<Collider>();
+            Vector3 robotCentre = footprint is BoxCollider box
+                ? laneFollower.transform.TransformPoint(box.center)
+                : laneFollower.transform.position;
+            Vector3 toCentre = turnCentre - robotCentre;
+            toCentre.y = 0f;
+            float travelled = PlanarDistance(motionStartPosition, robotCentre);
+            if (travelled >= rightBottomMaximumApproachDistance)
+            {
+                Fail($"Right-bottom turn centre was not reached within {rightBottomMaximumApproachDistance:F1} m");
+                return;
+            }
+
+            float remainingAlong = Vector3.Dot(toCentre, incomingDirection);
+            float lateralDistance = (toCentre - incomingDirection * remainingAlong).magnitude;
+            if (toCentre.magnitude <= junctionActionDistance ||
+                (remainingAlong <= 0f && lateralDistance <= junctionActionDistance))
+            {
+                ArriveAtTargetNode();
+                return;
+            }
+
+            float headingError = Vector3.SignedAngle(laneFollower.transform.forward, toCentre, Vector3.up);
+            float turn = Mathf.Clamp(headingError / 70f * activeSearchTurnCommand,
+                -activeSearchTurnCommand, activeSearchTurnCommand);
+            float move = Mathf.Abs(headingError) > 40f
+                ? 0f
+                : straightJunctionCommand * Mathf.Lerp(1f, 0.45f, Mathf.Abs(headingError) / 40f);
+            statusDetail = $"Guided to right-bottom turn centre: {toCentre.magnitude:F2} m, " +
+                           $"heading {headingError:F0} deg, travelled {travelled:F1} m";
+            laneFollower.SetManualCommand(move, turn);
+        }
+
+        private void EnterStraightMarkerFallback()
+        {
             markerFrames = 0;
             normalLaneLostFrames = 0;
             motionStartPosition = laneFollower.transform.position;
@@ -576,6 +811,8 @@ namespace ShipRobot.Navigation
 
         private void UpdateStraightToNextMarker()
         {
+            if (TryArriveAtTargetAfterAvoidance())
+                return;
             float travelled = PlanarDistance(motionStartPosition, laneFollower.transform.position);
             float elapsed = Time.time - fallbackStartTime;
             if (travelled >= maximumFallbackDistance || elapsed >= maximumFallbackSeconds)
@@ -585,6 +822,25 @@ namespace ShipRobot.Navigation
             }
 
             PlantNodeId target = activeRoute[targetRouteIndex];
+            if (avoidanceInterruptedCurrentLeg && routeGraph.TryGetMarker(target, out NavigationMarker targetMarker))
+            {
+                // After PPO moves the robot sideways, driving straight may never put
+                // the floor marker back in the camera. Use the simulator's route
+                // marker position until close enough to resume the original approach.
+                Collider footprint = laneFollower.GetComponent<Collider>();
+                Vector3 robotCentre = footprint is BoxCollider box
+                    ? laneFollower.transform.TransformPoint(box.center)
+                    : laneFollower.transform.position;
+                Vector3 toMarker = targetMarker.transform.position - robotCentre;
+                toMarker.y = 0f;
+                float headingError = Vector3.SignedAngle(laneFollower.transform.forward, toMarker, Vector3.up);
+                float move = Mathf.Abs(headingError) <= 35f ? fallbackStraightCommand : 0f;
+                float turn = Mathf.Clamp(headingError / 90f, -searchTurnCommand, searchTurnCommand);
+                statusDetail = $"Returning to marker ID {(int)target} after avoidance: " +
+                               $"{toMarker.magnitude:F1} m, heading {headingError:F0} deg";
+                laneFollower.SetManualCommand(move, turn);
+                return;
+            }
             bool visible = markerSource.TryGetLatestObservation(out MarkerObservation observation) &&
                            observation.nodeId == target &&
                            observation.confidence >= minimumMarkerConfidence;
@@ -609,6 +865,29 @@ namespace ShipRobot.Navigation
             laneFollower.SetManualCommand(fallbackStraightCommand * 0.5f, 0f);
             if (markerFrames >= requiredMarkerFrames)
                 ArriveAtTargetNode();
+        }
+
+        private bool TryArriveAtTargetAfterAvoidance()
+        {
+            if (!avoidanceInterruptedCurrentLeg || targetRouteIndex >= activeRoute.Count ||
+                !routeGraph.TryGetMarker(activeRoute[targetRouteIndex], out NavigationMarker marker))
+                return false;
+
+            Collider footprint = laneFollower.GetComponent<Collider>();
+            Vector3 robotCentre = footprint is BoxCollider box
+                ? laneFollower.transform.TransformPoint(box.center)
+                : laneFollower.transform.position;
+            if (PlanarDistance(robotCentre, marker.transform.position) > junctionActionDistance)
+                return false;
+
+            markerFrames++;
+            statusDetail = $"Reacquired route at ID {(int)activeRoute[targetRouteIndex]} after avoidance, " +
+                           $"confirm={markerFrames}/{requiredMarkerFrames}";
+            if (markerFrames >= requiredMarkerFrames)
+            {
+                ArriveAtTargetNode();
+            }
+            return true;
         }
 
         private void ResolveManeuver(PlantNodeId entry, PlantNodeId junction, PlantNodeId exit)
@@ -668,6 +947,7 @@ namespace ShipRobot.Navigation
             activeRoute.Clear();
             activeMission = ActiveMission.None;
             State = MissionState.Idle;
+            avoidanceInterruptedCurrentLeg = false;
             normalLaneLostFrames = 0;
             activeInspectionIndex = 0;
             activeInspectionPoint = null;
@@ -677,9 +957,11 @@ namespace ShipRobot.Navigation
 
         private void CompleteMission()
         {
-            if (activeMission == ActiveMission.EquipmentA && activeInspectionIndex < 2)
+            int requiredInspections = activeMission == ActiveMission.EquipmentAAndB ? 4 :
+                activeMission == ActiveMission.EquipmentA ? 2 : 0;
+            if (activeInspectionIndex < requiredInspections)
             {
-                Fail($"Equipment A mission reached the route end with only {activeInspectionIndex}/2 inspections completed");
+                Fail($"Equipment mission reached the route end with only {activeInspectionIndex}/{requiredInspections} inspections completed");
                 return;
             }
 
@@ -721,21 +1003,13 @@ namespace ShipRobot.Navigation
         {
             if (!showMissionPanel) return;
             EnsureStyles();
-            Rect panel = new Rect(10f, Screen.height - 198f, 500f, 188f);
+            Rect panel = new Rect(10f, Screen.height - 90f, 500f, 80f);
             GUI.Box(panel, GUIContent.none);
             GUI.Label(new Rect(panel.x + 10f, panel.y + 7f, panel.width - 20f, 22f),
-                $"MISSION: {activeMission}   State: {State}", titleStyle);
-            GUI.Label(new Rect(panel.x + 10f, panel.y + 31f, panel.width - 20f, 55f),
+                $"MISSION: {activeMission}   State: {State}" +
+                (avoidancePaused ? " [PPO / ADAS]" : ""), titleStyle);
+            GUI.Label(new Rect(panel.x + 10f, panel.y + 31f, panel.width - 20f, 44f),
                 $"{statusDetail}\nRoute: {RouteText()}", statusStyle);
-            bool canStart = State == MissionState.Idle || State == MissionState.Completed || State == MissionState.Fault;
-            if (canStart && GUI.Button(new Rect(panel.x + 10f, panel.y + 92f, 230f, 27f), "START SINGLE 6 -> 3"))
-                StartSingleEdgeMission();
-            if (canStart && GUI.Button(new Rect(panel.x + 255f, panel.y + 92f, 230f, 27f), "START PERIMETER"))
-                StartPerimeterMission();
-            if (canStart && GUI.Button(new Rect(panel.x + 10f, panel.y + 123f, 475f, 27f), "START EQUIPMENT A INSPECTION"))
-                StartEquipmentAMission();
-            if (State != MissionState.Idle && GUI.Button(new Rect(panel.x + 10f, panel.y + 155f, 475f, 25f), "RESET / STOP"))
-                ResetMission();
         }
 
         private void EnsureStyles()

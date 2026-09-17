@@ -49,9 +49,23 @@ namespace ShipRobot.Navigation
                     return ConnectCurrentNode(currentNode, new[]
                     {
                         PlantNodeId.UnderMid,
-                        PlantNodeId.UpperMid,
-                        PlantNodeId.UpperRight,
                         PlantNodeId.UnderRight,
+                        PlantNodeId.UpperRight,
+                        PlantNodeId.UpperMid,
+                        PlantNodeId.UnderMid
+                    });
+
+                case PlantMission.InspectEquipmentAAndB:
+                    return ConnectCurrentNode(currentNode, new[]
+                    {
+                        PlantNodeId.UnderMid,
+                        PlantNodeId.UpperMid,
+                        PlantNodeId.UpperLeft,
+                        PlantNodeId.UnderLeft,
+                        PlantNodeId.UnderMid,
+                        PlantNodeId.UnderRight,
+                        PlantNodeId.UpperRight,
+                        PlantNodeId.UpperMid,
                         PlantNodeId.UnderMid
                     });
 
