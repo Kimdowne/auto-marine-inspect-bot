@@ -1,0 +1,224 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Warehouse/UI/UITK/IndustrialDashboard.uss?fileID=7433441132597879392&amp;guid=77078c07febda4d1fa5407352b65a670&amp;type=3#IndustrialDashboard"/>
+    <ui:VisualElement name="Root" class="root">
+        <ui:VisualElement name="MainContainer" class="main-container">
+            <ui:VisualElement name="TopBar" class="top-bar">
+                <ui:VisualElement name="StatusIndicator" class="mini-box">
+                    <ui:VisualElement name="StandardDot" class="status-dot status-running"/>
+                    <ui:Label name="StandardCountLabel" text="0" class="metric metric-success" style="align-self: auto; color: rgb(0, 213, 99);">
+                        <Bindings>
+                            <ui:DataBinding property="text" data-source-path="standardStatusBotCount" data-source="project://database/Assets/Warehouse/RobotData/OverallData.asset?fileID=11400000&amp;guid=03583e393ed174263b60013b9bb10937&amp;type=2#OverallData" binding-mode="ToTarget"/>
+                        </Bindings>
+                    </ui:Label>
+                    <ui:Label name="StandardLabel" text="RUNNING" class="metric metric-success" style="color: rgb(0, 213, 99);"/>
+                    <ui:VisualElement name="Separator" class="status-separator"/>
+                    <ui:VisualElement name="WarningDot" class="status-dot status-warning"/>
+                    <ui:Label name="WarningCountLabel" text="2" class="metric metric-warning">
+                        <Bindings>
+                            <ui:DataBinding property="text" data-source-path="warningStatusBotCount" data-source="project://database/Assets/Warehouse/RobotData/OverallData.asset?fileID=11400000&amp;guid=03583e393ed174263b60013b9bb10937&amp;type=2#OverallData" binding-mode="ToTarget"/>
+                        </Bindings>
+                    </ui:Label>
+                    <ui:Label name="WarningLabel" text="WARNINGS" class="metric metric-warning"/>
+                    <ui:VisualElement name="Separator" class="status-separator"/>
+                    <ui:VisualElement name="CriticalDot" class="status-dot status-critical"/>
+                    <ui:Label name="CriticalCountLabel" text="3" class="metric-critical metric">
+                        <Bindings>
+                            <ui:DataBinding property="text" data-source-path="criticalStatusBotCount" data-source="project://database/Assets/Warehouse/RobotData/OverallData.asset?fileID=11400000&amp;guid=03583e393ed174263b60013b9bb10937&amp;type=2#OverallData" binding-mode="ToTarget"/>
+                        </Bindings>
+                    </ui:Label>
+                    <ui:Label name="CriticalLabel" text="CRITICAL" class="metric-critical metric"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="RightControls" class="right-controls">
+                    <ui:VisualElement name="Volume" class="mini-box">
+                        <ui:Slider label="AUDIO VOLUME" high-value="0" low-value="-80" fill="true" class="audio-volume-slider"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="SystemTime" class="system-time">
+                        <ui:Label text="SYSTEM TIME" class="time-label"/>
+                        <ui:Label name="TimeValue" text="14:23:45" class="time-value"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="ContentArea" class="content-area">
+                <ui:VisualElement name="LeftColumn" class="column-left">
+                    <ui:VisualElement name="LeftPanel" class="panel panel-left">
+                        <ui:VisualElement name="PipelineHeader" class="panel-header">
+                            <ui:Label text="Active Robots" class="panel-title"/>
+                            <ui:Label name="PipelineSubtitle" class="panel-subtitle" style="display: none;"/>
+                        </ui:VisualElement>
+                        <ui:ScrollView name="RobotsListView" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" class="robots-scroll-view"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="CenterColumn" class="panel column-center" style="background-color: rgba(37, 41, 50, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;">
+                    <ui:VisualElement name="Spacer" class="column-center-spacer"/>
+                    <ui:VisualElement name="SecurityCam" class="security-cam"/>
+                    <ui:VisualElement name="CenterPanel" class="panel-center">
+                        <ui:VisualElement name="QualityInspection" class="quality-inspection">
+                            <ui:VisualElement name="InspectionHeader" class="inspection-header">
+                                <ui:VisualElement class="inspection-title-section">
+                                    <ui:VisualElement name="QualityInspectionIcon" class="quality-inspection-icon"/>
+                                    <ui:VisualElement class="inspection-title-text">
+                                        <ui:Label text="Quality Inspection" class="inspection-title"/>
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="InspectionView" class="inspection-view">
+                                <ui:VisualElement name="RobotMiniMap" class="minimap" style="background-image: url(&quot;project://database/Assets/Warehouse/Textures/rendertextures/MiniMapViewRT.renderTexture?fileID=8400000&amp;guid=6b9adeaa6b73aec488cff8a24fc03769&amp;type=2#MiniMapViewRT&quot;); -unity-background-scale-mode: scale-to-fit;">
+                                    <ui:VisualElement name="ScanLine" class="scan-line"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement name="EmptySpace" style="width: 100px;"/>
+                                <ui:VisualElement name="RecentResults" class="recent-results">
+                                    <ui:VisualElement class="result-card result-pass">
+                                        <ui:VisualElement class="result-footer">
+                                            <ui:Label text="AVERAGE BATTERY" class="result-label"/>
+                                            <ui:Label text="98%" class="result-confidence">
+                                                <Bindings>
+                                                    <ui:DataBinding property="text" data-source-path="AverageBattery" data-source="project://database/Assets/Warehouse/RobotData/OverallData.asset?fileID=11400000&amp;guid=03583e393ed174263b60013b9bb10937&amp;type=2#OverallData" binding-mode="ToTarget" source-to-ui-converters="ToPercentageDirect"/>
+                                                </Bindings>
+                                            </ui:Label>
+                                        </ui:VisualElement>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement class="result-card result-pass">
+                                        <ui:VisualElement class="result-footer">
+                                            <ui:Label text="MOVING ROBOTS" class="result-label"/>
+                                            <ui:Label text="98%" class="result-confidence">
+                                                <Bindings>
+                                                    <ui:DataBinding property="text" data-source-path="MovingRobotsCount" data-source="project://database/Assets/Warehouse/RobotData/OverallData.asset?fileID=11400000&amp;guid=03583e393ed174263b60013b9bb10937&amp;type=2#OverallData" binding-mode="ToTarget" source-to-ui-converters="Range 0-100 → Percent"/>
+                                                </Bindings>
+                                            </ui:Label>
+                                        </ui:VisualElement>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement class="result-card result-pass">
+                                        <ui:VisualElement class="result-footer">
+                                            <ui:Label text="AVERAGE SPEED" class="result-label"/>
+                                            <ui:Label text="98%" class="result-confidence">
+                                                <Bindings>
+                                                    <ui:DataBinding property="text" data-source-path="AverageSpeed" data-source="project://database/Assets/Warehouse/RobotData/OverallData.asset?fileID=11400000&amp;guid=03583e393ed174263b60013b9bb10937&amp;type=2#OverallData" binding-mode="ToTarget" source-to-ui-converters="TwoDecimals"/>
+                                                </Bindings>
+                                            </ui:Label>
+                                        </ui:VisualElement>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement class="result-card result-pass">
+                                        <ui:VisualElement class="result-footer">
+                                            <ui:Label text="TOTAL ROBOTS" class="result-label"/>
+                                            <ui:Label text="98%" class="result-confidence">
+                                                <Bindings>
+                                                    <ui:DataBinding property="text" data-source-path="TotalRobots" data-source="project://database/Assets/Warehouse/RobotData/OverallData.asset?fileID=11400000&amp;guid=03583e393ed174263b60013b9bb10937&amp;type=2#OverallData" binding-mode="ToTarget" source-to-ui-converters="Range 0-100 → Percent"/>
+                                                </Bindings>
+                                            </ui:Label>
+                                        </ui:VisualElement>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement class="result-card result-pass" style="margin-bottom: 0;">
+                                        <ui:VisualElement class="result-footer">
+                                            <ui:Label text="AVERAGE TEMPERATURE" class="result-label"/>
+                                            <ui:Label text="98%" class="result-confidence">
+                                                <Bindings>
+                                                    <ui:DataBinding property="text" data-source-path="AverageTemperature" data-source="project://database/Assets/Warehouse/RobotData/OverallData.asset?fileID=11400000&amp;guid=03583e393ed174263b60013b9bb10937&amp;type=2#OverallData" binding-mode="ToTarget" source-to-ui-converters="TwoDecimals"/>
+                                                </Bindings>
+                                            </ui:Label>
+                                        </ui:VisualElement>
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="RightColumn" class="column-right">
+                    <ui:VisualElement name="RightPanel" data-source="project://database/Assets/Warehouse/RobotData/RobotData_01.asset?fileID=11400000&amp;guid=03b3ac356e1504e3690291d7a0f03726&amp;type=2#RobotData_01" class="panel panel-right" style="display: flex;">
+                        <ui:VisualElement name="ConfigHeader" class="panel-header">
+                            <ui:VisualElement name="NameBlock" class="config-header-content">
+                                <ui:VisualElement name="SettingsIcon" class="settings-icon"/>
+                                <ui:Label text="C-3PO" name="RobotName" class="panel-title">
+                                    <Bindings>
+                                        <ui:DataBinding property="text" data-source-path="robotName" binding-mode="ToTarget"/>
+                                    </Bindings>
+                                </ui:Label>
+                            </ui:VisualElement>
+                            <ui:Label text="MANUAL SETTINGS" parse-escape-sequences="true" name="Subtitle" class="config-name"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="ConfigControls" class="config-controls">
+                            <ui:VisualElement class="config-slider">
+                                <ui:VisualElement class="slider-header">
+                                    <ui:VisualElement class="slider-label-container">
+                                        <ui:VisualElement class="slider-icon" style="background-image: url(&quot;project://database/Assets/Warehouse/UI/Icons/Phosphor/speedometer-fill.png?fileID=2800000&amp;guid=6a10dea2f457341e099c7d13e9642d2a&amp;type=3#speedometer-fill&quot;);"/>
+                                        <ui:Label text="SPEED" class="slider-label"/>
+                                    </ui:VisualElement>
+                                    <ui:Label text="75%" class="slider-value">
+                                        <Bindings>
+                                            <ui:DataBinding property="text" data-source-path="TurboMultiplier" binding-mode="ToTarget" source-to-ui-converters="TwoDecimals"/>
+                                        </Bindings>
+                                    </ui:Label>
+                                </ui:VisualElement>
+                                <ui:Slider name="SpeedSlider" fill="true" class="custom-slider slider-locked">
+                                    <Bindings>
+                                        <ui:DataBinding property="value" data-source-path="TurboMultiplier"/>
+                                    </Bindings>
+                                </ui:Slider>
+                                <ui:VisualElement class="slider-range">
+                                    <ui:Label text="0%" class="range-label"/>
+                                    <ui:Label text="100%" class="range-label"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="config-slider">
+                                <ui:VisualElement class="slider-header">
+                                    <ui:VisualElement class="slider-label-container">
+                                        <ui:VisualElement class="slider-icon" style="background-image: url(&quot;project://database/Assets/Warehouse/UI/Icons/Phosphor/arrow-fat-lines-right-fill.png?fileID=2800000&amp;guid=1f303b0b1df81423a8c6f15956b4f297&amp;type=3#arrow-fat-lines-right-fill&quot;);"/>
+                                        <ui:Label text="ARMRANGE" enable-rich-text="false" class="slider-label"/>
+                                    </ui:VisualElement>
+                                    <ui:Label text="92%" class="slider-value">
+                                        <Bindings>
+                                            <ui:DataBinding property="text" data-source-path="ArmRange" binding-mode="ToTarget" source-to-ui-converters="ToPercentageX100"/>
+                                        </Bindings>
+                                    </ui:Label>
+                                </ui:VisualElement>
+                                <ui:Slider name="ArmSlider" high-value="1" value="92" fill="true" class="custom-slider slider-locked">
+                                    <Bindings>
+                                        <ui:DataBinding property="value" data-source-path="ArmRange"/>
+                                    </Bindings>
+                                </ui:Slider>
+                                <ui:VisualElement class="slider-range">
+                                    <ui:Label text="0%" class="range-label"/>
+                                    <ui:Label text="100%" class="range-label"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="config-slider">
+                                <ui:VisualElement class="slider-header">
+                                    <ui:VisualElement class="slider-label-container">
+                                        <ui:VisualElement class="slider-icon" style="background-image: url(&quot;project://database/Assets/Warehouse/UI/Icons/Phosphor/swap-fill.png?fileID=2800000&amp;guid=5fa28b871f2f845178570fee9f14b606&amp;type=3#swap-fill&quot;);"/>
+                                        <ui:Label text="VARIANT SWITCHER" enable-rich-text="false" class="slider-label"/>
+                                    </ui:VisualElement>
+                                    <ui:Label text="VARIANT 1" name="VariantNameLabel" class="slider-value" style="width: 100px;">
+                                        <Bindings>
+                                            <ui:DataBinding property="text" data-source-path="currentVariant" binding-mode="ToTarget" source-to-ui-converters="Int To &quot;Variant X&quot;"/>
+                                        </Bindings>
+                                    </ui:Label>
+                                </ui:VisualElement>
+                                <ui:VisualElement name="VariantSwitcherBtn" enabled="false" class="btn btn-robot-variant">
+                                    <ui:VisualElement name="SwitchVariantIcon" class="switch-variant-icon"/>
+                                    <ui:Label name="StatusLabel" text="SWITCH ROBOT VARIANT" class="btn-label"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="WarningMessage" class="warning-message" style="display: none;">
+                                <ui:Label text="Configuration locked while system is running" class="warning-text"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="ManualModeWarning" style="flex-direction: row; justify-content: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+                            <ui:Label text="&lt;b&gt;&lt;color=#4A9EFFFF&gt;Note:&lt;/color&gt;&lt;/b&gt; Manual mode disables autonomous navigation. The robot only moves with WASD, and the variant switcher becomes available." class="manual-mode-warning-label"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="ModeControllers" class="mode-controllers">
+                            <ui:VisualElement style="flex-grow: 0; flex-direction: row; flex-wrap: nowrap; align-self: center;">
+                                <ui:VisualElement name="ModeAutoBtn" class="btn">
+                                    <ui:VisualElement name="Dot" class="status-dot status-auto-mode"/>
+                                    <ui:Label text="AUTO" class="btn-label"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement name="ModeManualBtn" class="btn">
+                                    <ui:VisualElement name="Dot" class="status-dot status-manual-mode"/>
+                                    <ui:Label text="MANUAL" class="btn-label"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-8655643411575218601
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_25_{-8655643411575218601}
+  m_AudioClip: {fileID: 8300000, guid: 67b56d496ca214172bd18ef0936f9e3a, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-8256617626268950596
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_27_{-8256617626268950596}
+  m_AudioClip: {fileID: 8300000, guid: e79a1a2600bcb45479118407f57920e3, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7826080887807347935
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_33_{-7826080887807347935}
+  m_AudioClip: {fileID: 8300000, guid: bf3cfcff3b4374ad09537b2c63a10ec0, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7404234158318830405
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_31_{-7404234158318830405}
+  m_AudioClip: {fileID: 8300000, guid: 3c92302bc545741ec818ec324be65a5b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7285776736932733499
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_20_{-7285776736932733499}
+  m_AudioClip: {fileID: 8300000, guid: a8b000630bb6949bab32f27452cb736e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6255192884795574230
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_32_{-6255192884795574230}
+  m_AudioClip: {fileID: 8300000, guid: 2928e32e544714c3bb1f71034cda81c9, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5805983797835673218
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_30_{-5805983797835673218}
+  m_AudioClip: {fileID: 8300000, guid: f3a30cf7ba192479d9ca5925da7b490a, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5638087871829260367
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_34_{-5638087871829260367}
+  m_AudioClip: {fileID: 8300000, guid: b6e69124ac1b04933a82f3e8b7886836, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5226112120288905962
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_18_{-5226112120288905962}
+  m_AudioClip: {fileID: 8300000, guid: 98bfed03d99b6453396378c1168cde29, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3300740334614647745
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_19_{-3300740334614647745}
+  m_AudioClip: {fileID: 8300000, guid: 53ab810aa88ae4f6a993ed7d4d453d6e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1830181067082403257
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_26_{-1830181067082403257}
+  m_AudioClip: {fileID: 8300000, guid: d4cd39da452ad4426892cd6682eef759, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1572007761417837589
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_22_{-1572007761417837589}
+  m_AudioClip: {fileID: 8300000, guid: 95d78bb9773e7413a85d1483dc49a6af, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &2259213829344757673
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_16_bip_1_{2259213829344757673}
+  m_AudioClip: {fileID: 8300000, guid: 358d3af63c6c94ddc85541f764507ac6, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &2682869466415780947
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_21_{2682869466415780947}
+  m_AudioClip: {fileID: 8300000, guid: f6d8b953750874d78a208d27dd228226, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3724634729602267659
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_24_{3724634729602267659}
+  m_AudioClip: {fileID: 8300000, guid: e0ecc030306d64a59b0f9555f09711d8, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3785536417297378147
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_28_{3785536417297378147}
+  m_AudioClip: {fileID: 8300000, guid: eda5943a8cde54245996d02702573f0a, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5057654026870481154
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_23_{5057654026870481154}
+  m_AudioClip: {fileID: 8300000, guid: e3dabeee954824d8e854042183583523, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSoundsReverb
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 5
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -5, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 1}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 8550833988088510004}
+  - {fileID: 2259213829344757673}
+  - {fileID: -5226112120288905962}
+  - {fileID: -3300740334614647745}
+  - {fileID: -7285776736932733499}
+  - {fileID: 2682869466415780947}
+  - {fileID: -1572007761417837589}
+  - {fileID: 5057654026870481154}
+  - {fileID: 3724634729602267659}
+  - {fileID: -8655643411575218601}
+  - {fileID: -1830181067082403257}
+  - {fileID: -8256617626268950596}
+  - {fileID: 3785536417297378147}
+  - {fileID: 7607388363658833244}
+  - {fileID: -5805983797835673218}
+  - {fileID: -7404234158318830405}
+  - {fileID: -6255192884795574230}
+  - {fileID: -7826080887807347935}
+  - {fileID: -5638087871829260367}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 0
+  m_LoopMode: 0
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 1
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7607388363658833244
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_29_{7607388363658833244}
+  m_AudioClip: {fileID: 8300000, guid: 68512ded221d5447391d7beb73ada6e2, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &8550833988088510004
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotSounds_15_{8550833988088510004}
+  m_AudioClip: {fileID: 8300000, guid: 3e77ce9f23ca8436c9aee8698c53ce26, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

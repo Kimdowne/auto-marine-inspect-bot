@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-6071619786116135266
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Beeptype2_4_{-6071619786116135266}
+  m_AudioClip: {fileID: 8300000, guid: fda6261e7fe084a8998a8164a7c92f37, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4521074878338219333
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Beeptype1_3_{-4521074878338219333}
+  m_AudioClip: {fileID: 8300000, guid: fbec2c86626a64e71a68a61c03ab2075, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2166423719926799519
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Beeptype2_2_{-2166423719926799519}
+  m_AudioClip: {fileID: 8300000, guid: 00e8340fc84ed44ddbc8040dc1179a0b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1990228135541220392
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Beeptype1_4_{-1990228135541220392}
+  m_AudioClip: {fileID: 8300000, guid: 7ead64aaf181348f09751b3b736cadeb, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1007767964385058729
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Beeptype2_3_{-1007767964385058729}
+  m_AudioClip: {fileID: 8300000, guid: 6de9e137cd80748f58095fdc8d7e9954, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-747349971327693998
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Beeptype2_1_{-747349971327693998}
+  m_AudioClip: {fileID: 8300000, guid: 8f6cc6aa254004036afc4ece93d87588, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BeepType1
+  m_Volume: -10.5
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 5
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -6.8817186, y: 0}
+  m_PitchRandomizationRange: {x: -100, y: 100}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 6.451614}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 7575290551573409581}
+  - {fileID: 7982294450118519134}
+  - {fileID: -4521074878338219333}
+  - {fileID: -1990228135541220392}
+  - {fileID: -747349971327693998}
+  - {fileID: -2166423719926799519}
+  - {fileID: -1007767964385058729}
+  - {fileID: -6071619786116135266}
+  m_AvoidRepeatingLast: 3
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 0
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 1
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7575290551573409581
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Beeptype1_1_{7575290551573409581}
+  m_AudioClip: {fileID: 8300000, guid: b575468c5639e463db6bdd8a2ad1d16f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &7982294450118519134
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Beeptype1_2_{7982294450118519134}
+  m_AudioClip: {fileID: 8300000, guid: 7958055db01c74b98a89e5d484f140b8, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

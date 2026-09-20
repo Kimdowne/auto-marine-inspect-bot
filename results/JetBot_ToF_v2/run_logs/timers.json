@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1787227030",
+        "python_version": "3.10.9 (tags/v3.10.9:1dd9be6, Dec  6 2022, 20:01:21) [MSC v.1934 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\kimsumi\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\mlagents-learn config/jetbot_ppo.yaml --run-id=JetBot_ToF_v2 --force",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.13.0+cpu",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1787227055"
+    },
+    "total": 25.264897799992468,
+    "count": 1,
+    "self": 0.003916699963156134,
+    "children": {
+        "run_training.setup": {
+            "total": 0.05357380001805723,
+            "count": 1,
+            "self": 0.05357380001805723
+        },
+        "TrainerController.start_learning": {
+            "total": 25.207407300011255,
+            "count": 1,
+            "self": 0.00032189994817599654,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 25.207074300036766,
+                    "count": 1,
+                    "self": 25.207074300036766
+                },
+                "trainer_threads": {
+                    "total": 7.00005330145359e-07,
+                    "count": 1,
+                    "self": 7.00005330145359e-07
+                },
+                "TrainerController._save_models": {
+                    "total": 1.0400020983070135e-05,
+                    "count": 1,
+                    "self": 1.0400020983070135e-05
+                }
+            }
+        }
+    }
+}

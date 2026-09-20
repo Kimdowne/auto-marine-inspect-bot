@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d367811be414fa5ad6c25b4641ac413, type: 3}
+  m_Name: RobotData_03
+  m_EditorClassIdentifier: Assembly-CSharp::RobotDataStorage
+  robotName: MotoBot UMA
+  OperationMode: 0
+  CurrentRobotStatus: 0
+  currentVariant: 0
+  Battery: 100
+  Health: 100
+  Temperature: 0
+  Speed: 1
+  ArmRange: 0
+  IsMoving: 0
+  TurboMultiplier: 1
+  SpeedUsageCost: 0.01
+  ArmUsageCost: 0.05
+  BaseSpeed: 2
+  HealthWarningThreshold: 60
+  HealthCriticalThreshold: 30
+  BatteryWarningThreshold: 50
+  BatteryCriticalThreshold: 20
+  LowBatteryThreshold: 10
+  LowBatteryHealthLossPerSecond: 1
+  CollisionDamage: 10
+  CollisionCount: 2

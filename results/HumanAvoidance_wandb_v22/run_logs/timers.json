@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1788525760",
+        "python_version": "3.10.9 (tags/v3.10.9:1dd9be6, Dec  6 2022, 20:01:21) [MSC v.1934 64 bit (AMD64)]",
+        "command_line_arguments": ".\\tools\\train_human_avoidance_wandb.py .\\config\\human_avoidance_ppo.yaml --run-id=HumanAvoidance_wandb_v22 --env=.\\Builds\\HumanAvoidanceTraining\\ShipRobotTraining.exe",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.13.0+cpu",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1788525770"
+    },
+    "total": 9.995615700026974,
+    "count": 1,
+    "self": 0.005252800008747727,
+    "children": {
+        "run_training.setup": {
+            "total": 0.07170919998316094,
+            "count": 1,
+            "self": 0.07170919998316094
+        },
+        "TrainerController.start_learning": {
+            "total": 9.918653700035065,
+            "count": 1,
+            "self": 0.0005291000124998391,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 9.918109800026286,
+                    "count": 1,
+                    "self": 9.918109800026286
+                },
+                "trainer_threads": {
+                    "total": 1.00000761449337e-06,
+                    "count": 1,
+                    "self": 1.00000761449337e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 1.379998866468668e-05,
+                    "count": 1,
+                    "self": 1.379998866468668e-05
+                }
+            }
+        }
+    }
+}

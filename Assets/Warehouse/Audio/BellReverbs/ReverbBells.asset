@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-8074636847660096451
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ES_Alarm Loop 08 - Epidemic Sound - 0000-0897_1_{-8074636847660096451}
+  m_AudioClip: {fileID: 8300000, guid: 51fff21769a6c47d28604203e917ba68, type: 3}
+  m_Volume: -5
+  m_Enabled: 1
+--- !u!1233149941 &-3184592945417110184
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ES_Alarms 04 - Epidemic Sound - 0000-3205_1_{-3184592945417110184}
+  m_AudioClip: {fileID: 8300000, guid: 32f77f37420954467964b253ef346c40, type: 3}
+  m_Volume: -5
+  m_Enabled: 0
+--- !u!1233149941 &1059130601410562487
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ES_Alarm Loop 11 - Epidemic Sound - 0000-2701_1_{1059130601410562487}
+  m_AudioClip: {fileID: 8300000, guid: 2553ec86d6c504ddc9c75fbb5f19f8ab, type: 3}
+  m_Volume: -5
+  m_Enabled: 1
+--- !u!1233149941 &2704799120400413634
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ES_Alarm Loop 01 - Epidemic Sound - 0000-0354_1_{2704799120400413634}
+  m_AudioClip: {fileID: 8300000, guid: d7f56f7d5cd0c4edfbbf2bd0e57ee84b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4427648383331100417
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ES_Alarm Loop 12 - Epidemic Sound - 0000-0778_1_{4427648383331100417}
+  m_AudioClip: {fileID: 8300000, guid: fa9be4ec345d24c23b95aaebed1095b9, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ReverbBells
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 5
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -10, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 1}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 2704799120400413634}
+  - {fileID: -8074636847660096451}
+  - {fileID: 1059130601410562487}
+  - {fileID: 4427648383331100417}
+  - {fileID: -3184592945417110184}
+  - {fileID: 8439302132414201657}
+  - {fileID: 9064085359723478160}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 0
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 1
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &8439302132414201657
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ES_Bicycle Bell, Single Hit - Epidemic Sound - 5076-8455_1_{8439302132414201657}
+  m_AudioClip: {fileID: 8300000, guid: 4bcc4649f73f245f8a935a013da5063e, type: 3}
+  m_Volume: -5
+  m_Enabled: 1
+--- !u!1233149941 &9064085359723478160
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ES_School, Ring - Epidemic Sound - 0179-1990_1_{9064085359723478160}
+  m_AudioClip: {fileID: 8300000, guid: 76129a699b52a4d8fb442e0168e87f6a, type: 3}
+  m_Volume: -10
+  m_Enabled: 1
